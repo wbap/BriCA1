@@ -158,7 +158,7 @@ class Component(Unit):
 
         del self.results[id]
 
-    def collect_input(self, time):
+    def input(self, time):
         """ Obtain inputs from outputs of other Modules.
 
         This method collects the outputs of connected modules and sets the
@@ -179,7 +179,7 @@ class Component(Unit):
         assert self.last_input_time <= time, "collect_input() captured a time travel"
         self.last_input_time = time
 
-    def update_output(self, time):
+    def output(self, time):
         """ Expose results to `out_ports`
 
         This method exposes the computation results from `results` to

@@ -117,7 +117,7 @@ class VirtualTimeSyncScheduler(Scheduler):
         """
 
         for component in self.components:
-            component.collect_input(self.current_time)
+            component.input(self.current_time)
 
         for component in self.components:
             component.fire()
@@ -125,6 +125,6 @@ class VirtualTimeSyncScheduler(Scheduler):
         self.current_time = self.current_time + self.interval
 
         for component in self.components:
-            component.update_output(self.current_time)
+            component.output(self.current_time)
 
         return self.current_time
