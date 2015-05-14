@@ -44,6 +44,7 @@ class Component(Unit):
         super(Component, self).__init__()
         self.last_input_time = 0.0
         self.last_output_time = 0.0
+        self.offset = 0.0
         self.interval = 1.0
         self.inputs = {}
         self.states = {}
@@ -195,7 +196,6 @@ class Component(Unit):
 
         for id, out_port in self.out_ports.items():
             out_port.buffer = self.results[id]
-            out_port.sync()
 
         assert self.last_output_time <= time, "update_output() captured a time travel"
         self.last_output_time = time
@@ -252,7 +252,6 @@ class PipeComponent(Component):
         super(PipeComponent, self).__init__()
         self.map = []
 
-
     def set_map(self, in_id, out_id):
         """ Map from in-port to out port.
 
@@ -299,5 +298,4 @@ class NullComponent(Component):
           None.
 
         """
-
         pass

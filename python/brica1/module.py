@@ -69,14 +69,14 @@ class Module(Unit):
 
         """
 
-        list = id.split(".")
-        head = list.pop(0)
+        array = id.split(".")
+        head = array.pop(0)
         child = self.submodules[head]
 
-        if len(list) == 0:
+        if len(array) == 0:
             return child
 
-        return child.get_submodule(".".join(list))
+        return child.get_submodule(".".join(array))
 
     def get_all_submodules(self):
         """ Get all `Module`s recursively.
@@ -85,16 +85,16 @@ class Module(Unit):
           None.
 
         Returns:
-          list: a list of all `Module`s.
+          array: a array of all `Module`s.
 
         """
 
-        list = self.submodules.values()
+        array = self.submodules.values()
 
-        for submodule in list:
-            list.extend(submodule.get_all_submodules())
+        for submodule in array:
+            array.extend(submodule.get_all_submodules())
 
-        return list
+        return list(set(array))
 
     def remove_submodule(self, id):
         """ Remove a module from this `Module`.
@@ -147,16 +147,16 @@ class Module(Unit):
           None.
 
         Returns:
-          list: a list of all `Component`s.
+          array: a array of all `Component`s.
 
         """
 
-        list = self.components.values()
+        array = self.components.values()
 
         for submodule in self.get_all_submodules():
-            list.extend(submodule.get_all_components())
+            array.extend(submodule.get_all_components())
 
-        return list
+        return list(set(array))
 
     def remove_component(self, id):
         """ Remove a component from this `Module`.
@@ -197,11 +197,11 @@ class CognitiveArchitecture(Module):
           None.
 
         Returns:
-          None.
+           float: the current time of the scheduler
 
         """
 
-        self.scheduler.step()
+        return self.scheduler.step()
 
     def update_scheduler(self):
         """ Udpate the `Scheduler` with this `CognitiveArchitecture`.

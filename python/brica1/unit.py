@@ -65,6 +65,20 @@ class Unit(object):
 
         return self.in_ports[id]
 
+    def set_in_port(self, id, port):
+        """ Set a port with an actual instance.
+
+        Args:
+          id (str): a string ID.
+          port (Port): a Port instance to set.
+
+        Returns:
+          None.
+
+        """
+
+        self.in_ports[id] = port
+
     def remove_in_port(self, id):
         """ Remove an in-port from this `Unit`.
 
@@ -105,6 +119,20 @@ class Unit(object):
 
         return self.out_ports[id]
 
+    def set_out_port(self, id, port):
+        """ Set a port with an actual instance.
+
+        Args:
+          id (str): a string ID.
+          port (Port): a Port instance to set.
+
+        Returns:
+          None.
+
+        """
+
+        self.out_ports[id] = port
+
     def remove_out_port(self, id):
         """ Remove an out-port from this `Unit`.
 
@@ -118,35 +146,39 @@ class Unit(object):
 
         del self.out_ports[id]
 
-    def mirror_in_port(self, target, from_id, to_id):
-        """ Mirror an in-port from a target `Unit` to this `Unit`.
+    def alias_in_port(self, target, from_id, to_id):
+        """ Alias an in-port from a target `Unit` to this `Unit`.
+
+        Technical note: ALWAYS alias in ports OUTSIDE IN
 
         Args:
-          target (Unit): a `Unit` to mirror to.
-          from_id (str): a port ID to mirror from.
-          to_id (str): a port ID to mirror to.
+          target (Unit): a `Unit` to alias from.
+          from_id (str): a port ID to alias from.
+          to_id (str): a port ID to alias to.
 
         Returns:
           None.
 
         """
 
-        self.get_in_port(to_id).connect(target.get_in_port(from_id))
+        self.set_in_port(to_id, target.get_in_port(from_id))
 
-    def mirror_out_port(self, target, from_id, to_id):
-        """ Mirror an out-port from a target `Unit` to this `Unit`.
+    def alias_out_port(self, target, from_id, to_id):
+        """ Alias an out-port from a target `Unit` to this `Unit`.
+
+        Technical note: ALWAYS alias in ports INSIDE OUT
 
         Args:
-          target (Unit): a `Unit` to mirror to.
-          from_id (str): a port ID to mirror from.
-          to_id (str): a port ID to mirror to.
+          target (Unit): a `Unit` to alias from.
+          from_id (str): a port ID to alias from.
+          to_id (str): a port ID to alias to.
 
         Returns:
           None.
 
         """
 
-        target.get_out_port(from_id).connect(self.get_out_port(to_id))
+        target.set_out_port(from_id, self.get_out_port(to_id))
 
     def connect(self, target, from_id, to_id):
         """ Connect an out-port of another `Unit` to an in-port.

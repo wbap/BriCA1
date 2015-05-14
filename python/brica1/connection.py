@@ -29,21 +29,6 @@ class Connection(object):
         self.from_port = from_port
         self.to_port = to_port
 
-    def pull(self):
-        """ Recursively pull a value from one end of the port.
-
-        Args:
-          None.
-
-        Returns:
-          None.
-
-        """
-
-        if hasattr(self.from_port, 'connection'):
-            self.from_port.connection.sync()
-        return self.from_port.buffer
-
     def sync(self):
         """ Sync the value from `from_port` to `to_port`.
 
@@ -55,4 +40,4 @@ class Connection(object):
 
         """
 
-        self.to_port.buffer = self.pull()
+        self.to_port.buffer = self.from_port.buffer

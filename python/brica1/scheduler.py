@@ -9,28 +9,30 @@ types of schedulers. The `VirtualTimeSyncScheduler` is implemneted for now.
 
 """
 
-__all__ = ["Scheduler", "VirtualTimeSyncScheduler"]
+__all__ = ["Scheduler", "VirtualTimeSyncScheduler", "VirtualTimeScheduler"]
 
 from abc import ABCMeta, abstractmethod
 import copy
 import numpy
 
+import Queue
+
 class Scheduler(object):
     """
-    This class is an abstract class for creating schedulers. Subclasses must
+    This class is an abstract class for creating `Scheduler`s. Subclasses must
     override the `step()` method to specify its implementation.
     """
 
     __metaclass__ = ABCMeta
 
     def __init__(self):
-        """ Create a new Scheduler instance.
+        """ Create a new `Scheduler` instance.
 
         Args:
           None.
 
         Returns:
-          Scheduler: A new Scheduler instance.
+          Scheduler: A new `Scheduler` instance.
 
         """
 
@@ -40,7 +42,7 @@ class Scheduler(object):
         self.components = []
 
     def reset(self):
-        """ Reset the scheduler.
+        """ Reset the `Scheduler`.
 
         Args:
           None.
@@ -55,7 +57,7 @@ class Scheduler(object):
         self.components = []
 
     def update(self, ca):
-        """ Update the scheduler for given cognitive architecture (ca)
+        """ Update the `Scheduler` for given cognitive architecture (ca)
 
         Args:
           ca (CognitiveArchitecture): a target to update.
@@ -75,7 +77,7 @@ class Scheduler(object):
           None.
 
         Returns:
-          float: the current time of the scheduler
+          float: the current time of the `Scheduler`.
 
         """
 
@@ -83,18 +85,18 @@ class Scheduler(object):
 
 class VirtualTimeSyncScheduler(Scheduler):
     """
-    VirtualTimeSyncScheduler is a Scheduler implementation for virutal time in
-    a synced manner.
+    `VirtualTimeSyncScheduler` is a `Scheduler` implementation for virutal time
+    in a synced manner.
     """
 
     def __init__(self, interval=1.0):
-        """ Create a new VirtualTimeSyncScheduler Instance.
+        """ Create a new `VirtualTimeSyncScheduler` Instance.
 
         Args:
           interval (float): interval between each step
 
         Returns:
-          VirtualTimeSyncScheduler: A new VirtualTimeSyncScheduler instance.
+          VirtualTimeSyncScheduler: A new `VirtualTimeSyncScheduler` instance.
 
         """
 
@@ -112,7 +114,7 @@ class VirtualTimeSyncScheduler(Scheduler):
           None.
 
         Returns:
-          float: the current time of the scheduler
+          float: the current time of the `Scheduler`.
 
         """
 
@@ -126,5 +128,91 @@ class VirtualTimeSyncScheduler(Scheduler):
 
         for component in self.components:
             component.output(self.current_time)
+
+        return self.current_time
+
+class VirtualTimeScheduler(Scheduler):
+    """
+    `VirtualTimeScheduler` is a `Scheduler` implementation for virutal time.
+    """
+
+    class Event(object):
+        """
+        `Event` is a queue object for `PriorityQueue` in VirtualTimeScheduler.
+        """
+
+        def __init__(self, time, component):
+            """ Create a new `Event` instance.
+
+            Args:
+              time (float): the time of the `Event`.
+              component (Component): `Component` to be handled.
+
+            Returns:
+              Component: a new `Component` instance.
+
+            """
+
+            super(VirtualTimeScheduler.Event, self).__init__()
+            self.time = time
+            self.component = component
+
+        def __cmp__(self, other):
+            return cmp(self.time, other.time)
+
+    def __init__(self):
+        """ Create a new `Event` instance.
+
+        Args:
+          time (float): the time of the `Event`.
+          component (Component): `Component` to be handled.
+
+        Returns:
+          Component: a new `Component` instance.
+
+        """
+
+        super(VirtualTimeScheduler, self).__init__()
+        self.event_queue = Queue.PriorityQueue()
+
+    def update(self, ca):
+        """ Update the `Scheduler` for given cognitive architecture (ca)
+
+        Args:
+          ca (CognitiveArchitecture): a target to update.
+
+        Returns:
+          None.
+
+        """
+
+        super(VirtualTimeScheduler, self).update(ca)
+        for component in self.components:
+            component.input(self.current_time)
+            component.fire()
+            self.event_queue.put(VirtualTimeScheduler.Event(component.offset + component.last_input_time + component.interval, component))
+
+    def step(self):
+        """ Step by the internal interval.
+
+        An event is dequeued and `output()`, `input()`, and `fire()` are called
+        for the `Component` of interest.
+
+        Args:
+          None.
+
+        Returns:
+          float: the current time of the `Scheduler`.
+
+        """
+
+        e = self.event_queue.get()
+        self.current_time = e.time
+        component = e.component
+        component.output(self.current_time)
+        component.input(self.current_time)
+        component.fire()
+
+        self.event_queue.put(VirtualTimeScheduler.Event(self.current_time + component.interval, component))
 
         return self.current_time
