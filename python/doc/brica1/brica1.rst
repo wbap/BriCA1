@@ -52,6 +52,13 @@ brica1.unit module
     :undoc-members:
     :show-inheritance:
 
+brica1.utils module
+-------------------
+
+.. automodule:: brica1.utils
+    :members:
+    :undoc-members:
+    :show-inheritance:
 
 Module contents
 ---------------
