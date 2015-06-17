@@ -18,6 +18,7 @@ def connect(from_tuple, to_tuple):
       to_tuple (tuple<Unit, str>): Unit and port id to connect to.
 
     Returns:
+      None.
 
     """
 
@@ -35,6 +36,7 @@ def alias_in_port(from_tuple, to_tuple):
       to_tuple (tuple<Unit, str>): Unit and port id to alias to.
 
     Returns:
+      None.
 
     """
 
@@ -51,6 +53,7 @@ def alias_out_port(from_tuple, to_tuple):
       to_tuple (tuple<Unit, str>): Unit and port id to alias to.
 
     Returns:
+      None.
 
     """
 
