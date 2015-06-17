@@ -33,11 +33,11 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
         CompA.set_state("out", v)
         CompA.make_out_port("out", 3)
         CompB.make_in_port("in", 3)
-        CompB.connect(CompA, "out", "in")
+        brica1.connect((CompA, "out"), (CompB, "in"))
         CompB.make_out_port("out", 3)
         CompB.set_map("in", "out")
         CompC.make_in_port("in", 3)
-        CompC.connect(CompB, "out", "in")
+        brica1.connect((CompB, "out"), (CompC, "in"))
 
         ca.add_submodule("ModA", ModA)
 
@@ -102,13 +102,13 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
         ModB.add_component("CompB", CompB)
         ModC.add_component("CompC", CompC)
 
-        CompA.alias_out_port(ModA, "out", "out")
-        CompB.alias_in_port(ModB, "in", "in")
-        CompB.alias_out_port(ModB, "out", "out")
-        CompC.alias_in_port(ModC, "in", "in")
+        brica1.alias_out_port((ModA, "out"), (CompA, "out"))
+        brica1.alias_in_port((ModB, "in"), (CompB, "in"))
+        brica1.alias_out_port((ModB, "out"), (CompB, "out"))
+        brica1.alias_in_port((ModC, "in"), (CompC, "in"))
 
-        ModB.connect(ModA, "out", "in")
-        ModC.connect(ModB, "out", "in")
+        brica1.connect((ModA, "out"), (ModB, "in"))
+        brica1.connect((ModB, "out"), (ModC, "in"))
 
         ModD.add_submodule("ModA", ModA)
         ModD.add_submodule("ModB", ModB)
@@ -208,23 +208,23 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
         ModC.add_component("CompC", CompC)
 
         # Out ports must be aliased inside-out
-        CompA.alias_out_port(ModA, "out", "out")
-        ModA.alias_out_port(SupA, "out", "out")
+        brica1.alias_out_port((ModA, "out"), (CompA, "out"))
+        brica1.alias_out_port((SupA, "out"), (ModA, "out"))
 
         # In ports must be aliased outside-in
-        ModB.alias_in_port(SupB, "in", "in")
-        CompB.alias_in_port(ModB, "in", "in")
+        brica1.alias_in_port((SupB, "in"), (ModB, "in"))
+        brica1.alias_in_port((ModB, "in"), (CompB, "in"))
 
         # Out ports must be aliased inside-out
-        CompB.alias_out_port(ModB, "out", "out")
-        ModB.alias_out_port(SupB, "out", "out")
+        brica1.alias_out_port((ModB, "out"), (CompB, "out"))
+        brica1.alias_out_port((SupB, "out"), (ModB, "out"))
 
         # In ports must be aliased outside-in
-        ModC.alias_in_port(SupC, "in", "in")
-        CompC.alias_in_port(ModC, "in", "in")
+        brica1.alias_in_port((SupC, "in"), (ModC, "in"))
+        brica1.alias_in_port((ModC, "in"), (CompC, "in"))
 
-        SupB.connect(SupA, "out", "in")
-        SupC.connect(SupB, "out", "in")
+        brica1.connect((SupA, "out"), (SupB, "in"))
+        brica1.connect((SupB, "out"), (SupC, "in"))
 
         Top.add_submodule("SupA", SupA)
         Top.add_submodule("SupB", SupB)
@@ -325,11 +325,11 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         CompA.set_state("out", v)
         CompA.make_out_port("out", 3)
         CompB.make_in_port("in", 3)
-        CompB.connect(CompA, "out", "in")
+        brica1.connect((CompA, "out"), (CompB, "in"))
         CompB.make_out_port("out", 3)
         CompB.set_map("in", "out")
         CompC.make_in_port("in", 3)
-        CompC.connect(CompB, "out", "in")
+        brica1.connect((CompB, "out"), (CompC, "in"))
 
         ca.add_submodule("ModA", ModA)
 
@@ -453,13 +453,13 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         ModB.add_component("CompB", CompB)
         ModC.add_component("CompC", CompC)
 
-        CompA.alias_out_port(ModA, "out", "out")
-        CompB.alias_in_port(ModB, "in", "in")
-        CompB.alias_out_port(ModB, "out", "out")
-        CompC.alias_in_port(ModC, "in", "in")
+        brica1.alias_out_port((ModA, "out"), (CompA, "out"))
+        brica1.alias_in_port((ModB, "in"), (CompB, "in"))
+        brica1.alias_out_port((ModB, "out"), (CompB, "out"))
+        brica1.alias_in_port((ModC, "in"), (CompC, "in"))
 
-        ModB.connect(ModA, "out", "in")
-        ModC.connect(ModB, "out", "in")
+        brica1.connect((ModA, "out"), (ModB, "in"))
+        brica1.connect((ModB, "out"), (ModC, "in"))
 
         ModD.add_submodule("ModA", ModA)
         ModD.add_submodule("ModB", ModB)
@@ -642,23 +642,23 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         ModC.add_component("CompC", CompC)
 
         # Out ports must be aliased inside-out
-        CompA.alias_out_port(ModA, "out", "out")
-        ModA.alias_out_port(SupA, "out", "out")
+        brica1.alias_out_port((ModA, "out"), (CompA, "out"))
+        brica1.alias_out_port((SupA, "out"), (ModA, "out"))
 
         # In ports must be aliased outside-in
-        ModB.alias_in_port(SupB, "in", "in")
-        CompB.alias_in_port(ModB, "in", "in")
+        brica1.alias_in_port((SupB, "in"), (ModB, "in"))
+        brica1.alias_in_port((ModB, "in"), (CompB, "in"))
 
         # Out ports must be aliased inside-out
-        CompB.alias_out_port(ModB, "out", "out")
-        ModB.alias_out_port(SupB, "out", "out")
+        brica1.alias_out_port((ModB, "out"), (CompB, "out"))
+        brica1.alias_out_port((SupB, "out"), (ModB, "out"))
 
         # In ports must be aliased outside-in
-        ModC.alias_in_port(SupC, "in", "in")
-        CompC.alias_in_port(ModC, "in", "in")
+        brica1.alias_in_port((SupC, "in"), (ModC, "in"))
+        brica1.alias_in_port((ModC, "in"), (CompC, "in"))
 
-        SupB.connect(SupA, "out", "in")
-        SupC.connect(SupB, "out", "in")
+        brica1.connect((SupA, "out"), (SupB, "in"))
+        brica1.connect((SupB, "out"), (SupC, "in"))
 
         Top.add_submodule("SupA", SupA)
         Top.add_submodule("SupB", SupB)

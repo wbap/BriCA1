@@ -18,3 +18,4 @@ from module import *
 from port import *
 from scheduler import *
 from unit import *
+from utils import *
