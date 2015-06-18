@@ -195,7 +195,8 @@ class Component(Unit):
         """
 
         for id, out_port in self.out_ports.items():
-            out_port.buffer = self.results[id]
+            if id in self.results:
+                out_port.buffer = self.results[id]
 
         assert self.last_output_time <= time, "update_output() captured a time travel"
         self.last_output_time = time
