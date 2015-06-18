@@ -217,7 +217,7 @@ class CognitiveArchitecture(Module):
         self.scheduler.update(self)
 
     def add_submodule(self, id, submodule):
-        """ add a `Module` and update the `Scheduler`.
+        """ Add a `Module` and update the `Scheduler`.
 
         Args:
           id (str): a string ID.

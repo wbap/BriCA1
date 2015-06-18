@@ -11,7 +11,7 @@ are collectively reffered to as `Unit`s.
 
 """
 
-__all__ = ["Component", "ConstantComponent", "PipeComponent", "NullComponent"]
+__all__ = ["Component", "ComponentSet", "ConstantComponent", "PipeComponent", "NullComponent"]
 
 from abc import ABCMeta, abstractmethod
 import copy
@@ -201,6 +201,59 @@ class Component(Unit):
         assert self.last_output_time <= time, "update_output() captured a time travel"
         self.last_output_time = time
 
+class ComponentSet(Component):
+    """
+    `ComponentSet` groups components to fire sequentially
+    """
+    def __init__(self):
+        """ Create a new `ComponentSet` instance.
+
+        Args:
+          None.
+
+        Returns:
+          ComponentSet: a new `ComponentSet` instance.
+
+        """
+
+        super(ComponentSet, self).__init__()
+        self.components = {}
+        self.priorities = {}
+
+    def add_component(self, id, component, priority):
+        """ Add a `Component` for given ID and priority
+
+        Args:
+          id (str): a string ID.
+          component (Component): a component to add for `id`.
+          priority (int): a priority value for scheduling.
+
+        Returns:
+          None.
+
+        """
+
+        self.components[id] = component
+        self.priorities[id] = priority
+
+    def fire(self):
+        """ Fire sub-components based on priority
+
+        Args:
+          None.
+
+        Returns:
+          None.
+
+        """
+
+        order = sorted(self.priorities.keys(), key=lambda id: self.priorities[id])
+        for id in order:
+            component = self.components[id]
+            component.input(self.last_input_time)
+            component.fire()
+            component.output(self.last_output_time)
+
 class ConstantComponent(Component):
     """
     `ConstantComponent` copies states to out ports.
@@ -214,7 +267,7 @@ class ConstantComponent(Component):
           None.
 
         Returns:
-          Component: a new `ConstantComponent` instance.
+          ConstantComponent: a new `ConstantComponent` instance.
 
         """
 
@@ -246,7 +299,7 @@ class PipeComponent(Component):
           None.
 
         Returns:
-          Component: A new `PipeComponent` instance.
+          PipeComponent: A new `PipeComponent` instance.
 
         """
 
@@ -283,7 +336,7 @@ class NullComponent(Component):
           None.
 
         Returns:
-          Module: A new `NullComponent` instance.
+          NullComponent: A new `NullComponent` instance.
 
         """
 

@@ -13,6 +13,51 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
     def setUp(self):
         pass
 
+    def test_set(self):
+        s = brica1.VirtualTimeSyncScheduler(1.0)
+        ca = brica1.CognitiveArchitecture(s)
+
+        zero = numpy.zeros(3, dtype=numpy.short)
+        v = numpy.array([1, 2, 3], dtype=numpy.short)
+
+        CompA = brica1.ConstantComponent()
+        CompB = brica1.PipeComponent()
+        CompC = brica1.NullComponent()
+
+        CompSet = brica1.ComponentSet()
+        CompSet.add_component("CompA", CompA, 0)
+        CompSet.add_component("CompB", CompB, 1)
+        CompSet.add_component("CompC", CompC, 2)
+
+        ModA = brica1.Module()
+        ModA.add_component("CompSet", CompSet)
+
+        CompA.set_state("out", v)
+        CompA.make_out_port("out", 3)
+        CompB.make_in_port("in", 3)
+        brica1.connect((CompA, "out"), (CompB, "in"))
+        CompB.make_out_port("out", 3)
+        CompB.set_map("in", "out")
+        CompC.make_in_port("in", 3)
+        brica1.connect((CompB, "out"), (CompC, "in"))
+
+        ca.add_submodule("ModA", ModA)
+
+        self.assertTrue((CompA.get_state("out") == v).all())
+        self.assertIsNot(CompA.get_state("out"), v)
+
+        self.assertTrue((CompA.get_out_port("out").buffer == zero).all())
+        self.assertTrue((CompB.get_in_port("in").buffer   == zero).all())
+        self.assertTrue((CompB.get_out_port("out").buffer == zero).all())
+        self.assertTrue((CompC.get_in_port("in").buffer   == zero).all())
+
+        ca.step()
+
+        self.assertTrue((CompA.get_out_port("out").buffer == v).all())
+        self.assertTrue((CompB.get_in_port("in").buffer   == v).all())
+        self.assertTrue((CompB.get_out_port("out").buffer == v).all())
+        self.assertTrue((CompC.get_in_port("in").buffer   == v).all())
+
     def test_component(self):
         s = brica1.VirtualTimeSyncScheduler(1.0)
         ca = brica1.CognitiveArchitecture(s)
@@ -296,6 +341,44 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
 class VirtualTimeSchedulerTest(unittest.TestCase):
     def setUp(self):
         pass
+
+    def test_set(self):
+        s = brica1.VirtualTimeScheduler()
+        ca = brica1.CognitiveArchitecture(s)
+
+        zero = numpy.zeros(3, dtype=numpy.short)
+        v = numpy.array([1, 2, 3], dtype=numpy.short)
+
+        CompA = brica1.ConstantComponent()
+        CompB = brica1.PipeComponent()
+        CompC = brica1.NullComponent()
+
+        CompSet = brica1.ComponentSet()
+        CompSet.add_component("CompA", CompA, 0)
+        CompSet.add_component("CompB", CompB, 1)
+        CompSet.add_component("CompC", CompC, 2)
+
+        ModA = brica1.Module()
+        ModA.add_component("CompSet", CompSet)
+
+        CompA.set_state("out", v)
+        CompA.make_out_port("out", 3)
+        CompB.make_in_port("in", 3)
+        brica1.connect((CompA, "out"), (CompB, "in"))
+        CompB.make_out_port("out", 3)
+        CompB.set_map("in", "out")
+        CompC.make_in_port("in", 3)
+        brica1.connect((CompB, "out"), (CompC, "in"))
+
+        ca.add_submodule("ModA", ModA)
+
+        self.assertTrue((CompA.get_state("out") == v).all())
+        self.assertIsNot(CompA.get_state("out"), v)
+
+        self.assertTrue((CompA.get_out_port("out").buffer == v).all())
+        self.assertTrue((CompB.get_in_port("in").buffer   == v).all())
+        self.assertTrue((CompB.get_out_port("out").buffer == v).all())
+        self.assertTrue((CompC.get_in_port("in").buffer   == v).all())
 
     def test_component(self):
         s = brica1.VirtualTimeScheduler()
