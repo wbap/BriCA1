@@ -60,7 +60,7 @@ class Scheduler(object):
         """ Update the `Scheduler` for given cognitive architecture (ca)
 
         Args:
-          ca (CognitiveArchitecture): a target to update.
+          ca (Agent): a target to update.
 
         Returns:
           None.
@@ -179,7 +179,7 @@ class VirtualTimeScheduler(Scheduler):
         """ Update the `Scheduler` for given cognitive architecture (ca)
 
         Args:
-          ca (CognitiveArchitecture): a target to update.
+          ca (Agent): a target to update.
 
         Returns:
           None.

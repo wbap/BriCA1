@@ -4,13 +4,13 @@
 module.py
 =====
 
-This module contains the class `Module` and `CognitiveArchitecture` which serve
+This module contains the class `Module` and `Agent` which serve
 as abstractions for distict areas in the brain or sub-regions of those areas.
 `Module`s together with `Component`s are collectively reffered to as `Unit`s.
 
 """
 
-__all__ = ["Module", "CognitiveArchitecture"]
+__all__ = ["Module", "Agent"]
 
 import copy
 import numpy
@@ -171,23 +171,23 @@ class Module(Unit):
 
         del self.components[id]
 
-class CognitiveArchitecture(Module):
+class Agent(Module):
     """
-    A `CognitiveArchitecture` is a `Module` which serves as a top-level
+    A `Agent` is a `Module` which serves as a top-level
     container for functional `Module`s.
     """
 
     def __init__(self, scheduler):
-        """ Create a new `CognitiveArchitecture` instance.
+        """ Create a new `Agent` instance.
 
         Args:
           scheduler (Scheduler): a scheduler to schedule `Component` firing.
 
         Returns:
-          CognitiveArchitecture: a new `CognitiveArchitecture` instance.
+          Agent: a new `Agent` instance.
 
         """
-        super(CognitiveArchitecture, self).__init__()
+        super(Agent, self).__init__()
         self.scheduler = scheduler
 
     def step(self):
@@ -204,7 +204,7 @@ class CognitiveArchitecture(Module):
         return self.scheduler.step()
 
     def update_scheduler(self):
-        """ Udpate the `Scheduler` with this `CognitiveArchitecture`.
+        """ Udpate the `Scheduler` with this `Agent`.
 
         Args:
           None.
@@ -228,5 +228,5 @@ class CognitiveArchitecture(Module):
 
         """
 
-        super(CognitiveArchitecture, self).add_submodule(id, submodule)
+        super(Agent, self).add_submodule(id, submodule)
         self.update_scheduler()

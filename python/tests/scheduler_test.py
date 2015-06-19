@@ -15,7 +15,7 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
 
     def test_set(self):
         s = brica1.VirtualTimeSyncScheduler(1.0)
-        ca = brica1.CognitiveArchitecture(s)
+        ca = brica1.Agent(s)
 
         zero = numpy.zeros(3, dtype=numpy.short)
         v = numpy.array([1, 2, 3], dtype=numpy.short)
@@ -60,7 +60,7 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
 
     def test_component(self):
         s = brica1.VirtualTimeSyncScheduler(1.0)
-        ca = brica1.CognitiveArchitecture(s)
+        ca = brica1.Agent(s)
 
         zero = numpy.zeros(3, dtype=numpy.short)
         v = numpy.array([1, 2, 3], dtype=numpy.short)
@@ -117,7 +117,7 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
 
     def test_module(self):
         s = brica1.VirtualTimeSyncScheduler(1.0)
-        ca = brica1.CognitiveArchitecture(s)
+        ca = brica1.Agent(s)
 
         zero = numpy.zeros(3, dtype=numpy.short)
         v = numpy.array([1, 2, 3], dtype=numpy.short)
@@ -208,7 +208,7 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
 
     def test_nested(self):
         s = brica1.VirtualTimeSyncScheduler(1.0)
-        ca = brica1.CognitiveArchitecture(s)
+        ca = brica1.Agent(s)
 
         zero = numpy.zeros(3, dtype=numpy.short)
         v = numpy.array([1, 2, 3], dtype=numpy.short)
@@ -344,7 +344,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
 
     def test_set(self):
         s = brica1.VirtualTimeScheduler()
-        ca = brica1.CognitiveArchitecture(s)
+        ca = brica1.Agent(s)
 
         zero = numpy.zeros(3, dtype=numpy.short)
         v = numpy.array([1, 2, 3], dtype=numpy.short)
@@ -382,7 +382,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
 
     def test_component(self):
         s = brica1.VirtualTimeScheduler()
-        ca = brica1.CognitiveArchitecture(s)
+        ca = brica1.Agent(s)
 
         zero = numpy.zeros(3, dtype=numpy.short)
         v = numpy.array([1, 2, 3], dtype=numpy.short)
@@ -498,7 +498,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
 
     def test_module(self):
         s = brica1.VirtualTimeScheduler()
-        ca = brica1.CognitiveArchitecture(s)
+        ca = brica1.Agent(s)
 
         zero = numpy.zeros(3, dtype=numpy.short)
         v = numpy.array([1, 2, 3], dtype=numpy.short)
@@ -672,7 +672,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
 
     def test_nested(self):
         s = brica1.VirtualTimeScheduler()
-        ca = brica1.CognitiveArchitecture(s)
+        ca = brica1.Agent(s)
 
         zero = numpy.zeros(3, dtype=numpy.short)
         v = numpy.array([1, 2, 3], dtype=numpy.short)
