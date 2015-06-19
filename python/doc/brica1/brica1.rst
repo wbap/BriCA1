@@ -60,6 +60,7 @@ brica1.utils module
     :undoc-members:
     :show-inheritance:
 
+
 Module contents
 ---------------
 
