@@ -18,7 +18,7 @@ setup(name='brica1',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-          # -*- Extra requirements: -*-
+          'numpy'
       ],
       entry_points="""
       # -*- Entry points: -*-
