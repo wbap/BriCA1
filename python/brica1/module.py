@@ -16,6 +16,7 @@ import copy
 import numpy
 
 # BriCA imports
+from component import *
 from unit import *
 
 class Module(Unit):
@@ -51,6 +52,10 @@ class Module(Unit):
           None.
 
         """
+
+        if not isinstance(submodule, Module):
+            raise AssertionError("Not a Module instance")
+            return
 
         if id in self.components:
             raise LookupError("There is already a component of the same name")
@@ -120,6 +125,10 @@ class Module(Unit):
           None.
 
         """
+
+        if not isinstance(component, Component):
+            raise AssertionError("Not a Component instance")
+            return
 
         if id in self.submodules:
             raise LookupError("There is already a submodule of the same name")
