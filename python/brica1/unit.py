@@ -149,7 +149,7 @@ class Unit(object):
     def alias_in_port(self, target, from_id, to_id):
         """ Alias an in-port from a target `Unit` to this `Unit`.
 
-        Technical note: ALWAYS alias in ports OUTSIDE IN
+        Technical note: ALWAYS alias ports OUTSIDE IN
 
         Args:
           target (Unit): a `Unit` to alias from.
@@ -166,7 +166,7 @@ class Unit(object):
     def alias_out_port(self, target, from_id, to_id):
         """ Alias an out-port from a target `Unit` to this `Unit`.
 
-        Technical note: ALWAYS alias in ports INSIDE OUT
+        Technical note: ALWAYS alias ports OUTSIDE IN
 
         Args:
           target (Unit): a `Unit` to alias from.
@@ -178,7 +178,7 @@ class Unit(object):
 
         """
 
-        target.set_out_port(from_id, self.get_out_port(to_id))
+        self.set_out_port(to_id, target.get_out_port(from_id))
 
     def connect(self, target, from_id, to_id):
         """ Connect an out-port of another `Unit` to an in-port.
