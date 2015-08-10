@@ -6,7 +6,7 @@ Welcome to the tutorial for Brain-inspired Computing Architecture (BriCA) Versio
 What is BriCA?
 --------------
 
-Some introduction...
+BriCA is a software platform designed specifically to join and schedule multiple machine learning algorithms of different disciplines. The NeuralTalk architecture developed by Stanford University is a great example of one such machine learning system where a CNN and RNN are combined to solve the difficult task of creating captions for images. The implementation of a more simple machine learning system: the stacked autoencoder, and the NeuralTalk architecture will be covered in later tutorials.
 
 Installing
 ----------

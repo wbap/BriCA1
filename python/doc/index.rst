@@ -12,6 +12,7 @@ Contents:
    :maxdepth: 2
 
    brica1/brica1.rst
+   tutorial/introduction.rst
 
 
 Indices and tables
