@@ -1,282 +1,222 @@
+#!/usr/bin/env python
 import argparse
 import numpy as np
-from sklearn.datasets import fetch_mldata
 from chainer import Variable, FunctionSet, optimizers, cuda
 import chainer.functions  as F
+import data
+
 import brica1
+import sys
 
-class Perceptron():
-    def __init__(self, n_in, n_out, use_cuda=False):
-        self.model = FunctionSet(
-            transform=F.Linear(n_in, n_out)
+class SLP(FunctionSet):
+    def __init__(self, n_input, n_output):
+        super(SLP, self).__init__(
+            transform=F.Linear(n_input, n_output)
         )
-        self.use_cuda = use_cuda
 
-        if self.use_cuda:
-            self.model.to_gpu()
-
-        self.optimizer = optimizers.Adam()
-        self.optimizer.setup(self.model.collect_parameters())
-
-    def predict(self, x_data):
-        if self.use_cuda:
-            x_data = cuda.to_gpu(x_data)
-        x = Variable(x_data)
-        y = F.softmax(self.model.transform(x))
-        return cuda.to_cpu(y.data)
-
-    def cost(self, x_data, y_data):
+    def forward(self, x_data, y_data):
         x = Variable(x_data)
         t = Variable(y_data)
-        y = self.model.transform(x)
-        return F.softmax_cross_entropy(y, t), F.accuracy(y, t)
-
-    def train(self, x_data, y_data):
-        if self.use_cuda:
-            x_data = cuda.to_gpu(x_data)
-            y_data = cuda.to_gpu(y_data)
-        self.optimizer.zero_grads()
-        loss, acc = self.cost(x_data, y_data)
-        loss.backward()
-        self.optimizer.update()
-        return float(cuda.to_cpu(loss.data)), float(cuda.to_cpu(acc.data))
-
-    def test(self, x_data, y_data):
-        if self.use_cuda:
-            x_data = cuda.to_gpu(x_data)
-            y_data = cuda.to_gpu(y_data)
-        loss, acc = self.cost(x_data, y_data)
-        return float(cuda.to_cpu(loss.data)), float(cuda.to_cpu(acc.data))
-
-class DenoisingAutoencoder():
-    def __init__(self, n_in, n_hidden, use_cuda=False):
-        self.model = FunctionSet(
-            encode=F.Linear(n_in, n_hidden),
-            decode=F.Linear(n_hidden, n_in)
-        )
-        self.use_cuda = use_cuda
-
-        if self.use_cuda:
-            self.model.to_gpu()
-
-        self.optimizer = optimizers.Adam()
-        self.optimizer.setup(self.model.collect_parameters())
-
-    def encode(self, x_var):
-        return F.sigmoid(self.model.encode(x_var))
-
-    def decode(self, x_var):
-        return F.sigmoid(self.model.decode(x_var))
+        y = F.sigmoid(self.transform(x))
+        loss = F.softmax_cross_entropy(y, t)
+        accuracy = F.accuracy(y, t)
+        return loss, accuracy
 
     def predict(self, x_data):
-        if self.use_cuda:
-            x_data = cuda.to_gpu(x_data)
         x = Variable(x_data)
-        p = self.encode(x)
-        return cuda.to_cpu(p.data)
+        y = F.sigmoid(self.transform(x))
+        return y.data
 
-    def cost(self, x_data):
+class Autoencoder(FunctionSet):
+    def __init__(self, n_input, n_output):
+        super(Autoencoder, self).__init__(
+            encoder=F.Linear(n_input, n_output),
+            decoder=F.Linear(n_output, n_input)
+        )
+
+    def forward(self, x_data):
         x = Variable(x_data)
         t = Variable(x_data)
-        x_n = F.dropout(x)
-        h = self.encode(x_n)
-        y = self.decode(h)
-        return F.mean_squared_error(y, t)
+        x = F.dropout(x)
+        h = F.sigmoid(self.encoder(x))
+        y = F.sigmoid(self.decoder(h))
+        loss = F.mean_squared_error(y, t)
+        return loss
 
-    def train(self, x_data):
-        if self.use_cuda:
+    def encode(self, x_data):
+        x = Variable(x_data)
+        h = F.sigmoid(self.encoder(x))
+        return h.data
+
+class SLPComponent(brica1.Component):
+    def __init__(self, n_input, n_output, use_gpu=False):
+        super(SLPComponent, self).__init__()
+        self.model = SLP(n_input, n_output)
+        self.optimizer = optimizers.Adam()
+
+        self.make_in_port("input", n_input)
+        self.make_in_port("target", 1)
+        self.make_out_port("output", n_output)
+        self.make_out_port("loss", 1)
+        self.make_out_port("accuracy", 1)
+
+        self.use_gpu = use_gpu
+
+        if self.use_gpu:
+            self.model.to_gpu()
+
+        self.optimizer.setup(self.model)
+
+    def fire(self):
+        x_data = self.inputs["input"].astype(np.float32)
+        t_data = self.inputs["target"].astype(np.int32)
+
+        if self.use_gpu:
             x_data = cuda.to_gpu(x_data)
+            t_data = cuda.to_gpu(t_data)
+
         self.optimizer.zero_grads()
-        loss = self.cost(x_data)
+        loss, accuracy = self.model.forward(x_data, t_data)
         loss.backward()
         self.optimizer.update()
-        return float(cuda.to_cpu(loss.data))
 
-    def test(self, x_data):
-        if self.use_cuda:
+        y_data = self.model.predict(x_data)
+
+        self.results["loss"] = cuda.to_cpu(loss.data)
+        self.results["accuracy"] = cuda.to_cpu(accuracy.data)
+        self.results["output"] = cuda.to_cpu(y_data)
+
+class AutoencoderComponent(brica1.Component):
+    def __init__(self, n_input, n_output, use_gpu=False):
+        super(AutoencoderComponent, self).__init__()
+        self.model = Autoencoder(n_input, n_output)
+        self.optimizer = optimizers.Adam()
+
+        self.make_in_port("input", n_input)
+        self.make_out_port("output", n_output)
+        self.make_out_port("loss", 1)
+
+        self.use_gpu = use_gpu
+
+        if self.use_gpu:
+            self.model.to_gpu()
+
+        self.optimizer.setup(self.model)
+
+    def fire(self):
+        x_data = self.inputs["input"].astype(np.float32)
+
+        if self.use_gpu:
             x_data = cuda.to_gpu(x_data)
-        loss = self.cost(x_data)
-        return float(cuda.to_cpu(loss.data))
 
-class MNISTSensor(brica1.Component):
-    def __init__(self, N_train=60000, batchsize=100):
-        super(MNISTSensor, self).__init__()
-        mnist = fetch_mldata('MNIST original')
-        mnist.data = mnist.data.astype(np.float32)
-        mnist.data /= 255
-        mnist.target = mnist.target.astype(np.int32)
+        self.optimizer.zero_grads()
+        loss = self.model.forward(x_data)
+        loss.backward()
+        self.optimizer.update()
 
-        _, x_dim = mnist.data.shape
-        y_dim = 1
+        y_data = self.model.encode(x_data)
 
-        x_train, x_test = np.split(mnist.data, [N_train])
-        y_train, y_test = np.split(mnist.target, [N_train])
-        N_test = y_test.size
-
-        self.x_train = x_train
-        self.y_train = y_train
-        self.x_test = x_test
-        self.y_test = y_test
-        self.N_train = N_train
-        self.N_test = N_test
-        self.i_train = 0
-        self.i_test = 0
-        self.batchsize = batchsize
-
-        self.make_out_port("x_train", x_dim)
-        self.make_out_port("y_train", y_dim)
-        self.make_out_port("x_test", x_dim)
-        self.make_out_port("y_test", y_dim)
-
-        self.set_out_port("x_train", brica1.Port(np.zeros((x_dim, 1), dtype=np.float32)))
-        self.set_out_port("x_test", brica1.Port(np.zeros((x_dim, 1), dtype=np.float32)))
-
-        self.fire()
-        self.output(0.0)
-
-    def fire(self):
-        if self.i_train == 0:
-            perm = np.random.permutation(self.N_train)
-            self.x_train = self.x_train[perm]
-            self.y_train = self.y_train[perm]
-
-        x_train_batch = self.x_train[self.i_train:self.i_train+self.batchsize]
-        y_train_batch = self.y_train[self.i_train:self.i_train+self.batchsize]
-        x_test_batch = self.x_test[self.i_test:self.i_test+self.batchsize]
-        y_test_batch = self.y_test[self.i_test:self.i_test+self.batchsize]
-
-        self.results["x_train"] = x_train_batch
-        self.results["y_train"] = y_train_batch
-        self.results["x_test"] = x_test_batch
-        self.results["y_test"] = y_test_batch
-
-        self.i_train = (self.i_train + self.batchsize) % self.N_train
-        self.i_test = (self.i_test + self.batchsize) % self.N_test
-
-class DAComponent(brica1.Component):
-    def __init__(self, n_in, n_hidden, min_loss=0.001, max_cycles=100000, use_cuda=False):
-        super(DAComponent, self).__init__()
-        self.dA = DenoisingAutoencoder(n_in, n_hidden, use_cuda=use_cuda)
-        self.n_in = n_in
-        self.n_hidden = n_hidden
-        self.make_in_port("in", n_in)
-        self.make_out_port("out", n_hidden)
-        self.min_loss = min_loss
-        self.max_cycles = max_cycles
-        self.train = True
-        self.loss = 999.0
-        self.cycle = 0
-
-    def fire(self):
-        x_train = self.inputs["in"].astype(np.float32)
-
-        if len(x_train.shape) != 2:
-            return
-
-        M, N = x_train.shape
-
-        if N != self.n_in:
-            return
-
-        if self.train:
-            print x_train.dtype
-            self.loss = self.dA.train(x_train)
-            self.cycle += 1
-
-            if self.loss <= self.min_loss:
-                self.train = False
-
-            if self.max_cycles <= self.cycle:
-                self.train = False
-
-        self.results["out"] = self.dA.predict(x_train)
-
-class PerceptronComponent(brica1.Component):
-    def __init__(self, n_in, n_out, min_loss=0.001, max_cycles=1000000, use_cuda=False):
-        super(PerceptronComponent, self).__init__()
-        self.perceptron = Perceptron(n_in, n_out, use_cuda=use_cuda)
-        self.n_in = n_in
-        self.n_out = n_out
-        self.make_in_port("x_in", n_in)
-        self.make_in_port("y_in", n_in)
-        self.make_out_port("out", n_out)
-        self.min_loss = min_loss
-        self.max_cycles = max_cycles
-        self.train = True
-        self.loss = 999.0
-        self.acc = 0.0
-        self.cycle = 0
-
-    def fire(self):
-        x_train = self.inputs["x_in"].astype(np.float32)
-        y_train = self.inputs["y_in"].astype(np.int32)
-
-        if len(x_train.shape) != 2:
-            return
-
-        M, N = x_train.shape
-
-        if N != self.n_in:
-            return
-
-        if self.train:
-            loss, acc = self.perceptron.train(x_train, y_train)
-            self.loss = loss
-            self.acc = acc
-            self.cycle += 1
-
-            if self.loss <= self.min_loss:
-                self.train = False
-
-            if self.max_cycles <= self.cycle:
-                self.train = False
-
-        self.results["out"] = self.perceptron.predict(x_train)
+        self.results["loss"] = cuda.to_cpu(loss.data)
+        self.results["output"] = cuda.to_cpu(y_data)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Chainer example: MNIST')
-    parser.add_argument('--gpu', '-g', default=-1, type=int,
-                        help='GPU ID (negative value indicates CPU)')
+    parser = argparse.ArgumentParser(description="Chainer-BriCA integration")
+    parser.add_argument("--gpu", "-g", default=-1, type=int, help="GPU ID")
+
     args = parser.parse_args()
 
     use_gpu = False
     if args.gpu >= 0:
         use_gpu = True
-        cuda.init(args.gpu)
+        cuda.get_device(args.gpu).use()
 
-    s = brica1.VirtualTimeScheduler()
-    ca = brica1.Agent(s)
+    batchsize = 100
+    n_epoch = 20
 
-    cycles = 6000
-    sensor = MNISTSensor()
-    da1 = DAComponent(784, 1000, use_cuda=use_gpu, max_cycles=cycles)
-    da2 = DAComponent(1000, 1000, use_cuda=use_gpu, max_cycles=cycles)
-    da3 = DAComponent(1000, 1000, use_cuda=use_gpu, max_cycles=cycles)
-    perceptron = PerceptronComponent(1000, 10, use_cuda=use_gpu, max_cycles=cycles)
+    mnist = data.load_mnist_data()
+    mnist['data'] = mnist['data'].astype(np.float32)
+    mnist['data'] /= 255
+    mnist['target'] = mnist['target'].astype(np.int32)
 
-    brica1.connect((sensor, "x_train"), (da1, "in"))
-    brica1.connect((da1, "out"), (da2, "in"))
-    brica1.connect((da2, "out"), (da3, "in"))
-    brica1.connect((da3, "out"), (perceptron, "x_in"))
-    brica1.connect((sensor, "y_train"), (perceptron, "y_in"))
+    N_train = 60000
+    x_train, x_test = np.split(mnist['data'],   [N_train])
+    y_train, y_test = np.split(mnist['target'], [N_train])
+    N_test = y_test.size
 
-    sda = brica1.ComponentSet()
-    sda.make_out_port("out", 1)
-    sda.add_component("sensor", sensor, 0)
-    sda.add_component("da1", da1, 1)
-    sda.add_component("da2", da2, 2)
-    sda.add_component("da3", da3, 3)
-    sda.add_component("perceptron", perceptron, 4)
-    brica1.alias_out_port((sda, "out"), (perceptron, "out"))
+    autoencoder1 = AutoencoderComponent(28**2, 1000, use_gpu=use_gpu)
+    autoencoder2 = AutoencoderComponent(1000, 1000, use_gpu=use_gpu)
+    autoencoder3 = AutoencoderComponent(1000, 1000, use_gpu=use_gpu)
+    slp = SLPComponent(1000, 10)
 
-    mod = brica1.Module()
-    mod.make_out_port("out", 1)
-    mod.add_component("sda", sda)
-    brica1.alias_out_port((mod, "out"), (sda, "out"))
+    brica1.connect((autoencoder1, "output"), (autoencoder2, "input"))
+    brica1.connect((autoencoder2, "output"), (autoencoder3, "input"))
+    brica1.connect((autoencoder3, "output"), (slp, "input"))
 
-    ca.add_submodule("mod", mod)
+    stacked_autoencoder = brica1.ComponentSet()
+    stacked_autoencoder.add_component("autoencoder1", autoencoder1, 1)
+    stacked_autoencoder.add_component("autoencoder2", autoencoder2, 2)
+    stacked_autoencoder.add_component("autoencoder3", autoencoder3, 3)
+    stacked_autoencoder.add_component("slp", slp, 4)
 
-    while perceptron.train:
-        time = ca.step()
-        if (int(time) + 1) % 100 == 0:
-            print "Time {:}: L1={:.5f} L2={:.5f} L3={:.5f} Acc={:.5f}".format(time + 1, da1.loss, da2.loss, da3.loss, perceptron.acc)
+    stacked_autoencoder.make_in_port("input", 28**2)
+    stacked_autoencoder.make_in_port("target", 1)
+    stacked_autoencoder.make_out_port("output", 1000)
+    stacked_autoencoder.make_out_port("loss1", 1)
+    stacked_autoencoder.make_out_port("loss2", 1)
+    stacked_autoencoder.make_out_port("loss3", 1)
+    stacked_autoencoder.make_out_port("loss4", 1)
+    stacked_autoencoder.make_out_port("accuracy", 1)
+
+    brica1.alias_in_port((stacked_autoencoder, "input"), (autoencoder1, "input"))
+    brica1.alias_out_port((stacked_autoencoder, "output"), (slp, "output"))
+    brica1.alias_out_port((stacked_autoencoder, "loss1"), (autoencoder1, "loss"))
+    brica1.alias_out_port((stacked_autoencoder, "loss2"), (autoencoder2, "loss"))
+    brica1.alias_out_port((stacked_autoencoder, "loss3"), (autoencoder3, "loss"))
+    brica1.alias_out_port((stacked_autoencoder, "loss4"), (slp, "loss"))
+    brica1.alias_out_port((stacked_autoencoder, "accuracy"), (slp, "accuracy"))
+    brica1.alias_in_port((stacked_autoencoder, "target"), (slp, "target"))
+
+    scheduler = brica1.VirtualTimeSyncScheduler()
+    agent = brica1.Agent(scheduler)
+    module = brica1.Module()
+    module.add_component("stacked_autoencoder", stacked_autoencoder)
+    agent.add_submodule("module", module)
+
+    time = 0.0
+
+    for epoch in xrange(n_epoch):
+        perm = np.random.permutation(N_train)
+        sum_loss1 = 0
+        sum_loss2 = 0
+        sum_loss3 = 0
+        sum_loss4 = 0
+        sum_accuracy = 0
+
+        for batchnum in xrange(0, N_train, batchsize):
+            x_batch = x_train[perm[batchnum:batchnum+batchsize]]
+            y_batch = y_train[perm[batchnum:batchnum+batchsize]]
+
+            stacked_autoencoder.get_in_port("input").buffer = x_batch
+            stacked_autoencoder.get_in_port("target").buffer = y_batch
+
+            time = agent.step()
+
+            loss1 = stacked_autoencoder.get_out_port("loss1").buffer
+            loss2 = stacked_autoencoder.get_out_port("loss2").buffer
+            loss3 = stacked_autoencoder.get_out_port("loss3").buffer
+            loss4 = stacked_autoencoder.get_out_port("loss4").buffer
+            accuracy = stacked_autoencoder.get_out_port("accuracy").buffer
+
+            sum_loss1 += loss1 * batchsize
+            sum_loss2 += loss2 * batchsize
+            sum_loss3 += loss3 * batchsize
+            sum_loss4 += loss4 * batchsize
+            sum_accuracy += accuracy * batchsize
+
+        mean_loss1 = sum_loss1 / N_train
+        mean_loss2 = sum_loss2 / N_train
+        mean_loss3 = sum_loss3 / N_train
+        mean_loss4 = sum_loss3 / N_train
+        mean_accuracy = sum_accuracy / N_train
+
+        print "Epoch: {}\tLoss1: {}\tLoss2: {}\tLoss3: {}\tLoss4: {}\tAccuracy: {}".format(epoch+1, mean_loss1, mean_loss2, mean_loss3, mean_loss4, mean_accuracy)
