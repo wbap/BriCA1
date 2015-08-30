@@ -8,7 +8,15 @@ This modules contains utility functions for BriCA.
 
 """
 
-__all__ = ["connect", "alias_in_port", "alias_out_port"]
+import time
+
+__all__ = ["current_time", "current_time_millis", "connect", "alias_in_port", "alias_out_port"]
+
+def current_time():
+    return time.time()
+
+def current_time_millis():
+    return int(time.time() * 1000)
 
 def connect(from_tuple, to_tuple):
     """ Connect ports of two units

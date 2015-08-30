@@ -29,7 +29,7 @@ class RealTimeSyncSchedulerTest(unittest.TestCase):
     def setUp(self):
         pass
 
-    def test_set(self):
+    def test_basic(self):
         s = brica1.RealTimeSyncScheduler()
         ca = brica1.Agent(s)
 
@@ -52,7 +52,38 @@ class RealTimeSyncSchedulerTest(unittest.TestCase):
             self.assertGreater(s.current_time, scheduled_time)
             self.assertLessEqual(abs(s.current_time - scheduled_time), 
                                  TOLERANCE)
+            self.assertFalse(s.lagged)
 
+
+    def test_lagging(self):
+        s = brica1.RealTimeSyncScheduler()
+        ca = brica1.Agent(s)
+
+        c =TimeReporterComponent()
+
+        CompSet = brica1.ComponentSet()
+        CompSet.add_component("C", c, 0)
+
+        ModA = brica1.Module()
+        ModA.add_component("CompSet", CompSet)
+
+        ca.add_submodule("ModA", ModA)
+
+        s.set_interval(0.1)
+        c.delay = 0
+
+        ca.step()
+        scheduled_time = s.current_time + s.interval
+        ca.step()
+        self.assertGreater(s.current_time, scheduled_time)
+        self.assertLessEqual(abs(s.current_time - scheduled_time), 
+                             TOLERANCE)
+        self.assertFalse(s.lagged)
+        
+        c_interval = 0.2
+        c.delay = c_interval
+        ca.step()
+        self.assertTrue(s.lagged)
 
 
 
