@@ -15,7 +15,7 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
 
     def test_set(self):
         s = brica1.VirtualTimeSyncScheduler(1.0)
-        ca = brica1.Agent(s)
+        agent = brica1.Agent(s)
 
         zero = numpy.zeros(3, dtype=numpy.short)
         v = numpy.array([1, 2, 3], dtype=numpy.short)
@@ -41,7 +41,7 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
         CompC.make_in_port("in", 3)
         brica1.connect((CompB, "out"), (CompC, "in"))
 
-        ca.add_submodule("ModA", ModA)
+        agent.add_submodule("ModA", ModA)
 
         self.assertTrue((CompA.get_state("out") == v).all())
         self.assertIsNot(CompA.get_state("out"), v)
@@ -51,7 +51,7 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
         self.assertTrue((CompB.get_out_port("out").buffer == zero).all())
         self.assertTrue((CompC.get_in_port("in").buffer   == zero).all())
 
-        ca.step()
+        agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v).all())
@@ -60,7 +60,7 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
 
     def test_component(self):
         s = brica1.VirtualTimeSyncScheduler(1.0)
-        ca = brica1.Agent(s)
+        agent = brica1.Agent(s)
 
         zero = numpy.zeros(3, dtype=numpy.short)
         v = numpy.array([1, 2, 3], dtype=numpy.short)
@@ -84,7 +84,7 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
         CompC.make_in_port("in", 3)
         brica1.connect((CompB, "out"), (CompC, "in"))
 
-        ca.add_submodule("ModA", ModA)
+        agent.add_submodule("ModA", ModA)
 
         self.assertTrue((CompA.get_state("out") == v).all())
         self.assertIsNot(CompA.get_state("out"), v)
@@ -94,21 +94,21 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
         self.assertTrue((CompB.get_out_port("out").buffer == zero).all())
         self.assertTrue((CompC.get_in_port("in").buffer   == zero).all())
 
-        ca.step()
+        agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == zero).all())
         self.assertTrue((CompB.get_out_port("out").buffer == zero).all())
         self.assertTrue((CompC.get_in_port("in").buffer   == zero).all())
 
-        ca.step()
+        agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v   ).all())
         self.assertTrue((CompB.get_out_port("out").buffer == v   ).all())
         self.assertTrue((CompC.get_in_port("in").buffer   == zero).all())
 
-        ca.step()
+        agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v).all())
@@ -117,7 +117,7 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
 
     def test_module(self):
         s = brica1.VirtualTimeSyncScheduler(1.0)
-        ca = brica1.Agent(s)
+        agent = brica1.Agent(s)
 
         zero = numpy.zeros(3, dtype=numpy.short)
         v = numpy.array([1, 2, 3], dtype=numpy.short)
@@ -159,7 +159,7 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
         ModD.add_submodule("ModB", ModB)
         ModD.add_submodule("ModC", ModC)
 
-        ca.add_submodule("ModD", ModD)
+        agent.add_submodule("ModD", ModD)
 
         self.assertTrue((CompA.get_state("out") == v).all())
         self.assertIsNot(CompA.get_state("out"), v)
@@ -173,7 +173,7 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
         self.assertTrue((ModB.get_out_port("out").buffer  == zero).all())
         self.assertTrue((ModC.get_in_port("in").buffer    == zero).all())
 
-        ca.step()
+        agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == zero).all())
@@ -184,7 +184,7 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
         self.assertTrue((ModB.get_out_port("out").buffer  == zero).all())
         self.assertTrue((ModC.get_in_port("in").buffer    == zero).all())
 
-        ca.step()
+        agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v   ).all())
@@ -195,7 +195,7 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
         self.assertTrue((ModB.get_out_port("out").buffer  == v   ).all())
         self.assertTrue((ModC.get_in_port("in").buffer    == zero).all())
 
-        ca.step()
+        agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v).all())
@@ -208,7 +208,7 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
 
     def test_nested(self):
         s = brica1.VirtualTimeSyncScheduler(1.0)
-        ca = brica1.Agent(s)
+        agent = brica1.Agent(s)
 
         zero = numpy.zeros(3, dtype=numpy.short)
         v = numpy.array([1, 2, 3], dtype=numpy.short)
@@ -272,7 +272,7 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
         Top.add_submodule("SupB", SupB)
         Top.add_submodule("SupC", SupC)
 
-        ca.add_submodule("Top", Top)
+        agent.add_submodule("Top", Top)
 
         self.assertTrue((CompA.get_state("out") == v).all())
         self.assertIsNot(CompA.get_state("out"), v)
@@ -290,7 +290,7 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
         self.assertTrue((SupB.get_out_port("out").buffer  == zero).all())
         self.assertTrue((SupC.get_in_port("in").buffer    == zero).all())
 
-        ca.step()
+        agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == zero).all())
@@ -305,7 +305,7 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
         self.assertTrue((SupB.get_out_port("out").buffer  == zero).all())
         self.assertTrue((SupC.get_in_port("in").buffer    == zero).all())
 
-        ca.step()
+        agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v   ).all())
@@ -320,7 +320,7 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
         self.assertTrue((SupB.get_out_port("out").buffer  == v   ).all())
         self.assertTrue((SupC.get_in_port("in").buffer    == zero).all())
 
-        ca.step()
+        agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v).all())
@@ -334,6 +334,73 @@ class VirtualTimeSyncSchedulerTest(unittest.TestCase):
         self.assertTrue((SupB.get_in_port("in").buffer    == v).all())
         self.assertTrue((SupB.get_out_port("out").buffer  == v).all())
         self.assertTrue((SupC.get_in_port("in").buffer    == v).all())
+
+    def test_callback(self):
+        s = brica1.VirtualTimeSyncScheduler(1.0)
+        agent = brica1.Agent(s)
+
+        zero = numpy.zeros(3, dtype=numpy.short)
+        v = numpy.array([1, 2, 3], dtype=numpy.short)
+
+        CompA = brica1.ConstantComponent()
+        CompB = brica1.PipeComponent()
+        CompC = brica1.NullComponent()
+
+        ModA = brica1.Module()
+
+        ModA.add_component("CompA", CompA)
+        ModA.add_component("CompB", CompB)
+        ModA.add_component("CompC", CompC)
+
+        CompA.set_state("out", v)
+        CompA.make_out_port("out", 3)
+        CompB.make_in_port("in", 3)
+        brica1.connect((CompA, "out"), (CompB, "in"))
+        CompB.make_out_port("out", 3)
+        CompB.set_map("in", "out")
+        CompC.make_in_port("in", 3)
+        brica1.connect((CompB, "out"), (CompC, "in"))
+
+        agent.add_submodule("ModA", ModA)
+
+        def assign_callback(port):
+            def callback(v):
+                self.assertTrue((port.buffer == v).all())
+            port.register_callback(callback)
+
+        assign_callback(CompA.get_out_port("out"))
+        assign_callback(CompB.get_in_port("in"))
+        assign_callback(CompB.get_out_port("out"))
+        assign_callback(CompC.get_in_port("in"))
+
+        self.assertTrue((CompA.get_state("out") == v).all())
+        self.assertIsNot(CompA.get_state("out"), v)
+
+        self.assertTrue((CompA.get_out_port("out").buffer == zero).all())
+        self.assertTrue((CompB.get_in_port("in").buffer   == zero).all())
+        self.assertTrue((CompB.get_out_port("out").buffer == zero).all())
+        self.assertTrue((CompC.get_in_port("in").buffer   == zero).all())
+
+        agent.step()
+
+        self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
+        self.assertTrue((CompB.get_in_port("in").buffer   == zero).all())
+        self.assertTrue((CompB.get_out_port("out").buffer == zero).all())
+        self.assertTrue((CompC.get_in_port("in").buffer   == zero).all())
+
+        agent.step()
+
+        self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
+        self.assertTrue((CompB.get_in_port("in").buffer   == v   ).all())
+        self.assertTrue((CompB.get_out_port("out").buffer == v   ).all())
+        self.assertTrue((CompC.get_in_port("in").buffer   == zero).all())
+
+        agent.step()
+
+        self.assertTrue((CompA.get_out_port("out").buffer == v).all())
+        self.assertTrue((CompB.get_in_port("in").buffer   == v).all())
+        self.assertTrue((CompB.get_out_port("out").buffer == v).all())
+        self.assertTrue((CompC.get_in_port("in").buffer   == v).all())
 
 class VirtualTimeSchedulerTest(unittest.TestCase):
     def setUp(self):
@@ -341,7 +408,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
 
     def test_set(self):
         s = brica1.VirtualTimeScheduler()
-        ca = brica1.Agent(s)
+        agent = brica1.Agent(s)
 
         zero = numpy.zeros(3, dtype=numpy.short)
         v = numpy.array([1, 2, 3], dtype=numpy.short)
@@ -367,7 +434,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         CompC.make_in_port("in", 3)
         brica1.connect((CompB, "out"), (CompC, "in"))
 
-        ca.add_submodule("ModA", ModA)
+        agent.add_submodule("ModA", ModA)
 
         self.assertTrue((CompA.get_state("out") == v).all())
         self.assertIsNot(CompA.get_state("out"), v)
@@ -379,7 +446,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
 
     def test_component(self):
         s = brica1.VirtualTimeScheduler()
-        ca = brica1.Agent(s)
+        agent = brica1.Agent(s)
 
         zero = numpy.zeros(3, dtype=numpy.short)
         v = numpy.array([1, 2, 3], dtype=numpy.short)
@@ -411,7 +478,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         CompC.make_in_port("in", 3)
         brica1.connect((CompB, "out"), (CompC, "in"))
 
-        ca.add_submodule("ModA", ModA)
+        agent.add_submodule("ModA", ModA)
 
         self.assertTrue((CompA.get_state("out") == v).all())
         self.assertIsNot(CompA.get_state("out"), v)
@@ -421,7 +488,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((CompB.get_out_port("out").buffer == zero).all())
         self.assertTrue((CompC.get_in_port("in").buffer   == zero).all())
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == zero).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == zero).all())
@@ -429,7 +496,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((CompC.get_in_port("in").buffer   == zero).all())
         self.assertEquals(time, 5.0)
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == zero).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == zero).all())
@@ -437,7 +504,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((CompC.get_in_port("in").buffer   == zero).all())
         self.assertEquals(time, 6.0)
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == zero).all())
@@ -445,7 +512,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((CompC.get_in_port("in").buffer   == zero).all())
         self.assertEquals(time, 7.0)
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v   ).all())
@@ -453,7 +520,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((CompC.get_in_port("in").buffer   == zero).all())
         self.assertEquals(time, 10.0)
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v   ).all())
@@ -461,7 +528,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((CompC.get_in_port("in").buffer   == zero).all())
         self.assertEquals(time, 11.0)
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v   ).all())
@@ -469,7 +536,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((CompC.get_in_port("in").buffer   == zero).all())
         self.assertEquals(time, 12.0)
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v   ).all())
@@ -477,7 +544,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((CompC.get_in_port("in").buffer   == zero).all())
         self.assertEquals(time, 15.0)
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v   ).all())
@@ -485,7 +552,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((CompC.get_in_port("in").buffer   == v   ).all())
         self.assertEquals(time, 16.0)
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v).all())
@@ -495,7 +562,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
 
     def test_module(self):
         s = brica1.VirtualTimeScheduler()
-        ca = brica1.Agent(s)
+        agent = brica1.Agent(s)
 
         zero = numpy.zeros(3, dtype=numpy.short)
         v = numpy.array([1, 2, 3], dtype=numpy.short)
@@ -545,7 +612,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         ModD.add_submodule("ModB", ModB)
         ModD.add_submodule("ModC", ModC)
 
-        ca.add_submodule("ModD", ModD)
+        agent.add_submodule("ModD", ModD)
 
         self.assertTrue((CompA.get_state("out") == v).all())
         self.assertIsNot(CompA.get_state("out"), v)
@@ -559,7 +626,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((ModB.get_out_port("out").buffer  == zero).all())
         self.assertTrue((ModC.get_in_port("in").buffer    == zero).all())
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == zero).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == zero).all())
@@ -571,7 +638,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((ModC.get_in_port("in").buffer    == zero).all())
         self.assertEquals(time, 5.0)
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == zero).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == zero).all())
@@ -583,7 +650,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((ModC.get_in_port("in").buffer    == zero).all())
         self.assertEquals(time, 6.0)
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == zero).all())
@@ -595,7 +662,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((ModC.get_in_port("in").buffer    == zero).all())
         self.assertEquals(time, 7.0)
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v   ).all())
@@ -607,7 +674,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((ModC.get_in_port("in").buffer    == zero).all())
         self.assertEquals(time, 10.0)
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v   ).all())
@@ -619,7 +686,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((ModC.get_in_port("in").buffer    == zero).all())
         self.assertEquals(time, 11.0)
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v   ).all())
@@ -631,7 +698,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((ModC.get_in_port("in").buffer    == zero).all())
         self.assertEquals(time, 12.0)
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v   ).all())
@@ -643,7 +710,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((ModC.get_in_port("in").buffer    == zero).all())
         self.assertEquals(time, 15.0)
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v).all())
@@ -655,7 +722,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((ModC.get_in_port("in").buffer    == v).all())
         self.assertEquals(time, 16.0)
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v).all())
@@ -669,7 +736,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
 
     def test_nested(self):
         s = brica1.VirtualTimeScheduler()
-        ca = brica1.Agent(s)
+        agent = brica1.Agent(s)
 
         zero = numpy.zeros(3, dtype=numpy.short)
         v = numpy.array([1, 2, 3], dtype=numpy.short)
@@ -741,7 +808,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         Top.add_submodule("SupB", SupB)
         Top.add_submodule("SupC", SupC)
 
-        ca.add_submodule("Top", Top)
+        agent.add_submodule("Top", Top)
 
         self.assertTrue((CompA.get_state("out") == v).all())
         self.assertIsNot(CompA.get_state("out"), v)
@@ -759,7 +826,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((SupB.get_out_port("out").buffer  == zero).all())
         self.assertTrue((SupC.get_in_port("in").buffer    == zero).all())
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == zero).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == zero).all())
@@ -775,7 +842,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((SupC.get_in_port("in").buffer    == zero).all())
         self.assertEquals(time, 5.0)
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == zero).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == zero).all())
@@ -791,7 +858,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((SupC.get_in_port("in").buffer    == zero).all())
         self.assertEquals(time, 6.0)
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == zero).all())
@@ -807,7 +874,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((SupC.get_in_port("in").buffer    == zero).all())
         self.assertEquals(time, 7.0)
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v   ).all())
@@ -823,7 +890,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((SupC.get_in_port("in").buffer    == zero).all())
         self.assertEquals(time, 10.0)
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v   ).all())
@@ -839,7 +906,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((SupC.get_in_port("in").buffer    == zero).all())
         self.assertEquals(time, 11.0)
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v   ).all())
@@ -855,7 +922,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((SupC.get_in_port("in").buffer    == zero).all())
         self.assertEquals(time, 12.0)
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v   ).all())
@@ -871,7 +938,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((SupC.get_in_port("in").buffer    == zero).all())
         self.assertEquals(time, 15.0)
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v).all())
@@ -887,7 +954,7 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((SupC.get_in_port("in").buffer    == v).all())
         self.assertEquals(time, 16.0)
 
-        time = ca.step()
+        time = agent.step()
 
         self.assertTrue((CompA.get_out_port("out").buffer == v).all())
         self.assertTrue((CompB.get_in_port("in").buffer   == v).all())
@@ -901,6 +968,132 @@ class VirtualTimeSchedulerTest(unittest.TestCase):
         self.assertTrue((SupB.get_in_port("in").buffer    == v).all())
         self.assertTrue((SupB.get_out_port("out").buffer  == v).all())
         self.assertTrue((SupC.get_in_port("in").buffer    == v).all())
+        self.assertEquals(time, 17.0)
+
+    def test_callback(self):
+        s = brica1.VirtualTimeScheduler()
+        agent = brica1.Agent(s)
+
+        zero = numpy.zeros(3, dtype=numpy.short)
+        v = numpy.array([1, 2, 3], dtype=numpy.short)
+
+        CompA = brica1.ConstantComponent()
+        CompB = brica1.PipeComponent()
+        CompC = brica1.NullComponent()
+
+        CompA.offset = 2.0
+        CompB.offset = 0.0
+        CompC.offset = 1.0
+
+        CompA.interval = 5.0
+        CompB.interval = 5.0
+        CompC.interval = 5.0
+
+        ModA = brica1.Module()
+
+        ModA.add_component("CompA", CompA)
+        ModA.add_component("CompB", CompB)
+        ModA.add_component("CompC", CompC)
+
+        CompA.set_state("out", v)
+        CompA.make_out_port("out", 3)
+        CompB.make_in_port("in", 3)
+        brica1.connect((CompA, "out"), (CompB, "in"))
+        CompB.make_out_port("out", 3)
+        CompB.set_map("in", "out")
+        CompC.make_in_port("in", 3)
+        brica1.connect((CompB, "out"), (CompC, "in"))
+
+        agent.add_submodule("ModA", ModA)
+
+        def assign_callback(port):
+            def callback(v):
+                self.assertTrue((port.buffer == v).all())
+            port.register_callback(callback)
+
+        assign_callback(CompA.get_out_port("out"))
+        assign_callback(CompB.get_in_port("in"))
+        assign_callback(CompB.get_out_port("out"))
+        assign_callback(CompC.get_in_port("in"))
+
+        self.assertTrue((CompA.get_state("out") == v).all())
+        self.assertIsNot(CompA.get_state("out"), v)
+
+        self.assertTrue((CompA.get_out_port("out").buffer == zero).all())
+        self.assertTrue((CompB.get_in_port("in").buffer   == zero).all())
+        self.assertTrue((CompB.get_out_port("out").buffer == zero).all())
+        self.assertTrue((CompC.get_in_port("in").buffer   == zero).all())
+
+        time = agent.step()
+
+        self.assertTrue((CompA.get_out_port("out").buffer == zero).all())
+        self.assertTrue((CompB.get_in_port("in").buffer   == zero).all())
+        self.assertTrue((CompB.get_out_port("out").buffer == zero).all())
+        self.assertTrue((CompC.get_in_port("in").buffer   == zero).all())
+        self.assertEquals(time, 5.0)
+
+        time = agent.step()
+
+        self.assertTrue((CompA.get_out_port("out").buffer == zero).all())
+        self.assertTrue((CompB.get_in_port("in").buffer   == zero).all())
+        self.assertTrue((CompB.get_out_port("out").buffer == zero).all())
+        self.assertTrue((CompC.get_in_port("in").buffer   == zero).all())
+        self.assertEquals(time, 6.0)
+
+        time = agent.step()
+
+        self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
+        self.assertTrue((CompB.get_in_port("in").buffer   == zero).all())
+        self.assertTrue((CompB.get_out_port("out").buffer == zero).all())
+        self.assertTrue((CompC.get_in_port("in").buffer   == zero).all())
+        self.assertEquals(time, 7.0)
+
+        time = agent.step()
+
+        self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
+        self.assertTrue((CompB.get_in_port("in").buffer   == v   ).all())
+        self.assertTrue((CompB.get_out_port("out").buffer == zero).all())
+        self.assertTrue((CompC.get_in_port("in").buffer   == zero).all())
+        self.assertEquals(time, 10.0)
+
+        time = agent.step()
+
+        self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
+        self.assertTrue((CompB.get_in_port("in").buffer   == v   ).all())
+        self.assertTrue((CompB.get_out_port("out").buffer == zero).all())
+        self.assertTrue((CompC.get_in_port("in").buffer   == zero).all())
+        self.assertEquals(time, 11.0)
+
+        time = agent.step()
+
+        self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
+        self.assertTrue((CompB.get_in_port("in").buffer   == v   ).all())
+        self.assertTrue((CompB.get_out_port("out").buffer == zero).all())
+        self.assertTrue((CompC.get_in_port("in").buffer   == zero).all())
+        self.assertEquals(time, 12.0)
+
+        time = agent.step()
+
+        self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
+        self.assertTrue((CompB.get_in_port("in").buffer   == v   ).all())
+        self.assertTrue((CompB.get_out_port("out").buffer == v   ).all())
+        self.assertTrue((CompC.get_in_port("in").buffer   == zero).all())
+        self.assertEquals(time, 15.0)
+
+        time = agent.step()
+
+        self.assertTrue((CompA.get_out_port("out").buffer == v   ).all())
+        self.assertTrue((CompB.get_in_port("in").buffer   == v   ).all())
+        self.assertTrue((CompB.get_out_port("out").buffer == v   ).all())
+        self.assertTrue((CompC.get_in_port("in").buffer   == v   ).all())
+        self.assertEquals(time, 16.0)
+
+        time = agent.step()
+
+        self.assertTrue((CompA.get_out_port("out").buffer == v).all())
+        self.assertTrue((CompB.get_in_port("in").buffer   == v).all())
+        self.assertTrue((CompB.get_out_port("out").buffer == v).all())
+        self.assertTrue((CompC.get_in_port("in").buffer   == v).all())
         self.assertEquals(time, 17.0)
 
 if __name__ == '__main__':

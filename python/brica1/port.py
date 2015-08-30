@@ -32,6 +32,7 @@ class Port(object):
 
         super(Port, self).__init__()
         self.buffer = value
+        self.callbacks = []
 
     def connect(self, target):
         """ Create a connection to the target `Port`.
@@ -59,3 +60,30 @@ class Port(object):
 
         if hasattr(self, 'connection'):
             self.connection.sync()
+
+    def register_callback(self, f):
+        """ Register a callback function to this `Port`
+
+        Args:
+          f (Function): a function to register
+
+        Returns:
+          None.
+
+        """
+
+        self.callbacks.append(f)
+
+    def invoke_callbacks(self):
+        """ Invoke all callback functions with buffer value as argument
+
+        Args:
+          None.
+
+        Returns:
+          None.
+
+        """
+
+        for f in self.callbacks:
+            f(self.buffer)

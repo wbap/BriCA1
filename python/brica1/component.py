@@ -175,6 +175,7 @@ class Component(Unit):
 
         for id, in_port in self.in_ports.items():
             in_port.sync()
+            in_port.invoke_callbacks()
             self.inputs[id] = in_port.buffer.copy()
 
         assert self.last_input_time <= time, "collect_input() captured a time travel"
@@ -197,6 +198,7 @@ class Component(Unit):
         for id, out_port in self.out_ports.items():
             if id in self.results:
                 out_port.buffer = self.results[id]
+                out_port.invoke_callbacks()
 
         assert self.last_output_time <= time, "update_output() captured a time travel"
         self.last_output_time = time
