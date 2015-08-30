@@ -161,7 +161,10 @@ class Unit(object):
 
         """
 
-        self.set_in_port(to_id, target.get_in_port(from_id))
+        to_port = self.get_in_port(to_id)
+        from_port = target.get_in_port(from_id)
+        from_port.callbacks.extend(to_port.callbacks)
+        self.set_in_port(to_id, from_port)
 
     def alias_out_port(self, target, from_id, to_id):
         """ Alias an out-port from a target `Unit` to this `Unit`.
