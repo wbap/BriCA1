@@ -2,11 +2,10 @@
 import argparse
 import numpy as np
 from chainer import Variable, FunctionSet, optimizers, cuda
-import chainer.functions  as F
+import chainer.functions as F
 import data
 
 import brica1
-import sys
 
 class SLP(FunctionSet):
     def __init__(self, n_input, n_output):
