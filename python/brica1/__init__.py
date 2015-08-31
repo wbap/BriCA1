@@ -10,10 +10,11 @@ A scalable, general purpose computing platform for cognitive architectures.
 
 """
 
-__all__ = ["component", "connection", "module", "port", "scheduler", "unit", "utils"]
+__all__ = ["component", "connection", "integration", "module", "port", "scheduler", "unit", "utils"]
 
 from component import *
 from connection import *
+from integration import *
 from module import *
 from port import *
 from scheduler import *
