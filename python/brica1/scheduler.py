@@ -9,10 +9,13 @@ types of schedulers. The `VirtualTimeSyncScheduler` is implemneted for now.
 
 """
 
-__all__ = ["Scheduler", "VirtualTimeSyncScheduler", "VirtualTimeScheduler"]
+__all__ = ["Scheduler", "VirtualTimeSyncScheduler", "VirtualTimeScheduler", "RealTimeSyncScheduler"]
+
+from brica1.utils import *
 
 from abc import ABCMeta, abstractmethod
 import copy
+import time
 import numpy
 
 import Queue
@@ -93,7 +96,7 @@ class VirtualTimeSyncScheduler(Scheduler):
         """ Create a new `VirtualTimeSyncScheduler` Instance.
 
         Args:
-          interval (float): interval between each step
+          interval (float): interval in seconds between each step
 
         Returns:
           VirtualTimeSyncScheduler: A new `VirtualTimeSyncScheduler` instance.
@@ -214,5 +217,102 @@ class VirtualTimeScheduler(Scheduler):
         component.fire()
 
         self.event_queue.put(VirtualTimeScheduler.Event(self.current_time + component.interval, component))
+
+        return self.current_time
+
+class RealTimeSyncScheduler(Scheduler):
+    """
+    `RealTimeSyncScheduler` is a `Scheduler` implementation for real time
+    in a synced manner.
+    """
+
+    def __init__(self, interval=1.0):
+        """ Create a new `RealTimeSyncScheduler` Instance.
+
+        Args:
+          interval (float): minimu interval in seconds between input and output of the modules.
+
+        Returns:
+          RealTimeSyncScheduler: A new `RealTimeSyncScheduler` instance.
+
+        """
+
+        self.last_input_time = -1.0
+        self.last_output_time = -1.0
+        self.last_spent = -1.0
+        self.last_dt = -1.0
+
+        super(RealTimeSyncScheduler, self).__init__()
+        self.set_interval(interval)
+
+
+    def reset():
+        super(RealTimeSyncScheduler, self).reset()
+        self.set_interval(1.0)
+
+
+    def set_interval(self, interval):
+        self.interval = float(interval)
+        assert self.interval > 0.0
+
+    def step(self):
+        """ Step by the internal interval.
+
+        The methods `input()`, `fire()`, and `output()` are synchronously
+        called for all components.
+
+        The time when it started calling input() and output() of the 
+        components is stored in self.last_input_time and 
+        self.last_output_time, respectively.
+
+        self.interval sets the *minimum* interval between the point in
+        time when input() is called and when output() is called.
+        The actual interval between input() and output() will 
+        always be longer than self.interval, although the scheduler
+        tries to make the discrepancy minimum.
+
+        When calling fire() of the components takes longer than the
+        set interval, calling output() of the components will be 
+        later than the scheduled time self.input_time + self.interval.
+        In this case, self.lagged will be set True.
+
+        During the execution of this method, it will also set self.last_spent,
+        which will be the time spent until all components are fired
+        after self.last_input_time is set.
+
+        Args:
+          None.
+
+        Returns:
+          float: the current time of the `Scheduler`.
+
+        """
+
+        self.last_input_time = current_time()
+        self.current_time = self.last_input_time
+
+        for component in self.components:
+            component.input(self.last_input_time)
+
+        for component in self.components:
+            component.fire()
+
+        self.last_spent = current_time() - self.last_input_time
+        last_dt = self.interval - self.last_spent
+
+        self.lagged = False
+        if last_dt > 0.0:
+            time.sleep(last_dt)
+        elif last_dt < 0.0:
+            self.lagged = True
+
+        self.last_output_time = current_time()
+        self.current_time = self.last_output_time
+
+        for component in self.components:
+            component.output(self.last_output_time)
+
+        self.last_output_time = current_time()
+        self.current_time = self.last_output_time
 
         return self.current_time
