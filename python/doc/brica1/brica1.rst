@@ -36,6 +36,14 @@ brica1.port module
     :undoc-members:
     :show-inheritance:
 
+brica1.ros module
+-----------------
+
+.. automodule:: brica1.ros
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 brica1.scheduler module
 -----------------------
 

@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 """
-integration.py
+ros.py
 =====
 
-This module contains classes for BriCA cross-platform integration (eg. ROS).
+This module containes classes for ROS integration.
 
 """
 
