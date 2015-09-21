@@ -4,6 +4,7 @@ import numpy as np
 from chainer import Variable, FunctionSet, optimizers, cuda
 import chainer.functions as F
 import data
+import cPickle as pickle
 
 import brica1
 
@@ -52,6 +53,7 @@ class SLPComponent(brica1.Component):
         super(SLPComponent, self).__init__()
         self.model = SLP(n_input, n_output)
         self.optimizer = optimizers.Adam()
+        self.training = True
 
         self.make_in_port("input", n_input)
         self.make_in_port("target", 1)
@@ -66,6 +68,21 @@ class SLPComponent(brica1.Component):
 
         self.optimizer.setup(self.model)
 
+    def to_cpu(self):
+        if self.use_gpu:
+            self.model.to_cpu()
+            self.optimizer.setup(self.model)
+            self.use_gpu = False
+
+    def to_gpu(self):
+        if not self.use_gpu:
+            self.model.to_gpu()
+            self.optimizer.setup(self.model)
+            self.use_gpu = True
+
+    def set_training(self, flag):
+        self.training = flag;
+
     def fire(self):
         x_data = self.inputs["input"].astype(np.float32)
         t_data = self.inputs["target"].astype(np.int32)
@@ -76,8 +93,9 @@ class SLPComponent(brica1.Component):
 
         self.optimizer.zero_grads()
         loss, accuracy = self.model.forward(x_data, t_data)
-        loss.backward()
-        self.optimizer.update()
+        if self.training:
+            loss.backward()
+            self.optimizer.update()
 
         y_data = self.model.predict(x_data)
 
@@ -90,6 +108,7 @@ class AutoencoderComponent(brica1.Component):
         super(AutoencoderComponent, self).__init__()
         self.model = Autoencoder(n_input, n_output)
         self.optimizer = optimizers.Adam()
+        self.training = True
 
         self.make_in_port("input", n_input)
         self.make_out_port("output", n_output)
@@ -102,16 +121,33 @@ class AutoencoderComponent(brica1.Component):
 
         self.optimizer.setup(self.model)
 
+    def to_cpu(self):
+        if self.use_gpu:
+            self.model.to_cpu()
+            self.optimizer.setup(self.model)
+            self.use_gpu = False
+
+    def to_gpu(self):
+        if not self.use_gpu:
+            self.model.to_gpu()
+            self.optimizer.setup(self.model)
+            self.use_gpu = True
+
+    def set_training(self, flag):
+        self.training = flag;
+
     def fire(self):
         x_data = self.inputs["input"].astype(np.float32)
 
         if self.use_gpu:
             x_data = cuda.to_gpu(x_data)
 
+
         self.optimizer.zero_grads()
         loss = self.model.forward(x_data)
-        loss.backward()
-        self.optimizer.update()
+        if self.training:
+            loss.backward()
+            self.optimizer.update()
 
         y_data = self.model.encode(x_data)
 
@@ -125,7 +161,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     use_gpu = False
-    if args.gpu >= 0:
+    if args.gpu >= 0: 
+        print "Using gpu: {}".format(args.gpu)
         use_gpu = True
         cuda.get_device(args.gpu).use()
 
@@ -219,3 +256,18 @@ if __name__ == "__main__":
         mean_accuracy = sum_accuracy / N_train
 
         print "Epoch: {}\tLoss1: {}\tLoss2: {}\tLoss3: {}\tLoss4: {}\tAccuracy: {}".format(epoch+1, mean_loss1, mean_loss2, mean_loss3, mean_loss4, mean_accuracy)
+
+    autoencoder1.reset()
+    autoencoder2.reset()
+    autoencoder3.reset()
+    slp.reset()
+    stacked_autoencoder.reset()
+
+    autoencoder1.set_training(False)
+    autoencoder2.set_training(False)
+    autoencoder3.set_training(False)
+    slp.set_training(False)
+
+    f = open('sda.pkl', 'wb')
+    pickle.dump(stacked_autoencoder, f)
+    f.close()

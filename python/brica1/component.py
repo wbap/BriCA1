@@ -203,6 +203,24 @@ class Component(Unit):
         assert self.last_output_time <= time, "update_output() captured a time travel"
         self.last_output_time = time
 
+    def reset(self):
+        """ Reset the component state
+
+        This method resets the internal time of the component for reuse.
+
+        Args:
+          None.
+
+        Returns:
+          None.
+
+        """
+
+        self.last_input_time = 0.0
+        self.last_output_time = 0.0
+        self.offset = 0.0
+        self.interval = 1.0
+
 class ComponentSet(Component):
     """
     `ComponentSet` groups components to fire sequentially
