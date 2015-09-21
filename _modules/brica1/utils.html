@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>brica1.utils &mdash; BriCA1 1.0.0 ドキュメント</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="BriCA1 1.0.0 ドキュメント" href="../../index.html" />
+    <link rel="up" title="モジュールコード" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="総合索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Pythonモジュール索引"
+             >モジュール</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">BriCA1 1.0.0 ドキュメント</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">モジュールコード</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>brica1.utils のソースコード</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">utils.py</span>
+<span class="sd">=====</span>
+
+<span class="sd">This modules contains utility functions for BriCA.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;current_time&quot;</span><span class="p">,</span> <span class="s">&quot;current_time_millis&quot;</span><span class="p">,</span> <span class="s">&quot;connect&quot;</span><span class="p">,</span> <span class="s">&quot;alias_in_port&quot;</span><span class="p">,</span> <span class="s">&quot;alias_out_port&quot;</span><span class="p">]</span>
+
+<div class="viewcode-block" id="current_time"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.utils.current_time">[ドキュメント]</a><span class="k">def</span> <span class="nf">current_time</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="current_time_millis"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.utils.current_time_millis">[ドキュメント]</a><span class="k">def</span> <span class="nf">current_time_millis</span><span class="p">():</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="connect"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.utils.connect">[ドキュメント]</a><span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="n">from_tuple</span><span class="p">,</span> <span class="n">to_tuple</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Connect ports of two units</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      from_tuple (tuple&lt;Unit, str&gt;):  Unit and port id to connect from.</span>
+<span class="sd">      to_tuple (tuple&lt;Unit, str&gt;): Unit and port id to connect to.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">      None.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">from_unit</span><span class="p">,</span> <span class="n">from_port</span> <span class="o">=</span> <span class="n">from_tuple</span>
+    <span class="n">to_unit</span><span class="p">,</span> <span class="n">to_port</span> <span class="o">=</span> <span class="n">to_tuple</span>
+
+    <span class="n">to_unit</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">from_unit</span><span class="p">,</span> <span class="n">from_port</span><span class="p">,</span> <span class="n">to_port</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="alias_in_port"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.utils.alias_in_port">[ドキュメント]</a><span class="k">def</span> <span class="nf">alias_in_port</span><span class="p">(</span><span class="n">from_tuple</span><span class="p">,</span> <span class="n">to_tuple</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Alias in-ports of two units</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      from_tuple (tuple&lt;Unit, str&gt;): Unit and port id to alias from.</span>
+<span class="sd">      to_tuple (tuple&lt;Unit, str&gt;): Unit and port id to alias to.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">      None.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">from_unit</span><span class="p">,</span> <span class="n">from_port</span> <span class="o">=</span> <span class="n">from_tuple</span>
+    <span class="n">to_unit</span><span class="p">,</span> <span class="n">to_port</span> <span class="o">=</span> <span class="n">to_tuple</span>
+
+    <span class="n">to_unit</span><span class="o">.</span><span class="n">alias_in_port</span><span class="p">(</span><span class="n">from_unit</span><span class="p">,</span> <span class="n">from_port</span><span class="p">,</span> <span class="n">to_port</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="alias_out_port"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.utils.alias_out_port">[ドキュメント]</a><span class="k">def</span> <span class="nf">alias_out_port</span><span class="p">(</span><span class="n">from_tuple</span><span class="p">,</span> <span class="n">to_tuple</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Alias out-ports of two units</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      from_tuple (tuple&lt;Unit, str&gt;): Unit and port id to alias from.</span>
+<span class="sd">      to_tuple (tuple&lt;Unit, str&gt;): Unit and port id to alias to.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">      None.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">from_unit</span><span class="p">,</span> <span class="n">from_port</span> <span class="o">=</span> <span class="n">from_tuple</span>
+    <span class="n">to_unit</span><span class="p">,</span> <span class="n">to_port</span> <span class="o">=</span> <span class="n">to_tuple</span>
+
+    <span class="n">to_unit</span><span class="o">.</span><span class="n">alias_out_port</span><span class="p">(</span><span class="n">from_unit</span><span class="p">,</span> <span class="n">from_port</span><span class="p">,</span> <span class="n">to_port</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>クイック検索</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="検索" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    モジュール、クラス、または関数名を入力してください
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="総合索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Pythonモジュール索引"
+             >モジュール</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">BriCA1 1.0.0 ドキュメント</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >モジュールコード</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, ktnyt.
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1 で生成しました。
+    </div>
+  </body>
+</html>

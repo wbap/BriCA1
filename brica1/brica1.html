@@ -1,0 +1,1117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>brica1 package &mdash; BriCA1 1.0.0 ドキュメント</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="BriCA1 1.0.0 ドキュメント" href="../index.html" />
+    <link rel="next" title="Introduction" href="../tutorial/introduction.html" />
+    <link rel="prev" title="Welcome to BriCA1’s documentation!" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="総合索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Pythonモジュール索引"
+             >モジュール</a> |</li>
+        <li class="right" >
+          <a href="../tutorial/introduction.html" title="Introduction"
+             accesskey="N">次へ</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Welcome to BriCA1’s documentation!"
+             accesskey="P">前へ</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">BriCA1 1.0.0 ドキュメント</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="brica1-package">
+<h1>brica1 package<a class="headerlink" href="#brica1-package" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+<div class="section" id="module-brica1.component">
+<span id="brica1-component-module"></span><h2>brica1.component module<a class="headerlink" href="#module-brica1.component" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="component-py">
+<h3>component.py<a class="headerlink" href="#component-py" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>This module contains the <cite>Component</cite>, <cite>ConstantComponent</cite>, <cite>PipeComponent</cite>, and
+<cite>NullComponent</cite>. A <cite>Component</cite> is a unit of implementation which can exchange
+any type of data with another <cite>Component</cite>. <a href="#id1"><span class="problematic" id="id2">`</span></a>Component`s together with <a href="#id3"><span class="problematic" id="id4">`</span></a>Unit`s
+are collectively reffered to as <a href="#id5"><span class="problematic" id="id6">`</span></a>Unit`s.</p>
+<dl class="class">
+<dt id="brica1.component.Component">
+<em class="property">class </em><code class="descclassname">brica1.component.</code><code class="descname">Component</code><a class="reference internal" href="../_modules/brica1/component.html#Component"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.component.Component" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#brica1.unit.Unit" title="brica1.unit.Unit"><code class="xref py py-class docutils literal"><span class="pre">brica1.unit.Unit</span></code></a></p>
+<p><cite>Component</cite> is an abstract class for implementation units. Subclasses must
+override the <cite>fire()</cite> method to specify its implementation. See the sample
+implementations, <cite>ConstantComponent</cite>, <cite>NullComponent</cite>, and <cite>PipeComponent</cite>
+for reference.</p>
+<dl class="method">
+<dt id="brica1.component.Component.clear_result">
+<code class="descname">clear_result</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/component.html#Component.clear_result"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.component.Component.clear_result" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Clear a state value for the given ID.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): a string ID.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.component.Component.clear_state">
+<code class="descname">clear_state</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/component.html#Component.clear_state"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.component.Component.clear_state" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Clear a state value for the given ID.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): a string ID.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.component.Component.fire">
+<code class="descname">fire</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/component.html#Component.fire"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.component.Component.fire" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Perform a calculation.</p>
+<p>Users must override <cite>fire(self)</cite> method to define a new sub-class of
+Module. <cite>fire(self)</cite> method implements a function of the form</p>
+<blockquote>
+<div>results, states &lt;- fire(in_ports, states)</div></blockquote>
+<p>which states that this method should be a mutator of these two member
+variables (<cite>results</cite> and <cite>states</cite>), and the result of the computation
+should solely depend on the values stored in (<cite>in_ports</cite> and <cite>states</cite>).
+One important note here is that it shall mutate results member variable
+and not <cite>out_ports</cite>. Values stored in <cite>results</cite> will automatically be
+copied to <cite>out_ports</cite> by the scheduler which calls <cite>update_output()</cite>
+method of this Module, so these must be visible and accessible from
+other Modules. This procedure is especially necessary in concurrent
+execution of multiple Modules to avoid contention.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.component.Component.get_result">
+<code class="descname">get_result</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/component.html#Component.get_result"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.component.Component.get_result" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Get a result value for the given ID.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): a string ID.</dd>
+<dt>Returns:</dt>
+<dd>any: a result value for the given ID.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.component.Component.get_state">
+<code class="descname">get_state</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/component.html#Component.get_state"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.component.Component.get_state" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Get a state value for the given ID.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): a string ID.</dd>
+<dt>Returns:</dt>
+<dd>any: a state value for the given ID.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.component.Component.input">
+<code class="descname">input</code><span class="sig-paren">(</span><em>time</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/component.html#Component.input"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.component.Component.input" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Obtain inputs from outputs of other Modules.</p>
+<p>This method collects the outputs of connected modules and sets the
+values to the in-ports. It is usually called by the scheduler.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>time (float): the scheduler&#8217;s current time.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.component.Component.output">
+<code class="descname">output</code><span class="sig-paren">(</span><em>time</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/component.html#Component.output"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.component.Component.output" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Expose results to <cite>out_ports</cite></p>
+<p>This method exposes the computation results from <cite>results</cite> to
+<cite>out_ports</cite>. It is usually called by the scheduler.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>time (float): the scheduler&#8217;s current time.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.component.Component.reset">
+<code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/component.html#Component.reset"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.component.Component.reset" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Reset the component state</p>
+<p>This method resets the internal time of the component for reuse.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.component.Component.set_result">
+<code class="descname">set_result</code><span class="sig-paren">(</span><em>id</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/component.html#Component.set_result"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.component.Component.set_result" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Set a result value for the given ID.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): a string ID.
+v (any): a result value to set.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.component.Component.set_state">
+<code class="descname">set_state</code><span class="sig-paren">(</span><em>id</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/component.html#Component.set_state"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.component.Component.set_state" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Set a state value for the given ID.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): a string ID.
+v (any): a state value to set.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="brica1.component.ComponentSet">
+<em class="property">class </em><code class="descclassname">brica1.component.</code><code class="descname">ComponentSet</code><a class="reference internal" href="../_modules/brica1/component.html#ComponentSet"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.component.ComponentSet" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#brica1.component.Component" title="brica1.component.Component"><code class="xref py py-class docutils literal"><span class="pre">brica1.component.Component</span></code></a></p>
+<p><cite>ComponentSet</cite> groups components to fire sequentially</p>
+<dl class="method">
+<dt id="brica1.component.ComponentSet.add_component">
+<code class="descname">add_component</code><span class="sig-paren">(</span><em>id</em>, <em>component</em>, <em>priority</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/component.html#ComponentSet.add_component"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.component.ComponentSet.add_component" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Add a <cite>Component</cite> for given ID and priority</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): a string ID.
+component (Component): a component to add for <cite>id</cite>.
+priority (int): a priority value for scheduling.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.component.ComponentSet.fire">
+<code class="descname">fire</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/component.html#ComponentSet.fire"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.component.ComponentSet.fire" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Fire sub-components based on priority</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="brica1.component.ConstantComponent">
+<em class="property">class </em><code class="descclassname">brica1.component.</code><code class="descname">ConstantComponent</code><a class="reference internal" href="../_modules/brica1/component.html#ConstantComponent"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.component.ConstantComponent" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#brica1.component.Component" title="brica1.component.Component"><code class="xref py py-class docutils literal"><span class="pre">brica1.component.Component</span></code></a></p>
+<p><cite>ConstantComponent</cite> copies states to out ports.</p>
+<p>Use <cite>set_state</cite> to define the output of this Module.</p>
+<dl class="method">
+<dt id="brica1.component.ConstantComponent.fire">
+<code class="descname">fire</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/component.html#ConstantComponent.fire"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.component.ConstantComponent.fire" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Copy state contents to results.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="brica1.component.PipeComponent">
+<em class="property">class </em><code class="descclassname">brica1.component.</code><code class="descname">PipeComponent</code><a class="reference internal" href="../_modules/brica1/component.html#PipeComponent"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.component.PipeComponent" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#brica1.component.Component" title="brica1.component.Component"><code class="xref py py-class docutils literal"><span class="pre">brica1.component.Component</span></code></a></p>
+<p><cite>PipeComponent</cite> copies contents of in ports to out ports.</p>
+<dl class="method">
+<dt id="brica1.component.PipeComponent.fire">
+<code class="descname">fire</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/component.html#PipeComponent.fire"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.component.PipeComponent.fire" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="brica1.component.PipeComponent.set_map">
+<code class="descname">set_map</code><span class="sig-paren">(</span><em>in_id</em>, <em>out_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/component.html#PipeComponent.set_map"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.component.PipeComponent.set_map" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Map from in-port to out port.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>in_id (str): port id to map from.
+out_id (str): port id to map to.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="brica1.component.NullComponent">
+<em class="property">class </em><code class="descclassname">brica1.component.</code><code class="descname">NullComponent</code><a class="reference internal" href="../_modules/brica1/component.html#NullComponent"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.component.NullComponent" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#brica1.component.Component" title="brica1.component.Component"><code class="xref py py-class docutils literal"><span class="pre">brica1.component.Component</span></code></a></p>
+<p><cite>NullComponent</cite> does nothing.</p>
+<dl class="method">
+<dt id="brica1.component.NullComponent.fire">
+<code class="descname">fire</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/component.html#NullComponent.fire"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.component.NullComponent.fire" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Do nothing. Just return.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-brica1.connection">
+<span id="brica1-connection-module"></span><h2>brica1.connection module<a class="headerlink" href="#module-brica1.connection" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="connection-py">
+<h3>connection.py<a class="headerlink" href="#connection-py" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>This module contains the class <cite>Connection</cite>.</p>
+<dl class="class">
+<dt id="brica1.connection.Connection">
+<em class="property">class </em><code class="descclassname">brica1.connection.</code><code class="descname">Connection</code><span class="sig-paren">(</span><em>from_port</em>, <em>to_port</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/connection.html#Connection"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.connection.Connection" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>A <cite>Connection</cite> connects two <a href="#id7"><span class="problematic" id="id8">`</span></a>Port`s and can be <a href="#id9"><span class="problematic" id="id10">`</span></a>sync`ed in one direction.</p>
+<dl class="method">
+<dt id="brica1.connection.Connection.sync">
+<code class="descname">sync</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/connection.html#Connection.sync"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.connection.Connection.sync" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Sync the value from <cite>from_port</cite> to <cite>to_port</cite>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-brica1.module">
+<span id="brica1-module-module"></span><h2>brica1.module module<a class="headerlink" href="#module-brica1.module" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="module-py">
+<h3>module.py<a class="headerlink" href="#module-py" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>This module contains the class <cite>Module</cite> and <cite>Agent</cite> which serve
+as abstractions for distict areas in the brain or sub-regions of those areas.
+<a href="#id11"><span class="problematic" id="id12">`</span></a>Module`s together with <a href="#id13"><span class="problematic" id="id14">`</span></a>Component`s are collectively reffered to as <a href="#id15"><span class="problematic" id="id16">`</span></a>Unit`s.</p>
+<dl class="class">
+<dt id="brica1.module.Module">
+<em class="property">class </em><code class="descclassname">brica1.module.</code><code class="descname">Module</code><a class="reference internal" href="../_modules/brica1/module.html#Module"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.module.Module" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#brica1.unit.Unit" title="brica1.unit.Unit"><code class="xref py py-class docutils literal"><span class="pre">brica1.unit.Unit</span></code></a></p>
+<p>A <cite>Module</cite> may not have an implementation and may only exchange
+<cite>numpy.ndarray</cite> of the type <cite>numpy.short</cite> through in/out ports with another
+module.</p>
+<dl class="method">
+<dt id="brica1.module.Module.add_component">
+<code class="descname">add_component</code><span class="sig-paren">(</span><em>id</em>, <em>component</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/module.html#Module.add_component"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.module.Module.add_component" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Add a <cite>Component</cite> to this <cite>Module</cite>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): a string ID.
+component (Component): a component to add for <cite>id</cite>.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.module.Module.add_submodule">
+<code class="descname">add_submodule</code><span class="sig-paren">(</span><em>id</em>, <em>submodule</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/module.html#Module.add_submodule"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.module.Module.add_submodule" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Add a <cite>Module</cite> to this <cite>Module</cite>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): a string ID.
+submodule (Module): a module to add for <cite>id</cite>.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.module.Module.get_all_components">
+<code class="descname">get_all_components</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/module.html#Module.get_all_components"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.module.Module.get_all_components" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Get all <a href="#id17"><span class="problematic" id="id18">`</span></a>Component`s of all <a href="#id19"><span class="problematic" id="id20">`</span></a>Module`s.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None.</dd>
+<dt>Returns:</dt>
+<dd>array: a array of all <a href="#id21"><span class="problematic" id="id22">`</span></a>Component`s.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.module.Module.get_all_submodules">
+<code class="descname">get_all_submodules</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/module.html#Module.get_all_submodules"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.module.Module.get_all_submodules" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Get all <a href="#id23"><span class="problematic" id="id24">`</span></a>Module`s recursively.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None.</dd>
+<dt>Returns:</dt>
+<dd>array: a array of all <a href="#id25"><span class="problematic" id="id26">`</span></a>Module`s.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.module.Module.get_component">
+<code class="descname">get_component</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/module.html#Module.get_component"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.module.Module.get_component" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Get a <cite>Component</cite> for a given <cite>id</cite>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): a string ID.</dd>
+<dt>Returns:</dt>
+<dd>Component: a component for the given <cite>id</cite>.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.module.Module.get_submodule">
+<code class="descname">get_submodule</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/module.html#Module.get_submodule"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.module.Module.get_submodule" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Get a <cite>Module</cite> for a given <cite>id</cite>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): a string ID.</dd>
+<dt>Returns:</dt>
+<dd>Module: a module for the given <cite>id</cite>.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.module.Module.remove_component">
+<code class="descname">remove_component</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/module.html#Module.remove_component"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.module.Module.remove_component" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Remove a component from this <cite>Module</cite>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): a string ID.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.module.Module.remove_submodule">
+<code class="descname">remove_submodule</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/module.html#Module.remove_submodule"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.module.Module.remove_submodule" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Remove a module from this <cite>Module</cite>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): a string ID.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="brica1.module.Agent">
+<em class="property">class </em><code class="descclassname">brica1.module.</code><code class="descname">Agent</code><span class="sig-paren">(</span><em>scheduler</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/module.html#Agent"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.module.Agent" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#brica1.module.Module" title="brica1.module.Module"><code class="xref py py-class docutils literal"><span class="pre">brica1.module.Module</span></code></a></p>
+<p>A <cite>Agent</cite> is a <cite>Module</cite> which serves as a top-level
+container for functional <a href="#id27"><span class="problematic" id="id28">`</span></a>Module`s.</p>
+<dl class="method">
+<dt id="brica1.module.Agent.add_submodule">
+<code class="descname">add_submodule</code><span class="sig-paren">(</span><em>id</em>, <em>submodule</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/module.html#Agent.add_submodule"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.module.Agent.add_submodule" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Add a <cite>Module</cite> and update the <cite>Scheduler</cite>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): a string ID.
+submodule (Module): a module to add for <cite>id</cite>.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.module.Agent.step">
+<code class="descname">step</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/module.html#Agent.step"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.module.Agent.step" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Step the <cite>Scheduler</cite>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None.</dd>
+<dt>Returns:</dt>
+<dd>float: the current time of the scheduler</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.module.Agent.update_scheduler">
+<code class="descname">update_scheduler</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/module.html#Agent.update_scheduler"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.module.Agent.update_scheduler" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Udpate the <cite>Scheduler</cite> with this <cite>Agent</cite>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-brica1.port">
+<span id="brica1-port-module"></span><h2>brica1.port module<a class="headerlink" href="#module-brica1.port" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="port-py">
+<h3>port.py<a class="headerlink" href="#port-py" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>This module contains the class <cite>Port</cite>.</p>
+<dl class="class">
+<dt id="brica1.port.Port">
+<em class="property">class </em><code class="descclassname">brica1.port.</code><code class="descname">Port</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/port.html#Port"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.port.Port" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>A <cite>Port</cite> has a buffer value and a outward connection to another port.
+There may only be one outward connection but multiple inward connections.</p>
+<dl class="method">
+<dt id="brica1.port.Port.connect">
+<code class="descname">connect</code><span class="sig-paren">(</span><em>target</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/port.html#Port.connect"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.port.Port.connect" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Create a connection to the target <cite>Port</cite>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>target (Port): a <cite>Port</cite> to connect to.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.port.Port.invoke_callbacks">
+<code class="descname">invoke_callbacks</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/port.html#Port.invoke_callbacks"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.port.Port.invoke_callbacks" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Invoke all callback functions with buffer value as argument</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.port.Port.register_callback">
+<code class="descname">register_callback</code><span class="sig-paren">(</span><em>f</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/port.html#Port.register_callback"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.port.Port.register_callback" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Register a callback function to this <cite>Port</cite></p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>f (Function): a function to register</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.port.Port.sync">
+<code class="descname">sync</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/port.html#Port.sync"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.port.Port.sync" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Sync self with the <cite>Connection</cite>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-brica1.ros">
+<span id="brica1-ros-module"></span><h2>brica1.ros module<a class="headerlink" href="#module-brica1.ros" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="ros-py">
+<h3>ros.py<a class="headerlink" href="#ros-py" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>This module containes classes for ROS integration.</p>
+<dl class="class">
+<dt id="brica1.ros.ROSAdapter">
+<em class="property">class </em><code class="descclassname">brica1.ros.</code><code class="descname">ROSAdapter</code><span class="sig-paren">(</span><em>name='BriCA1 Node'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/ros.html#ROSAdapter"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.ros.ROSAdapter" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#brica1.unit.Unit" title="brica1.unit.Unit"><code class="xref py py-class docutils literal"><span class="pre">brica1.unit.Unit</span></code></a></p>
+<p><cite>ROSAdapter</cite> is a BriCA <cite>Unit</cite> which is intented to provide a bridge over the
+ROS Publisher/Subscriber and BriCA <cite>Agent</cite>.</p>
+<dl class="method">
+<dt id="brica1.ros.ROSAdapter.connect">
+<code class="descname">connect</code><span class="sig-paren">(</span><em>target</em>, <em>from_id</em>, <em>to_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/ros.html#ROSAdapter.connect"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.ros.ROSAdapter.connect" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Connect an out-port of another <cite>Unit</cite> to an in-port.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>target (Unit): a <cite>Unit</cite> to connect to.
+from_id (str): an out-port of the target <cite>Unit</cite>.
+to_id(str): an in-port of this <cite>Unit</cite>.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.ros.ROSAdapter.setup_publisher">
+<code class="descname">setup_publisher</code><span class="sig-paren">(</span><em>topic</em>, <em>id</em>, <em>length</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/ros.html#ROSAdapter.setup_publisher"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.ros.ROSAdapter.setup_publisher" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Setup a ROS subscriber</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>topic (str): a topic to subscribe to.
+id (str): a string ID.
+length (int): an initial length of the value vector.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.ros.ROSAdapter.setup_subscriber">
+<code class="descname">setup_subscriber</code><span class="sig-paren">(</span><em>topic</em>, <em>msg_type</em>, <em>id</em>, <em>length</em>, <em>converter</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/ros.html#ROSAdapter.setup_subscriber"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.ros.ROSAdapter.setup_subscriber" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Setup a ROS subscriber</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>topic (str): a topic to subscribe to.
+msg_type (msg): incoming message type.
+id (str): a string ID.
+length (int): an initial length of the value vector.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-brica1.scheduler">
+<span id="brica1-scheduler-module"></span><h2>brica1.scheduler module<a class="headerlink" href="#module-brica1.scheduler" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="scheduler-py">
+<h3>scheduler.py<a class="headerlink" href="#scheduler-py" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>This module contains the <cite>Scheduler</cite> class which is a base class for various
+types of schedulers. The <cite>VirtualTimeSyncScheduler</cite> is implemneted for now.</p>
+<dl class="class">
+<dt id="brica1.scheduler.Scheduler">
+<em class="property">class </em><code class="descclassname">brica1.scheduler.</code><code class="descname">Scheduler</code><a class="reference internal" href="../_modules/brica1/scheduler.html#Scheduler"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.scheduler.Scheduler" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>This class is an abstract class for creating <cite>Scheduler`s. Subclasses must
+override the `step()</cite> method to specify its implementation.</p>
+<dl class="method">
+<dt id="brica1.scheduler.Scheduler.reset">
+<code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/scheduler.html#Scheduler.reset"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.scheduler.Scheduler.reset" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Reset the <cite>Scheduler</cite>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.scheduler.Scheduler.step">
+<code class="descname">step</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/scheduler.html#Scheduler.step"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.scheduler.Scheduler.step" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Step over a single iteration</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None.</dd>
+<dt>Returns:</dt>
+<dd>float: the current time of the <cite>Scheduler</cite>.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.scheduler.Scheduler.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>ca</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/scheduler.html#Scheduler.update"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.scheduler.Scheduler.update" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Update the <cite>Scheduler</cite> for given cognitive architecture (ca)</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>ca (Agent): a target to update.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="brica1.scheduler.VirtualTimeSyncScheduler">
+<em class="property">class </em><code class="descclassname">brica1.scheduler.</code><code class="descname">VirtualTimeSyncScheduler</code><span class="sig-paren">(</span><em>interval=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/scheduler.html#VirtualTimeSyncScheduler"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.scheduler.VirtualTimeSyncScheduler" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#brica1.scheduler.Scheduler" title="brica1.scheduler.Scheduler"><code class="xref py py-class docutils literal"><span class="pre">brica1.scheduler.Scheduler</span></code></a></p>
+<p><cite>VirtualTimeSyncScheduler</cite> is a <cite>Scheduler</cite> implementation for virutal time
+in a synced manner.</p>
+<dl class="method">
+<dt id="brica1.scheduler.VirtualTimeSyncScheduler.step">
+<code class="descname">step</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/scheduler.html#VirtualTimeSyncScheduler.step"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.scheduler.VirtualTimeSyncScheduler.step" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Step by the internal interval.</p>
+<p>The methods <cite>input()</cite>, <cite>fire()</cite>, and <cite>output()</cite> are synchronously
+called and the time is incremented by the given interval for each
+step.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None.</dd>
+<dt>Returns:</dt>
+<dd>float: the current time of the <cite>Scheduler</cite>.</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="brica1.scheduler.VirtualTimeScheduler">
+<em class="property">class </em><code class="descclassname">brica1.scheduler.</code><code class="descname">VirtualTimeScheduler</code><a class="reference internal" href="../_modules/brica1/scheduler.html#VirtualTimeScheduler"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.scheduler.VirtualTimeScheduler" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#brica1.scheduler.Scheduler" title="brica1.scheduler.Scheduler"><code class="xref py py-class docutils literal"><span class="pre">brica1.scheduler.Scheduler</span></code></a></p>
+<p><cite>VirtualTimeScheduler</cite> is a <cite>Scheduler</cite> implementation for virutal time.</p>
+<dl class="class">
+<dt id="brica1.scheduler.VirtualTimeScheduler.Event">
+<em class="property">class </em><code class="descname">Event</code><span class="sig-paren">(</span><em>time</em>, <em>component</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/scheduler.html#VirtualTimeScheduler.Event"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.scheduler.VirtualTimeScheduler.Event" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p><cite>Event</cite> is a queue object for <cite>PriorityQueue</cite> in VirtualTimeScheduler.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.scheduler.VirtualTimeScheduler.step">
+<code class="descclassname">VirtualTimeScheduler.</code><code class="descname">step</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/scheduler.html#VirtualTimeScheduler.step"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.scheduler.VirtualTimeScheduler.step" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Step by the internal interval.</p>
+<p>An event is dequeued and <cite>output()</cite>, <cite>input()</cite>, and <cite>fire()</cite> are called
+for the <cite>Component</cite> of interest.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None.</dd>
+<dt>Returns:</dt>
+<dd>float: the current time of the <cite>Scheduler</cite>.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.scheduler.VirtualTimeScheduler.update">
+<code class="descclassname">VirtualTimeScheduler.</code><code class="descname">update</code><span class="sig-paren">(</span><em>ca</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/scheduler.html#VirtualTimeScheduler.update"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.scheduler.VirtualTimeScheduler.update" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Update the <cite>Scheduler</cite> for given cognitive architecture (ca)</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>ca (Agent): a target to update.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="brica1.scheduler.RealTimeSyncScheduler">
+<em class="property">class </em><code class="descclassname">brica1.scheduler.</code><code class="descname">RealTimeSyncScheduler</code><span class="sig-paren">(</span><em>interval=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/scheduler.html#RealTimeSyncScheduler"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.scheduler.RealTimeSyncScheduler" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#brica1.scheduler.Scheduler" title="brica1.scheduler.Scheduler"><code class="xref py py-class docutils literal"><span class="pre">brica1.scheduler.Scheduler</span></code></a></p>
+<p><cite>RealTimeSyncScheduler</cite> is a <cite>Scheduler</cite> implementation for real time
+in a synced manner.</p>
+<dl class="method">
+<dt id="brica1.scheduler.RealTimeSyncScheduler.reset">
+<code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/scheduler.html#RealTimeSyncScheduler.reset"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.scheduler.RealTimeSyncScheduler.reset" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="brica1.scheduler.RealTimeSyncScheduler.set_interval">
+<code class="descname">set_interval</code><span class="sig-paren">(</span><em>interval</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/scheduler.html#RealTimeSyncScheduler.set_interval"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.scheduler.RealTimeSyncScheduler.set_interval" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="brica1.scheduler.RealTimeSyncScheduler.step">
+<code class="descname">step</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/scheduler.html#RealTimeSyncScheduler.step"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.scheduler.RealTimeSyncScheduler.step" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Step by the internal interval.</p>
+<p>The methods <cite>input()</cite>, <cite>fire()</cite>, and <cite>output()</cite> are synchronously
+called for all components.</p>
+<p>The time when it started calling input() and output() of the 
+components is stored in self.last_input_time and 
+self.last_output_time, respectively.</p>
+<p>self.interval sets the <em>minimum</em> interval between the point in
+time when input() is called and when output() is called.
+The actual interval between input() and output() will 
+always be longer than self.interval, although the scheduler
+tries to make the discrepancy minimum.</p>
+<p>When calling fire() of the components takes longer than the
+set interval, calling output() of the components will be 
+later than the scheduled time self.input_time + self.interval.
+In this case, self.lagged will be set True.</p>
+<p>During the execution of this method, it will also set self.last_spent,
+which will be the time spent until all components are fired
+after self.last_input_time is set.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>None.</dd>
+<dt>Returns:</dt>
+<dd>float: the current time of the <cite>Scheduler</cite>.</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-brica1.unit">
+<span id="brica1-unit-module"></span><h2>brica1.unit module<a class="headerlink" href="#module-brica1.unit" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="unit-py">
+<h3>unit.py<a class="headerlink" href="#unit-py" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>This module contains the <cite>Unit</cite> modules which serves as a base class for the
+<cite>Component</cite> and <cite>Module</cite> classes.</p>
+<dl class="class">
+<dt id="brica1.unit.Unit">
+<em class="property">class </em><code class="descclassname">brica1.unit.</code><code class="descname">Unit</code><a class="reference internal" href="../_modules/brica1/unit.html#Unit"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.unit.Unit" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p><cite>Unit</cite> is a base class for <a href="#id29"><span class="problematic" id="id30">`</span></a>Module`s and <a href="#id31"><span class="problematic" id="id32">`</span></a>Component`s with functionalities
+for handling ports.</p>
+<dl class="method">
+<dt id="brica1.unit.Unit.alias_in_port">
+<code class="descname">alias_in_port</code><span class="sig-paren">(</span><em>target</em>, <em>from_id</em>, <em>to_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/unit.html#Unit.alias_in_port"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.unit.Unit.alias_in_port" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Alias an in-port from a target <cite>Unit</cite> to this <cite>Unit</cite>.</p>
+<p>Technical note: ALWAYS alias ports OUTSIDE IN</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>target (Unit): a <cite>Unit</cite> to alias from.
+from_id (str): a port ID to alias from.
+to_id (str): a port ID to alias to.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.unit.Unit.alias_out_port">
+<code class="descname">alias_out_port</code><span class="sig-paren">(</span><em>target</em>, <em>from_id</em>, <em>to_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/unit.html#Unit.alias_out_port"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.unit.Unit.alias_out_port" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Alias an out-port from a target <cite>Unit</cite> to this <cite>Unit</cite>.</p>
+<p>Technical note: ALWAYS alias ports OUTSIDE IN</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>target (Unit): a <cite>Unit</cite> to alias from.
+from_id (str): a port ID to alias from.
+to_id (str): a port ID to alias to.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.unit.Unit.connect">
+<code class="descname">connect</code><span class="sig-paren">(</span><em>target</em>, <em>from_id</em>, <em>to_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/unit.html#Unit.connect"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.unit.Unit.connect" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Connect an out-port of another <cite>Unit</cite> to an in-port.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>target (Unit): a <cite>Unit</cite> to connect to.
+from_id (str): an out-port of the target <cite>Unit</cite>.
+to_id(str): an in-port of this <cite>Unit</cite>.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.unit.Unit.get_in_port">
+<code class="descname">get_in_port</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/unit.html#Unit.get_in_port"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.unit.Unit.get_in_port" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Get values in an in-port from this <cite>Unit</cite>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): a string ID.</dd>
+<dt>Returns:</dt>
+<dd>numpy.ndarray: a value vector for the in-port ID.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.unit.Unit.get_out_port">
+<code class="descname">get_out_port</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/unit.html#Unit.get_out_port"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.unit.Unit.get_out_port" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Get values in an out-port from this <cite>Unit</cite>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): a string ID.</dd>
+<dt>Returns:</dt>
+<dd>numpy.ndarray: a value vector for the in-port ID.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.unit.Unit.make_in_port">
+<code class="descname">make_in_port</code><span class="sig-paren">(</span><em>id</em>, <em>length</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/unit.html#Unit.make_in_port"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.unit.Unit.make_in_port" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Make an in-port of this <cite>Unit</cite>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): a string ID.
+length (int): an initial length of the value vector.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.unit.Unit.make_out_port">
+<code class="descname">make_out_port</code><span class="sig-paren">(</span><em>id</em>, <em>length</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/unit.html#Unit.make_out_port"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.unit.Unit.make_out_port" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Make an out-port of this <cite>Unit</cite>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): a string ID.
+length (int): an initial length of the value vector.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.unit.Unit.remove_in_port">
+<code class="descname">remove_in_port</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/unit.html#Unit.remove_in_port"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.unit.Unit.remove_in_port" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Remove an in-port from this <cite>Unit</cite>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): a string ID.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.unit.Unit.remove_out_port">
+<code class="descname">remove_out_port</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/unit.html#Unit.remove_out_port"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.unit.Unit.remove_out_port" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Remove an out-port from this <cite>Unit</cite>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): a string ID.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.unit.Unit.set_in_port">
+<code class="descname">set_in_port</code><span class="sig-paren">(</span><em>id</em>, <em>port</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/unit.html#Unit.set_in_port"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.unit.Unit.set_in_port" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Set a port with an actual instance.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): a string ID.
+port (Port): a Port instance to set.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brica1.unit.Unit.set_out_port">
+<code class="descname">set_out_port</code><span class="sig-paren">(</span><em>id</em>, <em>port</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/unit.html#Unit.set_out_port"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.unit.Unit.set_out_port" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Set a port with an actual instance.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): a string ID.
+port (Port): a Port instance to set.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-brica1.utils">
+<span id="brica1-utils-module"></span><h2>brica1.utils module<a class="headerlink" href="#module-brica1.utils" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="utils-py">
+<h3>utils.py<a class="headerlink" href="#utils-py" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>This modules contains utility functions for BriCA.</p>
+<dl class="function">
+<dt id="brica1.utils.current_time">
+<code class="descclassname">brica1.utils.</code><code class="descname">current_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/utils.html#current_time"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.utils.current_time" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="brica1.utils.current_time_millis">
+<code class="descclassname">brica1.utils.</code><code class="descname">current_time_millis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/utils.html#current_time_millis"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.utils.current_time_millis" title="この定義へのパーマリンク">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="brica1.utils.connect">
+<code class="descclassname">brica1.utils.</code><code class="descname">connect</code><span class="sig-paren">(</span><em>from_tuple</em>, <em>to_tuple</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/utils.html#connect"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.utils.connect" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Connect ports of two units</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>from_tuple (tuple&lt;Unit, str&gt;):  Unit and port id to connect from.
+to_tuple (tuple&lt;Unit, str&gt;): Unit and port id to connect to.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="brica1.utils.alias_in_port">
+<code class="descclassname">brica1.utils.</code><code class="descname">alias_in_port</code><span class="sig-paren">(</span><em>from_tuple</em>, <em>to_tuple</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/utils.html#alias_in_port"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.utils.alias_in_port" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Alias in-ports of two units</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>from_tuple (tuple&lt;Unit, str&gt;): Unit and port id to alias from.
+to_tuple (tuple&lt;Unit, str&gt;): Unit and port id to alias to.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="brica1.utils.alias_out_port">
+<code class="descclassname">brica1.utils.</code><code class="descname">alias_out_port</code><span class="sig-paren">(</span><em>from_tuple</em>, <em>to_tuple</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/brica1/utils.html#alias_out_port"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#brica1.utils.alias_out_port" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Alias out-ports of two units</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>from_tuple (tuple&lt;Unit, str&gt;): Unit and port id to alias from.
+to_tuple (tuple&lt;Unit, str&gt;): Unit and port id to alias to.</dd>
+<dt>Returns:</dt>
+<dd>None.</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-brica1">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-brica1" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="brica">
+<h3>BriCA<a class="headerlink" href="#brica" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Brain-inspired Cognitive Architecture</p>
+<p>A scalable, general purpose computing platform for cognitive architectures.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">目次</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">brica1 package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-brica1.component">brica1.component module</a><ul>
+<li><a class="reference internal" href="#component-py">component.py</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-brica1.connection">brica1.connection module</a><ul>
+<li><a class="reference internal" href="#connection-py">connection.py</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-brica1.module">brica1.module module</a><ul>
+<li><a class="reference internal" href="#module-py">module.py</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-brica1.port">brica1.port module</a><ul>
+<li><a class="reference internal" href="#port-py">port.py</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-brica1.ros">brica1.ros module</a><ul>
+<li><a class="reference internal" href="#ros-py">ros.py</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-brica1.scheduler">brica1.scheduler module</a><ul>
+<li><a class="reference internal" href="#scheduler-py">scheduler.py</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-brica1.unit">brica1.unit module</a><ul>
+<li><a class="reference internal" href="#unit-py">unit.py</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-brica1.utils">brica1.utils module</a><ul>
+<li><a class="reference internal" href="#utils-py">utils.py</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-brica1">Module contents</a><ul>
+<li><a class="reference internal" href="#brica">BriCA</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>前のトピックへ</h4>
+  <p class="topless"><a href="../index.html"
+                        title="前の章へ">Welcome to BriCA1&#8217;s documentation!</a></p>
+  <h4>次のトピックへ</h4>
+  <p class="topless"><a href="../tutorial/introduction.html"
+                        title="次の章へ">Introduction</a></p>
+  <div role="note" aria-label="source link">
+    <h3>このページ</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/brica1/brica1.txt"
+            rel="nofollow">ソースコードを表示</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>クイック検索</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="検索" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    モジュール、クラス、または関数名を入力してください
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="総合索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Pythonモジュール索引"
+             >モジュール</a> |</li>
+        <li class="right" >
+          <a href="../tutorial/introduction.html" title="Introduction"
+             >次へ</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Welcome to BriCA1’s documentation!"
+             >前へ</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">BriCA1 1.0.0 ドキュメント</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, ktnyt.
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1 で生成しました。
+    </div>
+  </body>
+</html>
