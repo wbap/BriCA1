@@ -161,9 +161,6 @@ class VirtualTimeScheduler(Scheduler):
             self.time = time
             self.component = component
 
-        def __cmp__(self, other):
-            return cmp(self.time, other.time)
-
         def __lt__(self, other):
             return self.time < other.time;
 
