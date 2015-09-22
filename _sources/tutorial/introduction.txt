@@ -11,10 +11,10 @@ BriCA is a software platform designed specifically to join and schedule multiple
 Installing
 ----------
 
-BriCA must currently be installed from source which is hosted on `GitHub <http:s//github.com/wbap/V1/>`_. The NumPy library is required to use the library.
+BriCA must currently be installed from source which is hosted on `GitHub <http:s//github.com/wbap/BriCA1/>`_. The NumPy library is required to use the library.
 
-1. ``git clone https://github.com/wbap/V1.git``
-2. ``cd V1/python``
+1. ``git clone https://github.com/wbap/BriCA1.git``
+2. ``cd BriCA1/python``
 3. ``sudo python setup.py install`` or ``python setup.py install --user``
 
 Voila! You are done. Now that the library is installed, try running the test code.
@@ -27,7 +27,7 @@ This will run four tests, all of which should successfully pass.
 Getting Started
 ---------------
 
-Before starting to write a full featured cognitive architecture there are a number of core concepts you need to know. Here we cover the very basics: ``Components``, ``Modules``, ``Schedulers``, and ``Agents``. The source code for this and all of the other tutorials are included in the ``V1/python/examples`` directory so make sure to check them out.
+Before starting to write a full featured cognitive architecture there are a number of core concepts you need to know. Here we cover the very basics: ``Components``, ``Modules``, ``Schedulers``, and ``Agents``. The source code for this and all of the other tutorials are included in the ``BriCA1/python/examples`` directory so make sure to check them out.
 
 Components
 ~~~~~~~~~~
