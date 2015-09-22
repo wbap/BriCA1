@@ -15,7 +15,7 @@ import copy
 import numpy
 
 # BriCA imports
-from port import *
+from .port import *
 
 class Unit(object):
     """

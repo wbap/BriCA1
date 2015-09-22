@@ -16,8 +16,8 @@ import copy
 import numpy
 
 # BriCA imports
-from component import *
-from unit import *
+from .component import *
+from .unit import *
 
 class Module(Unit):
     """
@@ -94,7 +94,7 @@ class Module(Unit):
 
         """
 
-        array = self.submodules.values()
+        array = list(self.submodules.values())
 
         for submodule in array:
             array.extend(submodule.get_all_submodules())
@@ -160,7 +160,7 @@ class Module(Unit):
 
         """
 
-        array = self.components.values()
+        array = list(self.components.values())
 
         for submodule in self.get_all_submodules():
             array.extend(submodule.get_all_components())

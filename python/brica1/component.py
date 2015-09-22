@@ -18,7 +18,7 @@ import copy
 import numpy
 
 # BriCA imports
-from unit import *
+from .unit import *
 
 class Component(Unit):
     """

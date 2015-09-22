@@ -11,7 +11,7 @@ This module contains the class `Port`.
 import copy
 
 # BriCA imports
-from connection import *
+from .connection import *
 
 class Port(object):
     """

@@ -11,14 +11,15 @@ types of schedulers. The `VirtualTimeSyncScheduler` is implemneted for now.
 
 __all__ = ["Scheduler", "VirtualTimeSyncScheduler", "VirtualTimeScheduler", "RealTimeSyncScheduler"]
 
-from brica1.utils import *
+from .utils import *
 
 from abc import ABCMeta, abstractmethod
 import copy
 import time
 import numpy
 
-import Queue
+import future
+import queue
 
 class Scheduler(object):
     """
@@ -163,6 +164,9 @@ class VirtualTimeScheduler(Scheduler):
         def __cmp__(self, other):
             return cmp(self.time, other.time)
 
+        def __lt__(self, other):
+            return self.time < other.time;
+
     def __init__(self):
         """ Create a new `Event` instance.
 
@@ -176,7 +180,7 @@ class VirtualTimeScheduler(Scheduler):
         """
 
         super(VirtualTimeScheduler, self).__init__()
-        self.event_queue = Queue.PriorityQueue()
+        self.event_queue = queue.PriorityQueue()
 
     def update(self, ca):
         """ Update the `Scheduler` for given cognitive architecture (ca)

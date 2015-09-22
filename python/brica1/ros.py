@@ -15,7 +15,7 @@ import copy
 import numpy
 
 # BriCA imports
-from unit import *
+from .unit import *
 
 # ROS imporets
 import rospy
