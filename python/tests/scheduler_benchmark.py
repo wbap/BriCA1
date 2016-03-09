@@ -10,8 +10,8 @@ with Benchmarker(width=20, loop=10000, cycle=20) as bench:
 
     @bench('constant_null_small')
     def _(bm):
-        s = brica1.VirtualTimeSyncScheduler(1.0)
-        agent = brica1.Agent(s)
+        agent = brica1.Agent()
+        s = brica1.VirtualTimeSyncScheduler(agent, interval=1.0)
 
         compA = brica1.ConstantComponent()
         compB = brica1.NullComponent()
@@ -27,13 +27,15 @@ with Benchmarker(width=20, loop=10000, cycle=20) as bench:
 
         agent.add_submodule('mod', mod)
 
+        s.update()
+
         for _ in bm:
-            agent.step()
+            s.step()
 
     @bench('constant_null_medium')
     def _(bm):
-        s = brica1.VirtualTimeSyncScheduler(1.0)
-        agent = brica1.Agent(s)
+        agent = brica1.Agent()
+        s = brica1.VirtualTimeSyncScheduler(agent, interval=1.0)
 
         compA = brica1.ConstantComponent()
         compB = brica1.NullComponent()
@@ -49,13 +51,15 @@ with Benchmarker(width=20, loop=10000, cycle=20) as bench:
 
         agent.add_submodule('mod', mod)
 
+        s.update()
+
         for _ in bm:
-            agent.step()
+            s.step()
 
     @bench('constant_null_large')
     def _(bm):
-        s = brica1.VirtualTimeSyncScheduler(1.0)
-        agent = brica1.Agent(s)
+        agent = brica1.Agent()
+        s = brica1.VirtualTimeSyncScheduler(agent, interval=1.0)
 
         compA = brica1.ConstantComponent()
         compB = brica1.NullComponent()
@@ -71,5 +75,7 @@ with Benchmarker(width=20, loop=10000, cycle=20) as bench:
 
         agent.add_submodule('mod', mod)
 
+        s.update()
+
         for _ in bm:
-            agent.step()
+            s.step()

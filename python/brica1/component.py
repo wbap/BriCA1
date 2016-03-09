@@ -55,7 +55,7 @@ class Component(Unit):
         """ Perform a calculation.
 
         Users must override `fire(self)` method to define a new sub-class of
-        Module. `fire(self)` method implements a function of the form
+        `Component`. `fire(self)` method implements a function of the form
 
           results, states <- fire(in_ports, states)
 
@@ -71,6 +71,16 @@ class Component(Unit):
 
         Args:
           None.
+
+        Returns:
+          None.
+
+        """
+
+        pass
+
+    def train(self):
+        """ Perform a training iteration
 
         Returns:
           None.
