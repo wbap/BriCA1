@@ -266,6 +266,19 @@ class ComponentSet(Component):
         self.components[id] = component
         self.priorities[id] = priority
 
+    def get_component(self, id):
+        """ Get a `Component` for given ID.
+
+        Args:
+          id (str): a string ID.
+
+        Returns:
+          Component: a `Component` corresponding to the ID.
+
+        """
+
+        return self.components[id]
+
     def fire(self):
         """ Fire sub-components based on priority
 
