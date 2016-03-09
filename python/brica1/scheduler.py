@@ -12,6 +12,7 @@ types of schedulers. The `VirtualTimeSyncScheduler` is implemneted for now.
 __all__ = ["Scheduler", "VirtualTimeSyncScheduler", "VirtualTimeScheduler", "RealTimeSyncScheduler"]
 
 from .utils import *
+from .supervisor import *
 
 from abc import ABCMeta, abstractmethod
 import copy
@@ -29,11 +30,12 @@ class Scheduler(object):
 
     __metaclass__ = ABCMeta
 
-    def __init__(self):
+    def __init__(self, agent, supervisor=NullSupervisor):
         """ Create a new `Scheduler` instance.
 
         Args:
-          None.
+          agent (Agent): An `Agent` to schedule.
+          supervisor (Supervisor): A `Supervisor` to schedule.
 
         Returns:
           Scheduler: A new `Scheduler` instance.
@@ -41,9 +43,11 @@ class Scheduler(object):
         """
 
         super(Scheduler, self).__init__()
+        self.agent = agent
+        self.supervisor = supervisor(agent)
         self.num_steps = 0
         self.current_time = 0.0
-        self.components = []
+        self.components = agent.get_all_components()
 
     def reset(self):
         """ Reset the `Scheduler`.
@@ -60,18 +64,18 @@ class Scheduler(object):
         self.current_time = 0.0
         self.components = []
 
-    def update(self, ca):
-        """ Update the `Scheduler` for given cognitive architecture (ca)
+    def update(self):
+        """ Update the `Scheduler` for given cognitive architecture (agent)
 
         Args:
-          ca (Agent): a target to update.
+          agent (Agent): a target to update.
 
         Returns:
           None.
 
         """
 
-        self.components = ca.get_all_components()
+        self.components = self.agent.get_all_components()
 
     @abstractmethod
     def step(self):
@@ -93,7 +97,7 @@ class VirtualTimeSyncScheduler(Scheduler):
     in a synced manner.
     """
 
-    def __init__(self, interval=1.0):
+    def __init__(self, agent, supervisor=NullSupervisor, interval=1.0):
         """ Create a new `VirtualTimeSyncScheduler` Instance.
 
         Args:
@@ -104,7 +108,7 @@ class VirtualTimeSyncScheduler(Scheduler):
 
         """
 
-        super(VirtualTimeSyncScheduler, self).__init__()
+        super(VirtualTimeSyncScheduler, self).__init__(agent, supervisor=NullSupervisor)
         self.interval = interval
 
     def step(self):
@@ -125,7 +129,10 @@ class VirtualTimeSyncScheduler(Scheduler):
         for component in self.components:
             component.input(self.current_time)
 
+        self.supervisor.step()
+
         for component in self.components:
+            component.train()
             component.fire()
 
         self.current_time = self.current_time + self.interval
@@ -164,7 +171,7 @@ class VirtualTimeScheduler(Scheduler):
         def __lt__(self, other):
             return self.time < other.time;
 
-    def __init__(self):
+    def __init__(self, agent, supervisor=NullSupervisor):
         """ Create a new `Event` instance.
 
         Args:
@@ -176,23 +183,25 @@ class VirtualTimeScheduler(Scheduler):
 
         """
 
-        super(VirtualTimeScheduler, self).__init__()
+        super(VirtualTimeScheduler, self).__init__(agent, supervisor=NullSupervisor)
         self.event_queue = queue.PriorityQueue()
 
-    def update(self, ca):
-        """ Update the `Scheduler` for given cognitive architecture (ca)
+    def update(self):
+        """ Update the `Scheduler` for given cognitive architecture (agent)
 
         Args:
-          ca (Agent): a target to update.
+          agent (Agent): a target to update.
 
         Returns:
           None.
 
         """
 
-        super(VirtualTimeScheduler, self).update(ca)
+        super(VirtualTimeScheduler, self).update()
         for component in self.components:
             component.input(self.current_time)
+            self.supervisor.step()
+            component.train()
             component.fire()
             self.event_queue.put(VirtualTimeScheduler.Event(component.offset + component.last_input_time + component.interval, component))
 
@@ -215,6 +224,8 @@ class VirtualTimeScheduler(Scheduler):
         component = e.component
         component.output(self.current_time)
         component.input(self.current_time)
+        self.supervisor.step()
+        component.train()
         component.fire()
 
         self.event_queue.put(VirtualTimeScheduler.Event(self.current_time + component.interval, component))
@@ -227,7 +238,7 @@ class RealTimeSyncScheduler(Scheduler):
     in a synced manner.
     """
 
-    def __init__(self, interval=1.0):
+    def __init__(self, agent, supervisor=NullSupervisor, interval=1.0):
         """ Create a new `RealTimeSyncScheduler` Instance.
 
         Args:
@@ -243,7 +254,7 @@ class RealTimeSyncScheduler(Scheduler):
         self.last_spent = -1.0
         self.last_dt = -1.0
 
-        super(RealTimeSyncScheduler, self).__init__()
+        super(RealTimeSyncScheduler, self).__init__(agent, supervisor=NullSupervisor)
         self.set_interval(interval)
 
 
@@ -295,7 +306,10 @@ class RealTimeSyncScheduler(Scheduler):
         for component in self.components:
             component.input(self.last_input_time)
 
+        self.supervisor.step()
+
         for component in self.components:
+            component.train()
             component.fire()
 
         self.last_spent = current_time() - self.last_input_time

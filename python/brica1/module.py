@@ -186,56 +186,14 @@ class Agent(Module):
     container for functional `Module`s.
     """
 
-    def __init__(self, scheduler):
+    def __init__(self):
         """ Create a new `Agent` instance.
 
         Args:
-          scheduler (Scheduler): a scheduler to schedule `Component` firing.
+          None.
 
         Returns:
           Agent: a new `Agent` instance.
 
         """
         super(Agent, self).__init__()
-        self.scheduler = scheduler
-
-    def step(self):
-        """  Step the `Scheduler`.
-
-        Args:
-          None.
-
-        Returns:
-           float: the current time of the scheduler
-
-        """
-
-        return self.scheduler.step()
-
-    def update_scheduler(self):
-        """ Udpate the `Scheduler` with this `Agent`.
-
-        Args:
-          None.
-
-        Returns:
-          None.
-
-        """
-
-        self.scheduler.update(self)
-
-    def add_submodule(self, id, submodule):
-        """ Add a `Module` and update the `Scheduler`.
-
-        Args:
-          id (str): a string ID.
-          submodule (Module): a module to add for `id`.
-
-        Returns:
-          None.
-
-        """
-
-        super(Agent, self).add_submodule(id, submodule)
-        self.update_scheduler()
