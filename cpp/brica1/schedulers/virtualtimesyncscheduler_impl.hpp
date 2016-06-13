@@ -26,6 +26,8 @@
  *
  *****************************************************************************/
 
+#include <omp.h>
+#include <unistd.h>
 namespace brica1 {
   namespace schedulers {
     struct VirtualTimeSyncScheduler::impl {
@@ -66,19 +68,32 @@ namespace brica1 {
       std::vector<core::Component> components = get_components();
       std::vector<core::Component>::iterator component;
 
-      for(component = components.begin(); component != components.end(); ++component) {
-        component->input(pimpl->time);
+      const auto num_components = components.size();
+
+#pragma omp parallel
+      {
+
+#pragma omp for 
+          for(size_t i = 0; i < num_components; ++i) {
+              components[i].input(pimpl->time);
+          }
+
+#pragma omp for
+          for(size_t i = 0; i < num_components; ++i) {
+              components[i].fire();
+          }
+
+#pragma omp single
+          {
+              time() += pimpl->interval;
+          }
+
+#pragma omp for
+          for(size_t i = 0; i < num_components; ++i) {
+              components[i].output(pimpl->time);
+          }
       }
 
-      for(component = components.begin(); component != components.end(); ++component) {
-        component->fire();
-      }
-
-      time() += pimpl->interval;
-
-      for(component = components.begin(); component != components.end(); ++component) {
-        component->output(pimpl->time);
-      }
 
       return time();
     }

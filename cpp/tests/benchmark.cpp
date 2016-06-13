@@ -62,7 +62,38 @@ static void virtualtimesync_const_null(benchmark::State& state) {
   }
 }
 
+static void virtualtimesync_multi(benchmark::State& state) {
+
+  brica1::core::Agent agent;
+  brica1::core::Component p = brica1::components::Constant::create();;
+  p.make_out_port<std::vector<int> >("out");
+  p.set_state("out", std::vector<int>(28*28));
+
+  brica1::core::Component c;
+  for(int i = 0; i < state.range_x(); ++i) {
+      c = brica1::components::Constant::create();;
+      c.make_out_port<std::vector<int> >("out");
+      c.make_in_port<std::vector<int> >("in");
+      c.set_state("out", std::vector<int>(28*28));
+      brica1::core::connect(p, "out", c, "in");
+      agent.add_component("C" + std::to_string(i), c);
+
+      p = c;
+  }
+
+
+  brica1::schedulers::VirtualTimeSyncScheduler scheduler(agent);
+
+  while(state.KeepRunning()) {
+    scheduler.step();
+  }
+}
+
+
 BENCHMARK(virtualtimesync_empty);
 BENCHMARK(virtualtimesync_const_null)->Arg(1)->Arg(28*28)->Arg(256*256*3);
+
+// as this measures multi-threaded performance, real time is more accurate.
+BENCHMARK(virtualtimesync_multi)->Arg(1)->Arg(2)->Arg(4)->Arg(16)->Arg(32)->UseRealTime();
 
 BENCHMARK_MAIN();

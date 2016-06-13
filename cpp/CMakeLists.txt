@@ -9,7 +9,7 @@ set(BRICA1_VERSION_MAJOR 1)
 set(BRICA1_VERSION_MINOR 0)
 set(BRICA1_VERSION_PATCH 0)
 
-set(CMAKE_CXX_FLAGS "-g -Wall -O2")
+set(CMAKE_CXX_FLAGS "-g -Wall -O2 -fopenmp")
 
 # If you want your own include/ directory, set this, and then you can do
 # include_directories(${COMMON_INCLUDES}) in other CMakeLists.txt files.
