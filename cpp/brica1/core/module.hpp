@@ -29,7 +29,7 @@
 #ifndef __BRICA1_CORE_MODULE__
 #define __BRICA1_CORE_MODULE__
 
-#include <list>
+#include <vector>
 #include <map>
 #include <memory>
 #include <string>
@@ -48,11 +48,11 @@ namespace brica1 {
       friend void swap(Module& a, Module& b);
       void add_component(std::string key, Component component);
       Component get_component(std::string key);
-      std::list<Component> get_components();
+      std::vector<Component> get_components();
       void remove_component(std::string key);
       void add_submodule(std::string key, Module module);
       Module get_submodule(std::string key);
-      std::list<Module> get_submodules();
+      std::vector<Module> get_submodules();
       void remove_submodule(std::string key);
     private:
       struct impl; std::shared_ptr<impl> pimpl;

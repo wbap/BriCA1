@@ -29,7 +29,7 @@
 #ifndef __BRICA1_CORE_SCHEDULER__
 #define __BRICA1_CORE_SCHEDULER__
 
-#include <list>
+#include <vector>
 #include <memory>
 #include "brica1/core/agent.hpp"
 
@@ -41,7 +41,7 @@ namespace brica1 {
       Scheduler(Agent agent);
       Agent get_agent();
       void set_agent(Agent agent);
-      std::list<Component> get_components();
+      std::vector<Component> get_components();
       void reset();
       virtual double step()=0;
     protected:

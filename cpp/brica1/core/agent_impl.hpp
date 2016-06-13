@@ -60,13 +60,13 @@ namespace brica1 {
       
     }
 
-    std::list<Component> get_all_components_recursive(Module module) {
-      std::list<Component> components = module.get_components();
-      std::list<Module> submodules = module.get_submodules();
-      std::list<Module>::iterator submodule;
+    std::vector<Component> get_all_components_recursive(Module module) {
+      std::vector<Component> components = module.get_components();
+      std::vector<Module> submodules = module.get_submodules();
+      std::vector<Module>::iterator submodule;
       for(submodule = submodules.begin(); submodule != submodules.end(); ++submodule) {
-        std::list<Component> tmp = get_all_components_recursive(*submodule);
-        std::list<Component>::iterator component;
+        std::vector<Component> tmp = get_all_components_recursive(*submodule);
+        std::vector<Component>::iterator component;
         for(component = tmp.begin(); component != tmp.end(); ++component) {
           components.push_back(*component);
         }
@@ -74,13 +74,13 @@ namespace brica1 {
       return components;
     }
 
-    std::list<Component> Agent::get_all_components() {
+    std::vector<Component> Agent::get_all_components() {
       return get_all_components_recursive(*this);
     }
 
     void Agent::reset() {
-      std::list<Component> components = get_all_components();
-      std::list<Component>::iterator component;
+      std::vector<Component> components = get_all_components();
+      std::vector<Component>::iterator component;
       for(component = components.begin(); component != components.end(); ++component) {
         component->reset();
       }

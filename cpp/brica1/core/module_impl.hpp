@@ -65,9 +65,9 @@ namespace brica1 {
       return pimpl->components[key];
     }
 
-    std::list<Component> Module::get_components() {
+    std::vector<Component> Module::get_components() {
       std::map<std::string, Component>::iterator iter;
-      std::list<Component> components;
+      std::vector<Component> components;
       for(iter = pimpl->components.begin(); iter != pimpl->components.end(); ++iter) {
         Component component = iter->second;
         components.push_back(component);
@@ -87,9 +87,9 @@ namespace brica1 {
       return pimpl->submodules[key];
     }
 
-    std::list<Module> Module::get_submodules() {
+    std::vector<Module> Module::get_submodules() {
       std::map<std::string, Module>::iterator iter;
-      std::list<Module> submodules;
+      std::vector<Module> submodules;
       for(iter = pimpl->submodules.begin(); iter != pimpl->submodules.end(); ++iter) {
         Module submodule = iter->second;
         submodules.push_back(submodule);

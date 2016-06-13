@@ -29,8 +29,10 @@
 #ifndef __BRICA1_SCHEDULERS_VIRTUALTIMESYNCSCHEDULER__
 #define __BRICA1_SCHEDULERS_VIRTUALTIMESYNCSCHEDULER__
 
-#include <list>
+#include <vector>
 #include <memory>
+#include <thread>
+
 #include "brica1/core/component.hpp"
 #include "brica1/core/scheduler.hpp"
 

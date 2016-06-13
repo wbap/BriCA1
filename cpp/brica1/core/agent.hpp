@@ -29,7 +29,7 @@
 #ifndef __BRICA1_CORE_AGENT__
 #define __BRICA1_CORE_AGENT__
 
-#include <list>
+#include <vector>
 #include <map>
 #include <memory>
 #include "brica1/core/module.hpp"
@@ -45,7 +45,7 @@ namespace brica1 {
       Agent& operator =(Agent&& other) noexcept;
       friend void swap(Agent& a, Agent& b);
       void clone();
-      std::list<Component> get_all_components();
+      std::vector<Component> get_all_components();
       void reset();
     private:
       struct impl; std::shared_ptr<impl> pimpl;

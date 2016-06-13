@@ -30,7 +30,7 @@ namespace brica1 {
   namespace core {
     struct Scheduler::impl {
       Agent agent;
-      std::list<Component> components;
+      std::vector<Component> components;
       double time=0.0;
     };
     
@@ -50,7 +50,7 @@ namespace brica1 {
       pimpl->components = pimpl->agent.get_all_components();
     }
 
-    std::list<Component> Scheduler::get_components() {
+    std::vector<Component> Scheduler::get_components() {
       return pimpl->components;
     }
 

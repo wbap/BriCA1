@@ -63,8 +63,9 @@ namespace brica1 {
     }
 
     double VirtualTimeSyncScheduler::step() {
-      std::list<core::Component> components = get_components();
-      std::list<core::Component>::iterator component;
+      std::vector<core::Component> components = get_components();
+      std::vector<core::Component>::iterator component;
+
       for(component = components.begin(); component != components.end(); ++component) {
         component->input(pimpl->time);
       }
