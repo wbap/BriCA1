@@ -65,8 +65,7 @@ namespace brica1 {
     }
 
     double VirtualTimeSyncScheduler::step() {
-      std::vector<core::Component> components = get_components();
-      std::vector<core::Component>::iterator component;
+      std::vector<core::Component>& components = get_components();
 
       const auto num_components = components.size();
 
@@ -76,10 +75,6 @@ namespace brica1 {
 #pragma omp for 
           for(size_t i = 0; i < num_components; ++i) {
               components[i].input(pimpl->time);
-          }
-
-#pragma omp for
-          for(size_t i = 0; i < num_components; ++i) {
               components[i].fire();
           }
 

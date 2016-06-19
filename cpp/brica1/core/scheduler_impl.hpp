@@ -50,7 +50,7 @@ namespace brica1 {
       pimpl->components = pimpl->agent.get_all_components();
     }
 
-    std::vector<Component> Scheduler::get_components() {
+    std::vector<Component>& Scheduler::get_components() {
       return pimpl->components;
     }
 

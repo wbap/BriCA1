@@ -41,7 +41,7 @@ namespace brica1 {
       Scheduler(Agent agent);
       Agent get_agent();
       void set_agent(Agent agent);
-      std::vector<Component> get_components();
+      std::vector<Component>& get_components();
       void reset();
       virtual double step()=0;
     protected:
