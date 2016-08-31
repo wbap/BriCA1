@@ -212,8 +212,8 @@ if __name__ == "__main__":
     brica1.alias_out_port((stacked_autoencoder, "accuracy"), (slp, "accuracy"))
     brica1.alias_in_port((stacked_autoencoder, "target"), (slp, "target"))
 
-    scheduler = brica1.VirtualTimeSyncScheduler()
-    agent = brica1.Agent(scheduler)
+    agent = brica1.Agent()
+    scheduler = brica1.VirtualTimeSyncScheduler(agent)
     module = brica1.Module()
     module.add_component("stacked_autoencoder", stacked_autoencoder)
     agent.add_submodule("module", module)
@@ -235,7 +235,7 @@ if __name__ == "__main__":
             stacked_autoencoder.get_in_port("input").buffer = x_batch
             stacked_autoencoder.get_in_port("target").buffer = y_batch
 
-            time = agent.step()
+            time = scheduler.step()
 
             loss1 = stacked_autoencoder.get_out_port("loss1").buffer
             loss2 = stacked_autoencoder.get_out_port("loss2").buffer

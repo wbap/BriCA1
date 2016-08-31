@@ -1,13 +1,10 @@
 # coding: utf-8
 
-
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import ensemble, svm,datasets
  
 import brica1
-
-
 
 # Randomforest Component Definition
 class RandomForestClassifierComponent(brica1.Component):
@@ -74,7 +71,6 @@ RFC = RandomForestClassifierComponent(2)
 RFC.fit(X,y)
 
 SR =SVMvsRFC_Component(1)
-
  
 # Connect the components
 brica1.connect((feeder, "out0"), (svm, "in0"))
@@ -90,9 +86,9 @@ mod.add_component("RFC",RFC)
 mod.add_component("SR", SR)
  
 # Setup scheduler and agent
-s = brica1.VirtualTimeSyncScheduler()
-a = brica1.Agent(s)
+a = brica1.Agent()
 a.add_submodule("mod", mod)
+s = brica1.VirtualTimeSyncScheduler(a)
  
 # Test the classifier
 svm_result=[]
@@ -102,15 +98,14 @@ svm_vs_RFC=[]
 for i in xrange(len(X)):
     feeder.set_state("out0", X[i]) # Set data feeder to training data i
  
-    a.step() # Execute prediction
+    s.step() # Execute prediction
  
     svm_result.append(svm.get_out_port("out0").buffer[0])
     RFC_result.append(RFC.get_out_port("out0").buffer[0])
     
-    a.step()
+    s.step()
     
     svm_vs_RFC.append(SR.get_out_port("out0").buffer[0])
 
 for i in xrange(len(X)):
- 
     print "SVM: {}\tRFC: {}\tRESULT: {}".format(svm_result[i], RFC_result[i], svm_vs_RFC[i])
