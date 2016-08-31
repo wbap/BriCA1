@@ -45,14 +45,14 @@ mod.add_component("feeder", feeder)
 mod.add_component("svm", svm)
 
 # Setup scheduler and agent
-s = brica1.VirtualTimeSyncScheduler()
-a = brica1.Agent(s)
+a = brica1.Agent()
 a.add_submodule("mod", mod)
+s = brica1.VirtualTimeSyncScheduler(a)
 
 # Test the classifier
 for i in xrange(len(X)):
     feeder.set_state("out0", X[i]) # Set data feeder to training data i
 
-    a.step() # Execute prediction
+    s.step() # Execute prediction
 
     print "Actual: {}\tPrediction: {}\t{}".format(y[i], svm.get_out_port("out0").buffer[0], y[i] == svm.get_out_port("out0").buffer[0])
