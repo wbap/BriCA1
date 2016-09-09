@@ -14,7 +14,7 @@ are collectively reffered to as `Unit`s.
 __all__ = ["Component", "ComponentSet", "ConstantComponent", "PipeComponent", "NullComponent"]
 
 from abc import ABCMeta, abstractmethod
-import copy
+from copy import deepcopy
 import numpy
 
 # BriCA imports
@@ -101,7 +101,7 @@ class Component(Unit):
 
         """
 
-        self.states[id] = value.copy()
+        self.states[id] = deepcopy(value)
 
     def get_state(self, id):
         """ Get a state value for the given ID.
@@ -141,7 +141,7 @@ class Component(Unit):
 
         """
 
-        self.results[id] = value.copy()
+        self.results[id] = deepcopy(value)
 
     def get_result(self, id):
         """ Get a result value for the given ID.
@@ -186,7 +186,7 @@ class Component(Unit):
         for id, in_port in self.in_ports.items():
             in_port.sync()
             in_port.invoke_callbacks()
-            self.inputs[id] = in_port.buffer.copy()
+            self.inputs[id] = deepcopy(in_port.buffer)
 
         assert self.last_input_time <= time, "collect_input() captured a time travel"
         self.last_input_time = time
