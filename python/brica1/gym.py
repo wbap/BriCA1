@@ -31,6 +31,13 @@ class EnvComponent(Component):
         self.make_out_port('done', 1)
         self.make_out_port('info', 1)
 
+        observation = env.reset()
+
+        self.get_out_port('observation').buffer = observation
+        self.results['observation'] = observation
+        self.get_out_port('done').buffer = False
+        self.results['done'] = False
+
     def fire(self):
         action = self.inputs['action'][0]
         observation, reward, done, info = self.env.step(action)
