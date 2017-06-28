@@ -46,7 +46,7 @@ class Component(Unit):
         self.last_input_time = 0
         self.last_output_time = 0
         self.offset = 0
-        self.interval = 1
+        self.interval = 1000
         self.inputs = {}
         self.states = {}
         self.results = {}
@@ -177,7 +177,7 @@ class Component(Unit):
         values to the in-ports. It is usually called by the scheduler.
 
         Args:
-          time (float): the scheduler's current time.
+          time (int): the scheduler's current time.
 
         Returns:
           None.
@@ -200,7 +200,7 @@ class Component(Unit):
         `out_ports`. It is usually called by the scheduler.
 
         Args:
-          time (float): the scheduler's current time.
+          time (int): the scheduler's current time.
 
         Returns:
           None.
@@ -232,7 +232,7 @@ class Component(Unit):
         self.last_input_time = 0
         self.last_output_time = 0
         self.offset = 0
-        self.interval = 1
+        self.interval = 1000
 
 
 class ComponentSet(Component):

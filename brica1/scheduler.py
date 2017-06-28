@@ -84,7 +84,7 @@ class Scheduler(object):
           None.
 
         Returns:
-          float: the current time of the `Scheduler`.
+          int: the current time of the `Scheduler`.
 
         """
 
@@ -101,7 +101,7 @@ class VirtualTimeSyncScheduler(Scheduler):
         """ Create a new `VirtualTimeSyncScheduler` Instance.
 
         Args:
-          interval (float): interval in seconds between each step
+          interval (int): interval in milliseconds between each step
 
         Returns:
           VirtualTimeSyncScheduler: A new `VirtualTimeSyncScheduler` instance.
@@ -125,7 +125,7 @@ class VirtualTimeSyncScheduler(Scheduler):
           None.
 
         Returns:
-          float: the current time of the `Scheduler`.
+          int: the current time of the `Scheduler`.
 
         """
 
@@ -160,7 +160,7 @@ class VirtualTimeScheduler(Scheduler):
             """ Create a new `Event` instance.
 
             Args:
-              time (float): the time of the `Event`.
+              time (int): the time of the `Event`.
               component (Component): `Component` to be handled.
 
             Returns:
@@ -179,7 +179,7 @@ class VirtualTimeScheduler(Scheduler):
         """ Create a new `Event` instance.
 
         Args:
-          time (float): the time of the `Event`.
+          time (int): the time of the `Event`.
           component (Component): `Component` to be handled.
 
         Returns:
@@ -206,18 +206,41 @@ class VirtualTimeScheduler(Scheduler):
 
         super(VirtualTimeScheduler, self).update()
         for component in self.components:
-            component.input(self.current_time)
-            self.supervisor.step()
-            component.train()
-            component.fire()
             self.event_queue.put(
                 VirtualTimeScheduler.Event(
                     component.offset +
-                    component.last_input_time +
                     component.interval,
                     component,
                 )
             )
+
+    def step_for_time(self, time):
+        components = []
+
+        while not self.event_queue.empty():
+            if self.event_queue.queue[0].time == time:
+                component = self.event_queue.get().component
+                components.append(component)
+                self.event_queue.put(
+                    VirtualTimeScheduler.Event(
+                        time + component.interval,
+                        component,
+                    )
+                )
+            else:
+                break
+
+        for component in components:
+            component.output(time)
+
+        for component in components:
+            component.input(time)
+
+        self.supervisor.step()
+
+        for component in components:
+            component.train()
+            component.fire()
 
     def step(self, interval=0):
         """ Step with given interval or to the next event
@@ -226,52 +249,20 @@ class VirtualTimeScheduler(Scheduler):
         for the `Component` of interest.
 
         Args:
-          None.
+          interval (int): interval in milliseconds between each step
 
         Returns:
-          float: the current time of the `Scheduler`.
+          int: the current time of the `Scheduler`.
 
         """
 
-        e = self.event_queue.get()
-
         if interval == 0:
-            self.current_time = e.time
-            component = e.component
-            component.output(self.current_time)
-            component.input(self.current_time)
-            self.supervisor.step()
-            component.train()
-            component.fire()
-
-            self.event_queue.put(
-                VirtualTimeScheduler.Event(
-                    self.current_time + component.interval,
-                    component,
-                )
-            )
+            self.current_time = self.event_queue.queue[0].time
+            self.step_for_time(self.current_time)
         else:
-            assert interval > 0
             self.current_time += interval
-
-            while e.time <= self.current_time:
-                component = e.component
-                component.output(self.current_time)
-                component.input(self.current_time)
-                self.supervisor.step()
-                component.train()
-                component.fire()
-
-                self.event_queue.put(
-                    VirtualTimeScheduler.Event(
-                        self.current_time + component.interval,
-                        component,
-                    )
-                )
-
-                e = self.event_queue.get()
-
-            self.event_queue.put(e)
+            while self.event_queue.queue[0].time <= self.current_time:
+                self.step_for_time(self.event_queue.queue[0].time)
 
         return self.current_time
 
@@ -286,7 +277,7 @@ class RealTimeSyncScheduler(Scheduler):
         """ Create a new `RealTimeSyncScheduler` Instance.
 
         Args:
-          interval (float): minimu interval in seconds between input and output
+          interval (int): minimu interval in seconds between input and output
           of the modules.
 
         Returns:
@@ -310,7 +301,7 @@ class RealTimeSyncScheduler(Scheduler):
         self.set_interval(1)
 
     def set_interval(self, interval):
-        self.interval = float(interval)
+        self.interval = int(interval)
         assert self.interval > 0
 
     def step(self):
@@ -342,7 +333,7 @@ class RealTimeSyncScheduler(Scheduler):
           None.
 
         Returns:
-          float: the current time of the `Scheduler`.
+          int: the current time of the `Scheduler`.
 
         """
 
@@ -363,7 +354,7 @@ class RealTimeSyncScheduler(Scheduler):
 
         self.lagged = False
         if last_dt > 0:
-            time.sleep(last_dt)
+            time.sleep(last_dt / 1000.0)
         elif last_dt < 0:
             self.lagged = True
 
