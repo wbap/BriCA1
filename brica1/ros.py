@@ -10,24 +10,19 @@ This module containes classes for ROS integration.
 
 __all__ = ["ROSAdapter"]
 
-from abc import ABCMeta, abstractmethod
-import copy
-import numpy
-
 # BriCA imports
-from .unit import *
+from .unit import Unit
 
 # ROS imporets
 import rospy
 from std_msgs.msg import Int16MultiArray, MultiArrayDimension
 
+
 class ROSAdapter(Unit):
     """
-    `ROSAdapter` is a BriCA `Unit` which is intented to provide a bridge over the
-    ROS Publisher/Subscriber and BriCA `Agent`.
+    `ROSAdapter` is a BriCA `Unit` which is intented to provide a bridge over
+    the ROS Publisher/Subscriber and BriCA `Agent`.
     """
-
-    __metaclass__ = ABCMeta
 
     def __init__(self, name="BriCA1 Node"):
         """ Create a new `ROSAdapter` instance.

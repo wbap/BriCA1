@@ -11,14 +11,15 @@ are collectively reffered to as `Unit`s.
 
 """
 
-__all__ = ["Component", "ComponentSet", "ConstantComponent", "PipeComponent", "NullComponent"]
+__all__ = ["Component", "ComponentSet", "ConstantComponent", "PipeComponent",
+           "NullComponent"]
 
 from abc import ABCMeta, abstractmethod
 from copy import deepcopy
-import numpy
 
 # BriCA imports
-from .unit import *
+from unit import Unit
+
 
 class Component(Unit):
     """
@@ -188,7 +189,8 @@ class Component(Unit):
             in_port.invoke_callbacks()
             self.inputs[id] = deepcopy(in_port.buffer)
 
-        assert self.last_input_time <= time, "collect_input() captured a time travel"
+        assert self.last_input_time <= time, ("collect_input() captured a time"
+                                              " travel")
         self.last_input_time = time
 
     def output(self, time):
@@ -210,7 +212,8 @@ class Component(Unit):
                 out_port.buffer = self.results[id]
                 out_port.invoke_callbacks()
 
-        assert self.last_output_time <= time, "update_output() captured a time travel"
+        assert self.last_output_time <= time, ("update_output() captured a"
+                                               " time travel")
         self.last_output_time = time
 
     def reset(self):
@@ -230,6 +233,7 @@ class Component(Unit):
         self.last_output_time = 0.0
         self.offset = 0.0
         self.interval = 1.0
+
 
 class ComponentSet(Component):
     """
@@ -290,12 +294,14 @@ class ComponentSet(Component):
 
         """
 
-        order = sorted(self.priorities.keys(), key=lambda id: self.priorities[id])
+        order = sorted(self.priorities.keys(),
+                       key=lambda id: self.priorities[id])
         for id in order:
             component = self.components[id]
             component.input(self.last_input_time)
             component.fire()
             component.output(self.last_output_time)
+
 
 class ConstantComponent(Component):
     """
@@ -329,6 +335,7 @@ class ConstantComponent(Component):
 
         for id in self.states.keys():
             self.results[id] = self.states[id]
+
 
 class PipeComponent(Component):
     """
@@ -366,6 +373,7 @@ class PipeComponent(Component):
     def fire(self):
         for in_id, out_id in self.map:
             self.results[out_id] = self.inputs[in_id]
+
 
 class NullComponent(Component):
     """

@@ -11,11 +11,11 @@ This module contains the `Unit` modules which serves as a base class for the
 
 __all__ = ["Unit"]
 
-import copy
 import numpy
 
 # BriCA imports
-from .port import *
+from .port import Port
+
 
 class Unit(object):
     """

@@ -11,9 +11,8 @@ controls the behaviour of component training.
 
 __all__ = ["Supervisor", "NullSupervisor"]
 
-from .module import *
-
 from abc import ABCMeta, abstractmethod
+
 
 class Supervisor(object):
     """
@@ -41,6 +40,7 @@ class Supervisor(object):
     @abstractmethod
     def step(self):
         pass
+
 
 class NullSupervisor(Supervisor):
     """

@@ -8,10 +8,9 @@ This module contains the class `Port`.
 
 """
 
-import copy
-
 # BriCA imports
-from .connection import *
+from .connection import Connection
+
 
 class Port(object):
     """

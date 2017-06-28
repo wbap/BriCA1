@@ -11,13 +11,13 @@ to the respective `Port`s inside the `GymAgent`.
 """
 
 import numpy as np
-import gym
 
-from .component import *
-from .module import *
-from .utils import *
+from .component import Component
+from .module import Module, Agent
+from .utils import alias_in_port, alias_out_port, connect
 
 __all__ = ['EnvComponent', 'GymAgent']
+
 
 class EnvComponent(Component):
     def __init__(self, env):
@@ -45,8 +45,9 @@ class EnvComponent(Component):
             self.env.reset()
         self.results['observation'] = observation
         self.results['reward'] = np.array([reward])
-        #self.results['done'] = done
-        #self.results['info'] = info
+        # self.results['done'] = done
+        # self.results['info'] = info
+
 
 class GymAgent(Agent):
     def __init__(self, model, env):
