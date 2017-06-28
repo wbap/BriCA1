@@ -43,10 +43,10 @@ class Component(Unit):
         """
 
         super(Component, self).__init__()
-        self.last_input_time = 0.0
-        self.last_output_time = 0.0
-        self.offset = 0.0
-        self.interval = 1.0
+        self.last_input_time = 0
+        self.last_output_time = 0
+        self.offset = 0
+        self.interval = 1
         self.inputs = {}
         self.states = {}
         self.results = {}
@@ -229,10 +229,10 @@ class Component(Unit):
 
         """
 
-        self.last_input_time = 0.0
-        self.last_output_time = 0.0
-        self.offset = 0.0
-        self.interval = 1.0
+        self.last_input_time = 0
+        self.last_output_time = 0
+        self.offset = 0
+        self.interval = 1
 
 
 class ComponentSet(Component):

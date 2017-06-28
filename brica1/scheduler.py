@@ -45,7 +45,7 @@ class Scheduler(object):
         self.agent = agent
         self.supervisor = supervisor(agent)
         self.num_steps = 0
-        self.current_time = 0.0
+        self.current_time = 0
         self.components = agent.get_all_components()
 
     def reset(self):
@@ -60,7 +60,7 @@ class Scheduler(object):
         """
 
         self.num_steps = 0
-        self.current_time = 0.0
+        self.current_time = 0
         self.components = []
 
     def update(self):
@@ -97,7 +97,7 @@ class VirtualTimeSyncScheduler(Scheduler):
     in a synced manner.
     """
 
-    def __init__(self, agent, supervisor=NullSupervisor, interval=1.0):
+    def __init__(self, agent, supervisor=NullSupervisor, interval=1):
         """ Create a new `VirtualTimeSyncScheduler` Instance.
 
         Args:
@@ -219,8 +219,8 @@ class VirtualTimeScheduler(Scheduler):
                 )
             )
 
-    def step(self):
-        """ Step by the internal interval.
+    def step(self, interval=0):
+        """ Step with given interval or to the next event
 
         An event is dequeued and `output()`, `input()`, and `fire()` are called
         for the `Component` of interest.
@@ -234,20 +234,44 @@ class VirtualTimeScheduler(Scheduler):
         """
 
         e = self.event_queue.get()
-        self.current_time = e.time
-        component = e.component
-        component.output(self.current_time)
-        component.input(self.current_time)
-        self.supervisor.step()
-        component.train()
-        component.fire()
 
-        self.event_queue.put(
-            VirtualTimeScheduler.Event(
-                self.current_time + component.interval,
-                component,
+        if interval == 0:
+            self.current_time = e.time
+            component = e.component
+            component.output(self.current_time)
+            component.input(self.current_time)
+            self.supervisor.step()
+            component.train()
+            component.fire()
+
+            self.event_queue.put(
+                VirtualTimeScheduler.Event(
+                    self.current_time + component.interval,
+                    component,
+                )
             )
-        )
+        else:
+            assert interval > 0
+            self.current_time += interval
+
+            while e.time <= self.current_time:
+                component = e.component
+                component.output(self.current_time)
+                component.input(self.current_time)
+                self.supervisor.step()
+                component.train()
+                component.fire()
+
+                self.event_queue.put(
+                    VirtualTimeScheduler.Event(
+                        self.current_time + component.interval,
+                        component,
+                    )
+                )
+
+                e = self.event_queue.get()
+
+            self.event_queue.put(e)
 
         return self.current_time
 
@@ -258,7 +282,7 @@ class RealTimeSyncScheduler(Scheduler):
     in a synced manner.
     """
 
-    def __init__(self, agent, supervisor=NullSupervisor, interval=1.0):
+    def __init__(self, agent, supervisor=NullSupervisor, interval=1):
         """ Create a new `RealTimeSyncScheduler` Instance.
 
         Args:
@@ -270,10 +294,10 @@ class RealTimeSyncScheduler(Scheduler):
 
         """
 
-        self.last_input_time = -1.0
-        self.last_output_time = -1.0
-        self.last_spent = -1.0
-        self.last_dt = -1.0
+        self.last_input_time = -1
+        self.last_output_time = -1
+        self.last_spent = -1
+        self.last_dt = -1
 
         super(RealTimeSyncScheduler, self).__init__(
             agent,
@@ -283,11 +307,11 @@ class RealTimeSyncScheduler(Scheduler):
 
     def reset(self):
         super(RealTimeSyncScheduler, self).reset()
-        self.set_interval(1.0)
+        self.set_interval(1)
 
     def set_interval(self, interval):
         self.interval = float(interval)
-        assert self.interval > 0.0
+        assert self.interval > 0
 
     def step(self):
         """ Step by the internal interval.
@@ -338,9 +362,9 @@ class RealTimeSyncScheduler(Scheduler):
         last_dt = self.interval - self.last_spent
 
         self.lagged = False
-        if last_dt > 0.0:
+        if last_dt > 0:
             time.sleep(last_dt)
-        elif last_dt < 0.0:
+        elif last_dt < 0:
             self.lagged = True
 
         self.last_output_time = current_time()
