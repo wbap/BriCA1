@@ -9,18 +9,17 @@ types of schedulers. The `VirtualTimeSyncScheduler` is implemneted for now.
 
 """
 
-__all__ = ["Scheduler", "VirtualTimeSyncScheduler", "VirtualTimeScheduler", "RealTimeSyncScheduler"]
+__all__ = ["Scheduler", "VirtualTimeSyncScheduler", "VirtualTimeScheduler",
+           "RealTimeSyncScheduler"]
 
-from .utils import *
-from .supervisor import *
+from .utils import current_time
+from .supervisor import NullSupervisor
 
 from abc import ABCMeta, abstractmethod
-import copy
 import time
-import numpy
 
-import future
 import queue
+
 
 class Scheduler(object):
     """
@@ -91,6 +90,7 @@ class Scheduler(object):
 
         pass
 
+
 class VirtualTimeSyncScheduler(Scheduler):
     """
     `VirtualTimeSyncScheduler` is a `Scheduler` implementation for virutal time
@@ -108,7 +108,10 @@ class VirtualTimeSyncScheduler(Scheduler):
 
         """
 
-        super(VirtualTimeSyncScheduler, self).__init__(agent, supervisor=NullSupervisor)
+        super(VirtualTimeSyncScheduler, self).__init__(
+            agent,
+            supervisor=NullSupervisor,
+        )
         self.interval = interval
 
     def step(self):
@@ -142,6 +145,7 @@ class VirtualTimeSyncScheduler(Scheduler):
 
         return self.current_time
 
+
 class VirtualTimeScheduler(Scheduler):
     """
     `VirtualTimeScheduler` is a `Scheduler` implementation for virutal time.
@@ -169,7 +173,7 @@ class VirtualTimeScheduler(Scheduler):
             self.component = component
 
         def __lt__(self, other):
-            return self.time < other.time;
+            return self.time < other.time
 
     def __init__(self, agent, supervisor=NullSupervisor):
         """ Create a new `Event` instance.
@@ -183,7 +187,10 @@ class VirtualTimeScheduler(Scheduler):
 
         """
 
-        super(VirtualTimeScheduler, self).__init__(agent, supervisor=NullSupervisor)
+        super(VirtualTimeScheduler, self).__init__(
+            agent,
+            supervisor=NullSupervisor,
+        )
         self.event_queue = queue.PriorityQueue()
 
     def update(self):
@@ -203,7 +210,14 @@ class VirtualTimeScheduler(Scheduler):
             self.supervisor.step()
             component.train()
             component.fire()
-            self.event_queue.put(VirtualTimeScheduler.Event(component.offset + component.last_input_time + component.interval, component))
+            self.event_queue.put(
+                VirtualTimeScheduler.Event(
+                    component.offset +
+                    component.last_input_time +
+                    component.interval,
+                    component,
+                )
+            )
 
     def step(self):
         """ Step by the internal interval.
@@ -228,9 +242,15 @@ class VirtualTimeScheduler(Scheduler):
         component.train()
         component.fire()
 
-        self.event_queue.put(VirtualTimeScheduler.Event(self.current_time + component.interval, component))
+        self.event_queue.put(
+            VirtualTimeScheduler.Event(
+                self.current_time + component.interval,
+                component,
+            )
+        )
 
         return self.current_time
+
 
 class RealTimeSyncScheduler(Scheduler):
     """
@@ -242,7 +262,8 @@ class RealTimeSyncScheduler(Scheduler):
         """ Create a new `RealTimeSyncScheduler` Instance.
 
         Args:
-          interval (float): minimu interval in seconds between input and output of the modules.
+          interval (float): minimu interval in seconds between input and output
+          of the modules.
 
         Returns:
           RealTimeSyncScheduler: A new `RealTimeSyncScheduler` instance.
@@ -254,14 +275,15 @@ class RealTimeSyncScheduler(Scheduler):
         self.last_spent = -1.0
         self.last_dt = -1.0
 
-        super(RealTimeSyncScheduler, self).__init__(agent, supervisor=NullSupervisor)
+        super(RealTimeSyncScheduler, self).__init__(
+            agent,
+            supervisor=NullSupervisor,
+        )
         self.set_interval(interval)
 
-
-    def reset():
+    def reset(self):
         super(RealTimeSyncScheduler, self).reset()
         self.set_interval(1.0)
-
 
     def set_interval(self, interval):
         self.interval = float(interval)
@@ -273,18 +295,18 @@ class RealTimeSyncScheduler(Scheduler):
         The methods `input()`, `fire()`, and `output()` are synchronously
         called for all components.
 
-        The time when it started calling input() and output() of the 
-        components is stored in self.last_input_time and 
+        The time when it started calling input() and output() of the
+        components is stored in self.last_input_time and
         self.last_output_time, respectively.
 
         self.interval sets the *minimum* interval between the point in
         time when input() is called and when output() is called.
-        The actual interval between input() and output() will 
+        The actual interval between input() and output() will
         always be longer than self.interval, although the scheduler
         tries to make the discrepancy minimum.
 
         When calling fire() of the components takes longer than the
-        set interval, calling output() of the components will be 
+        set interval, calling output() of the components will be
         later than the scheduled time self.input_time + self.interval.
         In this case, self.lagged will be set True.
 

@@ -12,12 +12,10 @@ as abstractions for distict areas in the brain or sub-regions of those areas.
 
 __all__ = ["Module", "Agent"]
 
-import copy
-import numpy
-
 # BriCA imports
-from .component import *
-from .unit import *
+from .component import Component
+from .unit import Unit
+
 
 class Module(Unit):
     """
@@ -179,6 +177,7 @@ class Module(Unit):
         """
 
         del self.components[id]
+
 
 class Agent(Module):
     """

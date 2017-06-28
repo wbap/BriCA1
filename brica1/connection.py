@@ -8,6 +8,7 @@ This module contains the class `Connection`.
 
 """
 
+
 class Connection(object):
     """
     A `Connection` connects two `Port`s and can be `sync`ed in one direction.
