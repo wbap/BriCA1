@@ -51,16 +51,16 @@ def test_autostep():
 
         time = scheduler.step()
 
-        if time > 3000:
+        if time > 2000:
             break
 
-        if time == 2000:
+        if time == 1000:
             a_out = data
-        if time == 2000:
+        if time == 1000:
             b_in = data
-        if time == 3000:
+        if time == 2000:
             b_out = data
-        if time == 3000:
+        if time == 2000:
             c_in = data
 
 def test_interval():
@@ -114,14 +114,14 @@ def test_interval():
         time = scheduler.step(interval)
         steps += 1
 
-        if time > 3000:
+        if time > 2000:
             break
 
-        if time == 2000:
+        if time == 1000:
             a_out = data
-        if time == 2000:
+        if time == 1000:
             b_in = data
-        if time == 3000:
+        if time == 2000:
             b_out = data
-        if time == 3000:
+        if time == 2000:
             c_in = data
