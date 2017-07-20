@@ -47,6 +47,7 @@ class Component(Unit):
         self.last_output_time = 0
         self.offset = 0
         self.interval = 1000
+        self.sleep = 0
         self.inputs = {}
         self.states = {}
         self.results = {}

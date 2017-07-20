@@ -18,7 +18,7 @@ from .supervisor import NullSupervisor
 from abc import ABCMeta, abstractmethod
 import time
 
-import queue
+import Queue as queue
 
 
 class Scheduler(object):
@@ -156,7 +156,7 @@ class VirtualTimeScheduler(Scheduler):
         `Event` is a queue object for `PriorityQueue` in VirtualTimeScheduler.
         """
 
-        def __init__(self, time, component):
+        def __init__(self, time, component, action='fire'):
             """ Create a new `Event` instance.
 
             Args:
@@ -171,6 +171,7 @@ class VirtualTimeScheduler(Scheduler):
             super(VirtualTimeScheduler.Event, self).__init__()
             self.time = time
             self.component = component
+            self.action = action
 
         def __lt__(self, other):
             return self.time < other.time
@@ -208,37 +209,50 @@ class VirtualTimeScheduler(Scheduler):
         for component in self.components:
             self.event_queue.put(
                 VirtualTimeScheduler.Event(
-                    component.offset +
-                    component.interval,
+                    component.offset,
                     component,
+                    'sleep',
                 )
             )
 
     def step_for_time(self, time):
-        components = []
+        fires = []
+        sleeps = []
 
         while not self.event_queue.empty():
             if self.event_queue.queue[0].time == time:
-                component = self.event_queue.get().component
-                components.append(component)
-                self.event_queue.put(
-                    VirtualTimeScheduler.Event(
-                        time + component.interval,
+                event = self.event_queue.get()
+                component = event.component
+
+                if event.action == 'fire':
+                    next_event = VirtualTimeScheduler.Event(
+                        event.time + component.sleep,
                         component,
+                        'sleep'
                     )
-                )
+                    sleeps.append(component)
+                else:
+                    next_event = VirtualTimeScheduler.Event(
+                        event.time + component.interval,
+                        component,
+                        'fire'
+                    )
+                    fires.append(component)
+
+                self.event_queue.put(next_event)
             else:
                 break
 
-        for component in components:
+        
+        for component in sleeps:
             component.output(time)
 
-        for component in components:
+        for component in fires:
             component.input(time)
 
         self.supervisor.step()
 
-        for component in components:
+        for component in fires:
             component.train()
             component.fire()
 
