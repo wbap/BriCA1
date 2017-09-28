@@ -18,7 +18,7 @@ from .supervisor import NullSupervisor
 from abc import ABCMeta, abstractmethod
 import time
 
-import Queue as queue
+import queue
 
 
 class Scheduler(object):
