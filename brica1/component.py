@@ -18,7 +18,7 @@ from abc import ABCMeta, abstractmethod
 from copy import deepcopy
 
 # BriCA imports
-from unit import Unit
+from .unit import Unit
 
 
 class Component(Unit):
