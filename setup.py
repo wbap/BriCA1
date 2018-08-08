@@ -15,7 +15,7 @@ from setuptools import find_packages, setup, Command
 NAME = 'BriCA1'
 DESCRIPTION = 'Brain-inspired Computing Architecture Version 1'
 URL = 'https://github.com/wbap/BriCA1'
-EMAIL = 'kotone [at] sfc.keio.ac.jp'
+EMAIL = 'kotone@sfc.keio.ac.jp'
 AUTHOR = 'Kotone Itaya'
 REQUIRES_PYTHON = '>=2.7.0'
 VERSION = None
