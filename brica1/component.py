@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 """
 component.py
 =====
@@ -11,8 +10,10 @@ are collectively reffered to as `Unit`s.
 
 """
 
-__all__ = ["Component", "ComponentSet", "ConstantComponent", "PipeComponent",
-           "NullComponent"]
+__all__ = [
+    "Component", "ComponentSet", "ConstantComponent", "PipeComponent",
+    "NullComponent"
+]
 
 from abc import ABCMeta, abstractmethod
 from copy import deepcopy
@@ -91,85 +92,85 @@ class Component(Unit):
 
         pass
 
-    def set_state(self, id, value):
+    def set_state(self, identifier, value):
         """ Set a state value for the given ID.
 
         Args:
-          id (str): a string ID.
-          v (any): a state value to set.
+          identifier (str): a string ID.
+          vvalue (any): a state value to set.
 
         Returns:
           None.
 
         """
 
-        self.states[id] = deepcopy(value)
+        self.states[identifier] = deepcopy(value)
 
-    def get_state(self, id):
+    def get_state(self, identifier):
         """ Get a state value for the given ID.
 
         Args:
-          id (str): a string ID.
+          identifier (str): a string ID.
 
         Returns:
           any: a state value for the given ID.
 
         """
 
-        return self.states[id]
+        return self.states[identifier]
 
-    def clear_state(self, id):
+    def clear_state(self, identifier):
         """ Clear a state value for the given ID.
 
         Args:
-          id (str): a string ID.
+          identifier (str): a string ID.
 
         Returns:
           None.
 
         """
 
-        del self.states[id]
+        del self.states[identifier]
 
-    def set_result(self, id, value):
+    def set_result(self, identifier, value):
         """ Set a result value for the given ID.
 
         Args:
-          id (str): a string ID.
-          v (any): a result value to set.
+          identifier (str): a string ID.
+          value (any): a result value to set.
 
         Returns:
           None.
 
         """
 
-        self.results[id] = deepcopy(value)
+        self.results[identifier] = deepcopy(value)
 
-    def get_result(self, id):
+    def get_result(self, identifier):
         """ Get a result value for the given ID.
 
         Args:
-          id (str): a string ID.
+          identifier (str): a string ID.
 
         Returns:
           any: a result value for the given ID.
 
         """
 
-        return self.results[id]
+        return self.results[identifier]
 
-    def clear_result(self, id):
+    def clear_result(self, identifier):
         """ Clear a state value for the given ID.
 
         Args:
-          id (str): a string ID.
+          identifier (str): a string ID.
 
         Returns:
           None.
 
         """
 
-        del self.results[id]
+        del self.results[identifier]
 
     def input(self, time):
         """ Obtain inputs from outputs of other Modules.
@@ -185,10 +186,10 @@ class Component(Unit):
 
         """
 
-        for id, in_port in self.in_ports.items():
+        for identifier, in_port in self.in_ports.items():
             in_port.sync()
             in_port.invoke_callbacks()
-            self.inputs[id] = deepcopy(in_port.buffer)
+            self.inputs[identifier] = deepcopy(in_port.buffer)
 
         assert self.last_input_time <= time, ("collect_input() captured a time"
                                               " travel")
@@ -208,9 +209,9 @@ class Component(Unit):
 
         """
 
-        for id, out_port in self.out_ports.items():
-            if id in self.results:
-                out_port.buffer = self.results[id]
+        for identifier, out_port in self.out_ports.items():
+            if identifier in self.results:
+                out_port.buffer = self.results[identifier]
                 out_port.invoke_callbacks()
 
         assert self.last_output_time <= time, ("update_output() captured a"
@@ -236,10 +237,39 @@ class Component(Unit):
         self.interval = 1000
 
 
+class FunctorComponent(Component):
+    """
+    `FunctorComponent` is a wrapper for simple component definition by allowing
+    users to define the behavior without overriding the fire method.
+    """
+
+    def __init__(self, function, use_state=False):
+        """ Create a new `FunctorComponent` instance.
+
+        Args:
+          function (callable): a function to implement to this component.
+
+        Returns:
+          FunctorComponent: a new `FunctorComponent` instance.
+
+        """
+
+        super(FunctorComponent, self).__init__()
+        self.function = function
+        self.use_state = use_state
+
+    def fire(self):
+        if self.use_state:
+            self.results, self.states = self.function(self.inputs, self.states)
+        else:
+            self.results = self.function(self.inputs)
+
+
 class ComponentSet(Component):
     """
     `ComponentSet` groups components to fire sequentially
     """
+
     def __init__(self):
         """ Create a new `ComponentSet` instance.
 
@@ -255,12 +285,12 @@ class ComponentSet(Component):
         self.components = {}
         self.priorities = {}
 
-    def add_component(self, id, component, priority):
+    def add_component(self, identifier, component, priority):
         """ Add a `Component` for given ID and priority
 
         Args:
-          id (str): a string ID.
-          component (Component): a component to add for `id`.
+          identifier (str): a string ID.
+          component (Component): a component to add for `identifier`.
           priority (int): a priority value for scheduling.
 
         Returns:
@@ -268,21 +298,21 @@ class ComponentSet(Component):
 
         """
 
-        self.components[id] = component
-        self.priorities[id] = priority
+        self.components[identifier] = component
+        self.priorities[identifier] = priority
 
-    def get_component(self, id):
+    def get_component(self, identifier):
         """ Get a `Component` for given ID.
 
         Args:
-          id (str): a string ID.
+          identifier (str): a string ID.
 
         Returns:
           Component: a `Component` corresponding to the ID.
 
         """
 
-        return self.components[id]
+        return self.components[identifier]
 
     def fire(self):
         """ Fire sub-components based on priority
@@ -295,10 +325,11 @@ class ComponentSet(Component):
 
         """
 
-        order = sorted(self.priorities.keys(),
-                       key=lambda id: self.priorities[id])
-        for id in order:
-            component = self.components[id]
+        order = sorted(
+            self.priorities.keys(),
+            key=lambda identifier: self.priorities[identifier])
+        for identifier in order:
+            component = self.components[identifier]
             component.input(self.last_input_time)
             component.fire()
             component.output(self.last_output_time)
@@ -310,6 +341,7 @@ class ConstantComponent(Component):
 
     Use `set_state` to define the output of this Module.
     """
+
     def __init__(self):
         """ Create a new `ConstantComponent` instance.
 
@@ -334,8 +366,8 @@ class ConstantComponent(Component):
 
         """
 
-        for id in self.states.keys():
-            self.results[id] = self.states[id]
+        for identifier in self.states.keys():
+            self.results[identifier] = self.states[identifier]
 
 
 class PipeComponent(Component):
@@ -357,23 +389,23 @@ class PipeComponent(Component):
         super(PipeComponent, self).__init__()
         self.map = []
 
-    def set_map(self, in_id, out_id):
+    def set_map(self, in_identifier, out_identifier):
         """ Map from in-port to out port.
 
         Args:
-          in_id (str): port id to map from.
-          out_id (str): port id to map to.
+          in_identifier (str): port identifier to map from.
+          out_identifier (str): port identifier to map to.
 
         Returns:
           None.
 
         """
 
-        self.map.append((in_id, out_id))
+        self.map.append((in_identifier, out_identifier))
 
     def fire(self):
-        for in_id, out_id in self.map:
-            self.results[out_id] = self.inputs[in_id]
+        for in_identifier, out_identifier in self.map:
+            self.results[out_identifier] = self.inputs[in_identifier]
 
 
 class NullComponent(Component):
