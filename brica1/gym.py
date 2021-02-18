@@ -67,11 +67,11 @@ class GymAgent(Agent):
         self.make_in_port('info', 1)
         self.make_out_port('action', 1)
 
-        alias_in_port((self, 'observation'), (model, 'observation'))
-        alias_in_port((self, 'reward'), (model, 'reward'))
-        alias_in_port((self, 'done'), (model, 'done'))
-        alias_in_port((self, 'info'), (model, 'info'))
-        alias_out_port((self, 'action'), (model, 'action'))
+        alias_in_port((model, 'observation'), (self, 'observation'))
+        alias_in_port((model, 'reward'), (self, 'reward'))
+        alias_in_port((model, 'done'), (self, 'done'))
+        alias_in_port((model, 'info'), (self, 'info'))
+        alias_out_port((model, 'action'), (self, 'action'))
 
         connect((self.env, 'observation'), (self, 'observation'))
         connect((self.env, 'reward'), (self, 'reward'))
