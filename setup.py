@@ -12,7 +12,7 @@ from shutil import rmtree
 from setuptools import find_packages, setup, Command
 
 # Package meta-data.
-NAME = 'BriCA1'
+NAME = 'brica1'
 DESCRIPTION = 'Brain-inspired Computing Architecture Version 1'
 URL = 'https://github.com/wbap/BriCA1'
 EMAIL = 'kotone@sfc.keio.ac.jp'
