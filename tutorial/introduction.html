@@ -1,46 +1,37 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Introduction &mdash; BriCA1 1.0.0 ドキュメント</title>
-    
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction &#8212; BriCA1 1.0.1 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '1.0.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/translations.js"></script>
-    <link rel="top" title="BriCA1 1.0.0 ドキュメント" href="../index.html" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="prev" title="brica1 package" href="../brica1/brica1.html" /> 
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
-      <h3>ナビゲーション</h3>
+      <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="総合索引"
-             accesskey="I">索引</a></li>
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Pythonモジュール索引"
-             >モジュール</a> |</li>
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="../brica1/brica1.html" title="brica1 package"
-             accesskey="P">前へ</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">BriCA1 1.0.0 ドキュメント</a> &raquo;</li> 
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">BriCA1 1.0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Introduction</a></li> 
       </ul>
     </div>  
 
@@ -50,242 +41,243 @@
           <div class="body" role="main">
             
   <div class="section" id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <p>Welcome to the tutorial for Brain-inspired Computing Architecture (BriCA) Version 1. Basics for installing and getting started with the BriCA platform are included in this tutorial. For more advanced content, take a look at some of the other tutorials.</p>
 <div class="section" id="what-is-brica">
-<h2>What is BriCA?<a class="headerlink" href="#what-is-brica" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<h2>What is BriCA?<a class="headerlink" href="#what-is-brica" title="Permalink to this headline">¶</a></h2>
 <p>BriCA is a software platform designed specifically to join and schedule multiple machine learning algorithms of different disciplines. The NeuralTalk architecture developed by Stanford University is a great example of one such machine learning system where a CNN and RNN are combined to solve the difficult task of creating captions for images. The implementation of a more simple machine learning system: the stacked autoencoder, and the NeuralTalk architecture will be covered in later tutorials.</p>
 </div>
 <div class="section" id="installing">
-<h2>Installing<a class="headerlink" href="#installing" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>BriCA must currently be installed from source which is hosted on <a class="reference external" href="https://github.com/wbap/BriCA1/">GitHub</a>. The NumPy library is required to use the library.</p>
+<h2>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">¶</a></h2>
+<p>BriCA must currently be installed from source which is hosted on <a class="reference external" href="http:s//github.com/wbap/BriCA1/">GitHub</a>. The NumPy library is required to use the library.</p>
 <ol class="arabic simple">
-<li><code class="docutils literal"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/wbap/BriCA1.git</span></code></li>
-<li><code class="docutils literal"><span class="pre">cd</span> <span class="pre">BriCA1/python</span></code></li>
-<li><code class="docutils literal"><span class="pre">sudo</span> <span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span></code> or <code class="docutils literal"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span> <span class="pre">--user</span></code></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/wbap/BriCA1.git</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">BriCA1/python</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span></code> or <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span> <span class="pre">--user</span></code></p></li>
 </ol>
 <p>Voila! You are done. Now that the library is installed, try running the test code.</p>
-<p><code class="docutils literal"><span class="pre">python</span> <span class="pre">tests/scheduler_test.py</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">tests/scheduler_test.py</span></code></p>
 <p>This will run four tests, all of which should successfully pass.</p>
 </div>
 <div class="section" id="getting-started">
-<h2>Getting Started<a class="headerlink" href="#getting-started" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>Before starting to write a full featured cognitive architecture there are a number of core concepts you need to know. Here we cover the very basics: <code class="docutils literal"><span class="pre">Components</span></code>, <code class="docutils literal"><span class="pre">Modules</span></code>, <code class="docutils literal"><span class="pre">Schedulers</span></code>, and <code class="docutils literal"><span class="pre">Agents</span></code>. The source code for this and all of the other tutorials are included in the <code class="docutils literal"><span class="pre">BriCA1/python/examples</span></code> directory so make sure to check them out.</p>
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>Before starting to write a full featured cognitive architecture there are a number of core concepts you need to know. Here we cover the very basics: <code class="docutils literal notranslate"><span class="pre">Components</span></code>, <code class="docutils literal notranslate"><span class="pre">Modules</span></code>, <code class="docutils literal notranslate"><span class="pre">Schedulers</span></code>, and <code class="docutils literal notranslate"><span class="pre">Agents</span></code>. The source code for this and all of the other tutorials are included in the <code class="docutils literal notranslate"><span class="pre">BriCA1/python/examples</span></code> directory so make sure to check them out.</p>
 <div class="section" id="components">
-<h3>Components<a class="headerlink" href="#components" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>The most fundamental building blocks for a BriCA agent are the <code class="docutils literal"><span class="pre">Components</span></code>. A single component has an input port array, output port array, internal states, and a <code class="docutils literal"><span class="pre">fire()</span></code> method which defines its behaviour. For example, if you want to stack a number of denoising autoencoders to perform a trivial MNIST digit classification, you might want to define a <code class="docutils literal"><span class="pre">AutoencoderComponent</span></code> class which implements an autoencoder internally and trains itself based on the input data. In this case, the <code class="docutils literal"><span class="pre">fire()</span></code> method should have some code for online training and <em>encoding</em> the input to the learnt representation. In order to stack these autoencoders, input ports may be connected to output ports which are synchronized on different timings based on which <code class="docutils literal"><span class="pre">Scheduler</span></code> is being used. An actual implementation of the autoencoder will appear in the &#8220;Stacked Denoising Autoencoder&#8221; tutorial. Before we get hands on with complicated <code class="docutils literal"><span class="pre">Components</span></code>, we will start by connecting three simple <code class="docutils literal"><span class="pre">Components</span></code>: <code class="docutils literal"><span class="pre">ConstantComponent</span></code>, <code class="docutils literal"><span class="pre">PipeComponent</span></code>, and <code class="docutils literal"><span class="pre">NullComponent</span></code> which are prepared inside the BriCA library.</p>
-<p>The <code class="docutils literal"><span class="pre">Components</span></code> are pretty much self explanatory. <code class="docutils literal"><span class="pre">ConstantComponent</span></code> will constantly emit a value which is set in the internal state buffer. <code class="docutils literal"><span class="pre">PipeComponent</span></code> will redirect whatever is in the input port array to the output port array, based on registered associations (called a <code class="docutils literal"><span class="pre">map</span></code>). <code class="docutils literal"><span class="pre">NullComponent</span></code> will simply receive a value and do nothing else at all. By connecting these three <code class="docutils literal"><span class="pre">Components</span></code>, we can understand how information travels through the BriCA architecture.</p>
+<h3>Components<a class="headerlink" href="#components" title="Permalink to this headline">¶</a></h3>
+<p>The most fundamental building blocks for a BriCA agent are the <code class="docutils literal notranslate"><span class="pre">Components</span></code>. A single component has an input port array, output port array, internal states, and a <code class="docutils literal notranslate"><span class="pre">fire()</span></code> method which defines its behaviour. For example, if you want to stack a number of denoising autoencoders to perform a trivial MNIST digit classification, you might want to define a <code class="docutils literal notranslate"><span class="pre">AutoencoderComponent</span></code> class which implements an autoencoder internally and trains itself based on the input data. In this case, the <code class="docutils literal notranslate"><span class="pre">fire()</span></code> method should have some code for online training and <em>encoding</em> the input to the learnt representation. In order to stack these autoencoders, input ports may be connected to output ports which are synchronized on different timings based on which <code class="docutils literal notranslate"><span class="pre">Scheduler</span></code> is being used. An actual implementation of the autoencoder will appear in the “Stacked Denoising Autoencoder” tutorial. Before we get hands on with complicated <code class="docutils literal notranslate"><span class="pre">Components</span></code>, we will start by connecting three simple <code class="docutils literal notranslate"><span class="pre">Components</span></code>: <code class="docutils literal notranslate"><span class="pre">ConstantComponent</span></code>, <code class="docutils literal notranslate"><span class="pre">PipeComponent</span></code>, and <code class="docutils literal notranslate"><span class="pre">NullComponent</span></code> which are prepared inside the BriCA library.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Components</span></code> are pretty much self explanatory. <code class="docutils literal notranslate"><span class="pre">ConstantComponent</span></code> will constantly emit a value which is set in the internal state buffer. <code class="docutils literal notranslate"><span class="pre">PipeComponent</span></code> will redirect whatever is in the input port array to the output port array, based on registered associations (called a <code class="docutils literal notranslate"><span class="pre">map</span></code>). <code class="docutils literal notranslate"><span class="pre">NullComponent</span></code> will simply receive a value and do nothing else at all. By connecting these three <code class="docutils literal notranslate"><span class="pre">Components</span></code>, we can understand how information travels through the BriCA architecture.</p>
 <p>First, start by importing the BriCA and NumPy libraries.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">brica1</span>
 </pre></div>
 </div>
-<p>This will import all submodules into the <code class="docutils literal"><span class="pre">brica1</span></code> namespace. Next, instantiate the three <code class="docutils literal"><span class="pre">Components</span></code>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">ConstantComponent</span><span class="p">()</span>
+<p>This will import all submodules into the <code class="docutils literal notranslate"><span class="pre">brica1</span></code> namespace. Next, instantiate the three <code class="docutils literal notranslate"><span class="pre">Components</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">ConstantComponent</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">PipeComponent</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CompC</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">NullComponent</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Create the in/out ports for passing the information.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">make_out_port</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">make_in_port</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">make_out_port</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompC</span><span class="o">.</span><span class="n">make_in_port</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">make_out_port</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">make_in_port</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">make_out_port</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompC</span><span class="o">.</span><span class="n">make_in_port</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>To connect these <code class="docutils literal"><span class="pre">Components</span></code>, either the <code class="docutils literal"><span class="pre">brica1.connect()</span></code> method or <code class="docutils literal"><span class="pre">brica1.Component.connect()</span></code> method can be called. The former is highly suggested as it is syntactically intuitive. The out-port of the first <code class="docutils literal"><span class="pre">Component</span></code> is connected to the in-port of the second <code class="docutils literal"><span class="pre">Component</span></code>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">brica1</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">CompA</span><span class="p">,</span> <span class="s">&quot;out&quot;</span><span class="p">),</span> <span class="p">(</span><span class="n">CompB</span><span class="p">,</span> <span class="s">&quot;in&quot;</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">brica1</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">CompB</span><span class="p">,</span> <span class="s">&quot;out&quot;</span><span class="p">),</span> <span class="p">(</span><span class="n">CompC</span><span class="p">,</span> <span class="s">&quot;in&quot;</span><span class="p">))</span>
+<p>To connect these <code class="docutils literal notranslate"><span class="pre">Components</span></code>, either the <code class="docutils literal notranslate"><span class="pre">brica1.connect()</span></code> method or <code class="docutils literal notranslate"><span class="pre">brica1.Component.connect()</span></code> method can be called. The former is highly suggested as it is syntactically intuitive. The out-port of the first <code class="docutils literal notranslate"><span class="pre">Component</span></code> is connected to the in-port of the second <code class="docutils literal notranslate"><span class="pre">Component</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">brica1</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">CompA</span><span class="p">,</span> <span class="s2">&quot;out&quot;</span><span class="p">),</span> <span class="p">(</span><span class="n">CompB</span><span class="p">,</span> <span class="s2">&quot;in&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">brica1</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">CompB</span><span class="p">,</span> <span class="s2">&quot;out&quot;</span><span class="p">),</span> <span class="p">(</span><span class="n">CompC</span><span class="p">,</span> <span class="s2">&quot;in&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>Now see what values are in the ports of the <code class="docutils literal"><span class="pre">Components</span></code>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<p>Now see what values are in the ports of the <code class="docutils literal notranslate"><span class="pre">Components</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([0, 0, 0], dtype=int16)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([0, 0, 0], dtype=int16)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([0, 0, 0], dtype=int16)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompC</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompC</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([0, 0, 0], dtype=int16)</span>
 </pre></div>
 </div>
-<p>As you can see, every port is zero-initialized. Lets setup <code class="docutils literal"><span class="pre">CompA</span></code> so it will emit a non-zero vector. Because the <code class="docutils literal"><span class="pre">fire()</span></code> method from <code class="docutils literal"><span class="pre">CompA</span></code> will copy values from <code class="docutils literal"><span class="pre">CompA.states</span></code> into <code class="docutils literal"><span class="pre">CompA.results</span></code>, and the contents of <code class="docutils literal"><span class="pre">CompA.results</span></code> will later be dumped to the out-ports, we set the <code class="docutils literal"><span class="pre">CompA.states[&quot;out&quot;]</span></code> to the desired value.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<p>As you can see, every port is zero-initialized. Lets setup <code class="docutils literal notranslate"><span class="pre">CompA</span></code> so it will emit a non-zero vector. Because the <code class="docutils literal notranslate"><span class="pre">fire()</span></code> method from <code class="docutils literal notranslate"><span class="pre">CompA</span></code> will copy values from <code class="docutils literal notranslate"><span class="pre">CompA.states</span></code> into <code class="docutils literal notranslate"><span class="pre">CompA.results</span></code>, and the contents of <code class="docutils literal notranslate"><span class="pre">CompA.results</span></code> will later be dumped to the out-ports, we set the <code class="docutils literal notranslate"><span class="pre">CompA.states[&quot;out&quot;]</span></code> to the desired value.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>So now when we call <code class="docutils literal"><span class="pre">CompA.fire()</span></code>, you can see that <code class="docutils literal"><span class="pre">CompA.states[&quot;out&quot;]</span></code> is copied to <code class="docutils literal"><span class="pre">CompA.results[&quot;out&quot;]</span></code>, but not to the out-port.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">fire</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">get_result</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">)</span>
+<p>So now when we call <code class="docutils literal notranslate"><span class="pre">CompA.fire()</span></code>, you can see that <code class="docutils literal notranslate"><span class="pre">CompA.states[&quot;out&quot;]</span></code> is copied to <code class="docutils literal notranslate"><span class="pre">CompA.results[&quot;out&quot;]</span></code>, but not to the out-port.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">fire</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">get_result</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span>
 <span class="go">array([1, 2, 3], dtype=int16)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([0, 0, 0], dtype=int16)</span>
 </pre></div>
 </div>
-<p>Calling the <code class="docutils literal"><span class="pre">CompA.output()</span></code> method will flush the contents of <code class="docutils literal"><span class="pre">CompA.results[&quot;out&quot;]</span></code> to the out-port with the ID <code class="docutils literal"><span class="pre">&quot;out&quot;</span></code>. The <code class="docutils literal"><span class="pre">output()</span></code> method requires a time passed as an argument.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">get_result</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">)</span>
+<p>Calling the <code class="docutils literal notranslate"><span class="pre">CompA.output()</span></code> method will flush the contents of <code class="docutils literal notranslate"><span class="pre">CompA.results[&quot;out&quot;]</span></code> to the out-port with the ID <code class="docutils literal notranslate"><span class="pre">&quot;out&quot;</span></code>. The <code class="docutils literal notranslate"><span class="pre">output()</span></code> method requires a time passed as an argument.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">get_result</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span>
 <span class="go">array([1, 2, 3], dtype=int16)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([1, 2, 3], dtype=int16)</span>
 </pre></div>
 </div>
-<p>However, the information is not yet passed to <code class="docutils literal"><span class="pre">CompB</span></code>. In order to pass the contents of <code class="docutils literal"><span class="pre">CompA</span></code> out-ports to <code class="docutils literal"><span class="pre">CompB</span></code> in-ports, <code class="docutils literal"><span class="pre">CompB.input()</span></code> must be called. This will also automatically copy the values of in-ports to <code class="docutils literal"><span class="pre">CompB.inputs</span></code>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<p>However, the information is not yet passed to <code class="docutils literal notranslate"><span class="pre">CompB</span></code>. In order to pass the contents of <code class="docutils literal notranslate"><span class="pre">CompA</span></code> out-ports to <code class="docutils literal notranslate"><span class="pre">CompB</span></code> in-ports, <code class="docutils literal notranslate"><span class="pre">CompB.input()</span></code> must be called. This will also automatically copy the values of in-ports to <code class="docutils literal notranslate"><span class="pre">CompB.inputs</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([0, 0, 0], dtype=int16)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s">&quot;in&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">]</span>
 <span class="gt">Traceback (most recent call last):</span>
   File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
 <span class="gr">KeyError</span>: <span class="n">&#39;in&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([1, 2, 3], dtype=int16)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s">&quot;in&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">]</span>
 <span class="go">array([1, 2, 3], dtype=int16)</span>
 </pre></div>
 </div>
-<p>As <code class="docutils literal"><span class="pre">CompB</span></code> implements a method to bypass the inputs to outputs, calling <code class="docutils literal"><span class="pre">CompB.fire()</span></code> should perform this task... right? Actually, this is not the case.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_result</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">)</span>
+<p>As <code class="docutils literal notranslate"><span class="pre">CompB</span></code> implements a method to bypass the inputs to outputs, calling <code class="docutils literal notranslate"><span class="pre">CompB.fire()</span></code> should perform this task… right? Actually, this is not the case.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_result</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
   File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
   File <span class="nb">&quot;/usr/local/lib/python2.7/site-packages/brica1-1.0.0dev_r0-py2.7.egg/brica1/component.py&quot;</span>, line <span class="m">147</span>, in <span class="n">get_result</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span>
 <span class="gr">KeyError</span>: <span class="n">&#39;out&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([0, 0, 0], dtype=int16)</span>
 </pre></div>
 </div>
-<p>This is because <code class="docutils literal"><span class="pre">CompB</span></code> does not yet know which input should be mapped to which output. We set an association with <code class="docutils literal"><span class="pre">CompB.set_map()</span></code> method so it can now map <code class="docutils literal"><span class="pre">CompB.inputs[&quot;in&quot;]</span></code> to <code class="docutils literal"><span class="pre">CompB.outputs[&quot;out&quot;]</span></code>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">set_map</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">,</span> <span class="s">&quot;out&quot;</span><span class="p">)</span>
+<p>This is because <code class="docutils literal notranslate"><span class="pre">CompB</span></code> does not yet know which input should be mapped to which output. We set an association with <code class="docutils literal notranslate"><span class="pre">CompB.set_map()</span></code> method so it can now map <code class="docutils literal notranslate"><span class="pre">CompB.inputs[&quot;in&quot;]</span></code> to <code class="docutils literal notranslate"><span class="pre">CompB.outputs[&quot;out&quot;]</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">set_map</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="s2">&quot;out&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">fire</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_result</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_result</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span>
 <span class="go">array([1, 2, 3], dtype=int16)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([0, 0, 0], dtype=int16)</span>
 </pre></div>
 </div>
-<p>And like before, call <code class="docutils literal"><span class="pre">CompB.output()</span></code>, then <code class="docutils literal"><span class="pre">CompC.input()</span></code> to pass the information to <code class="docutils literal"><span class="pre">CompC</span></code>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_result</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">)</span>
+<p>And like before, call <code class="docutils literal notranslate"><span class="pre">CompB.output()</span></code>, then <code class="docutils literal notranslate"><span class="pre">CompC.input()</span></code> to pass the information to <code class="docutils literal notranslate"><span class="pre">CompC</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_result</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span>
 <span class="go">array([1, 2, 3], dtype=int16)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([1, 2, 3], dtype=int16)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CompC</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompC</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompC</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([1, 2, 3], dtype=int16)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompC</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s">&quot;in&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompC</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">]</span>
 <span class="go">array([1, 2, 3], dtype=int16)</span>
 </pre></div>
 </div>
-<p>In practice, <code class="docutils literal"><span class="pre">input()</span></code>, <code class="docutils literal"><span class="pre">fire()</span></code>, and <code class="docutils literal"><span class="pre">output()</span></code> methods are called by the <code class="docutils literal"><span class="pre">Scheduler</span></code> and handled automatically. Wwhen designing a <code class="docutils literal"><span class="pre">Component</span></code>, keep in mind what in/out port names to use and how/when these data are visible from the <code class="docutils literal"><span class="pre">fire()</span></code> method. We highly suggest taking a look at <code class="docutils literal"><span class="pre">brica1/component.py</span></code> so you can see what the three <code class="docutils literal"><span class="pre">Components</span></code> used here do internally.</p>
+<p>In practice, <code class="docutils literal notranslate"><span class="pre">input()</span></code>, <code class="docutils literal notranslate"><span class="pre">fire()</span></code>, and <code class="docutils literal notranslate"><span class="pre">output()</span></code> methods are called by the <code class="docutils literal notranslate"><span class="pre">Scheduler</span></code> and handled automatically. Wwhen designing a <code class="docutils literal notranslate"><span class="pre">Component</span></code>, keep in mind what in/out port names to use and how/when these data are visible from the <code class="docutils literal notranslate"><span class="pre">fire()</span></code> method. We highly suggest taking a look at <code class="docutils literal notranslate"><span class="pre">brica1/component.py</span></code> so you can see what the three <code class="docutils literal notranslate"><span class="pre">Components</span></code> used here do internally.</p>
 </div>
 <div class="section" id="modules">
-<h3>Modules<a class="headerlink" href="#modules" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>When you want to build a complex network of <code class="docutils literal"><span class="pre">Components</span></code>, there may be times where you would like to group together multiple <code class="docutils literal"><span class="pre">Components</span></code> into a single container. A <code class="docutils literal"><span class="pre">Module</span></code> is a class that serves such task. Assuming you are continuing from the tutorial above, let us start by instantiating a <code class="docutils literal"><span class="pre">Module</span></code>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ModA</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">Module</span><span class="p">()</span>
+<h3>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h3>
+<p>When you want to build a complex network of <code class="docutils literal notranslate"><span class="pre">Components</span></code>, there may be times where you would like to group together multiple <code class="docutils literal notranslate"><span class="pre">Components</span></code> into a single container. A <code class="docutils literal notranslate"><span class="pre">Module</span></code> is a class that serves such task. Assuming you are continuing from the tutorial above, let us start by instantiating a <code class="docutils literal notranslate"><span class="pre">Module</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ModA</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">Module</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>The basic functionalities of a <code class="docutils literal"><span class="pre">Module</span></code> are identical to <code class="docutils literal"><span class="pre">Components</span></code>: they have input/output port arrays and can be connected via the same interface. The biggest difference is that <code class="docutils literal"><span class="pre">Modules</span></code> can contain <code class="docutils literal"><span class="pre">Modules</span></code> and <code class="docutils literal"><span class="pre">Components</span></code> to create hierarchical structures. The following code adds the <code class="docutils literal"><span class="pre">Components</span></code> defined above to <code class="docutils literal"><span class="pre">ModA</span></code>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ModA</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="s">&quot;CompA&quot;</span><span class="p">,</span> <span class="n">CompA</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ModA</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="s">&quot;CompB&quot;</span><span class="p">,</span> <span class="n">CompB</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ModA</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="s">&quot;CompC&quot;</span><span class="p">,</span> <span class="n">CompC</span><span class="p">)</span>
+<p>The basic functionalities of a <code class="docutils literal notranslate"><span class="pre">Module</span></code> are identical to <code class="docutils literal notranslate"><span class="pre">Components</span></code>: they have input/output port arrays and can be connected via the same interface. The biggest difference is that <code class="docutils literal notranslate"><span class="pre">Modules</span></code> can contain <code class="docutils literal notranslate"><span class="pre">Modules</span></code> and <code class="docutils literal notranslate"><span class="pre">Components</span></code> to create hierarchical structures. The following code adds the <code class="docutils literal notranslate"><span class="pre">Components</span></code> defined above to <code class="docutils literal notranslate"><span class="pre">ModA</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ModA</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="s2">&quot;CompA&quot;</span><span class="p">,</span> <span class="n">CompA</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ModA</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="s2">&quot;CompB&quot;</span><span class="p">,</span> <span class="n">CompB</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ModA</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="s2">&quot;CompC&quot;</span><span class="p">,</span> <span class="n">CompC</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ModA</span><span class="o">.</span><span class="n">get_all_components</span><span class="p">()</span>
 <span class="go">[&lt;brica1.component.NullComponent object at 0x10d156d10&gt;, &lt;brica1.component.PipeComponent object at 0x10d156ed0&gt;, &lt;brica1.component.ConstantComponent object at 0x10d156c50&gt;]</span>
 </pre></div>
 </div>
-<p>The top-level <code class="docutils literal"><span class="pre">Module</span></code> which encapsulates an entire cognitive architecture is called an <code class="docutils literal"><span class="pre">Agent</span></code>, which is combined with the <code class="docutils literal"><span class="pre">Scheduler</span></code> to adapt to various tasks. We will go over <code class="docutils literal"><span class="pre">Schedulers</span></code> and <code class="docutils literal"><span class="pre">Agents</span></code> more in detail below.</p>
+<p>The top-level <code class="docutils literal notranslate"><span class="pre">Module</span></code> which encapsulates an entire cognitive architecture is called an <code class="docutils literal notranslate"><span class="pre">Agent</span></code>, which is combined with the <code class="docutils literal notranslate"><span class="pre">Scheduler</span></code> to adapt to various tasks. We will go over <code class="docutils literal notranslate"><span class="pre">Schedulers</span></code> and <code class="docutils literal notranslate"><span class="pre">Agents</span></code> more in detail below.</p>
 </div>
 <div class="section" id="schedulers">
-<h3>Schedulers<a class="headerlink" href="#schedulers" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>There are four types of <code class="docutils literal"><span class="pre">Schedulers</span></code> planned and two of them currently implemented: the <code class="docutils literal"><span class="pre">VirtualTimeSyncScheduler</span></code> sychronously calls <code class="docutils literal"><span class="pre">input()</span></code>, <code class="docutils literal"><span class="pre">fire()</span></code>, then <code class="docutils literal"><span class="pre">output()</span></code> methods of all encapsulated <code class="docutils literal"><span class="pre">Components</span></code> in order. <code class="docutils literal"><span class="pre">VirtualTimeScheduler</span></code> calls these methods according to the <code class="docutils literal"><span class="pre">offset</span></code> and <code class="docutils literal"><span class="pre">interval</span></code> property values of each <code class="docutils literal"><span class="pre">Component</span></code>.</p>
+<h3>Schedulers<a class="headerlink" href="#schedulers" title="Permalink to this headline">¶</a></h3>
+<p>There are four types of <code class="docutils literal notranslate"><span class="pre">Schedulers</span></code> planned and two of them currently implemented: the <code class="docutils literal notranslate"><span class="pre">VirtualTimeSyncScheduler</span></code> sychronously calls <code class="docutils literal notranslate"><span class="pre">input()</span></code>, <code class="docutils literal notranslate"><span class="pre">fire()</span></code>, then <code class="docutils literal notranslate"><span class="pre">output()</span></code> methods of all encapsulated <code class="docutils literal notranslate"><span class="pre">Components</span></code> in order. <code class="docutils literal notranslate"><span class="pre">VirtualTimeScheduler</span></code> calls these methods according to the <code class="docutils literal notranslate"><span class="pre">offset</span></code> and <code class="docutils literal notranslate"><span class="pre">interval</span></code> property values of each <code class="docutils literal notranslate"><span class="pre">Component</span></code>.</p>
 </div>
 <div class="section" id="agents">
-<h3>Agents<a class="headerlink" href="#agents" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>Beacause the implementation is simpler, we will show some examples for using the <code class="docutils literal"><span class="pre">VirtualTimeSyncScheduler</span></code> in this tutorial. Instantiate the <code class="docutils literal"><span class="pre">Scheduler</span></code> and pass it to the <code class="docutils literal"><span class="pre">Agent</span></code> constructor.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">VirtualTimeSyncScheduler</span><span class="p">()</span>
+<h3>Agents<a class="headerlink" href="#agents" title="Permalink to this headline">¶</a></h3>
+<p>First re-setup the <code class="docutils literal notranslate"><span class="pre">Components</span></code> and a <code class="docutils literal notranslate"><span class="pre">Module</span></code> to pass an <code class="docutils literal notranslate"><span class="pre">Agent</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">ConstantComponent</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">PipeComponent</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompC</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">NullComponent</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">set_map</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="s2">&quot;out&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">make_out_port</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">make_in_port</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">make_out_port</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompC</span><span class="o">.</span><span class="n">make_in_port</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">brica1</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">CompA</span><span class="p">,</span> <span class="s2">&quot;out&quot;</span><span class="p">),</span> <span class="p">(</span><span class="n">CompB</span><span class="p">,</span> <span class="s2">&quot;in&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">brica1</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">CompB</span><span class="p">,</span> <span class="s2">&quot;out&quot;</span><span class="p">),</span> <span class="p">(</span><span class="n">CompC</span><span class="p">,</span> <span class="s2">&quot;in&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ModA</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">Module</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ModA</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="s2">&quot;CompA&quot;</span><span class="p">,</span> <span class="n">CompA</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ModA</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="s2">&quot;CompB&quot;</span><span class="p">,</span> <span class="n">CompB</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ModA</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="s2">&quot;CompC&quot;</span><span class="p">,</span> <span class="n">CompC</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">agent</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">Agent</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Beacause the implementation is simpler, we will show some examples for using the <code class="docutils literal notranslate"><span class="pre">VirtualTimeSyncScheduler</span></code> in this tutorial.  Pass the <code class="docutils literal notranslate"><span class="pre">Agent</span></code> to the <code class="docutils literal notranslate"><span class="pre">Scheduler</span></code> constructor.  Adding the <code class="docutils literal notranslate"><span class="pre">Module</span></code> to the <code class="docutils literal notranslate"><span class="pre">Agent</span></code> beforehand will automatically make the <code class="docutils literal notranslate"><span class="pre">Scheduler</span></code> aware of all <code class="docutils literal notranslate"><span class="pre">Components</span></code> contained in the <code class="docutils literal notranslate"><span class="pre">Module</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">agent</span><span class="o">.</span><span class="n">add_submodule</span><span class="p">(</span><span class="s2">&quot;ModA&quot;</span><span class="p">,</span> <span class="n">ModA</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">VirtualTimeSyncScheduler</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">agent</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">Agent</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Adding a <code class="docutils literal"><span class="pre">Module</span></code> to the <code class="docutils literal"><span class="pre">Agent</span></code> will automatically make the <code class="docutils literal"><span class="pre">Scheduler</span></code> aware of all <code class="docutils literal"><span class="pre">Components</span></code> contained in the <code class="docutils literal"><span class="pre">Module</span></code>. First re-setup the <code class="docutils literal"><span class="pre">Components</span></code> and <code class="docutils literal"><span class="pre">Modules</span></code>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">ConstantComponent</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">PipeComponent</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompC</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">NullComponent</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">set_map</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">,</span> <span class="s">&quot;out&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">make_out_port</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">make_in_port</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">make_out_port</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompC</span><span class="o">.</span><span class="n">make_in_port</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">brica1</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">CompA</span><span class="p">,</span> <span class="s">&quot;out&quot;</span><span class="p">),</span> <span class="p">(</span><span class="n">CompB</span><span class="p">,</span> <span class="s">&quot;in&quot;</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">brica1</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">CompB</span><span class="p">,</span> <span class="s">&quot;out&quot;</span><span class="p">),</span> <span class="p">(</span><span class="n">CompC</span><span class="p">,</span> <span class="s">&quot;in&quot;</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ModA</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">Module</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ModA</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="s">&quot;CompA&quot;</span><span class="p">,</span> <span class="n">CompA</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ModA</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="s">&quot;CompB&quot;</span><span class="p">,</span> <span class="n">CompB</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ModA</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="s">&quot;CompC&quot;</span><span class="p">,</span> <span class="n">CompC</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">agent</span><span class="o">.</span><span class="n">add_submodule</span><span class="p">(</span><span class="s">&quot;ModA&quot;</span><span class="p">,</span> <span class="n">ModA</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>First check that all ports for every <code class="docutils literal"><span class="pre">Component</span></code> is initialized with a zero vector.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<p>First check that all ports for every <code class="docutils literal notranslate"><span class="pre">Component</span></code> is initialized with a zero vector.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([0, 0, 0], dtype=int16)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([0, 0, 0], dtype=int16)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([0, 0, 0], dtype=int16)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompC</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompC</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([0, 0, 0], dtype=int16)</span>
 </pre></div>
 </div>
-<p>Call the <code class="docutils literal"><span class="pre">step()</span></code> method of <code class="docutils literal"><span class="pre">Agent</span></code> to update the <code class="docutils literal"><span class="pre">Components</span></code>. Because the <code class="docutils literal"><span class="pre">Scheduler</span></code> given to the <code class="docutils literal"><span class="pre">Agent</span></code> is <code class="docutils literal"><span class="pre">VirtualTimeSyncScheduler</span></code>, the <code class="docutils literal"><span class="pre">input()</span></code> method for all <code class="docutils literal"><span class="pre">Components</span></code> are called first, then <code class="docutils literal"><span class="pre">fire()</span></code>, and finally the <code class="docutils literal"><span class="pre">output()</span></code>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">agent</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<p>Call the <code class="docutils literal notranslate"><span class="pre">step()</span></code> method of <code class="docutils literal notranslate"><span class="pre">Scheduler`</span></code> to update the <code class="docutils literal notranslate"><span class="pre">Components</span></code>.  Because the <code class="docutils literal notranslate"><span class="pre">Scheduler</span></code> given to the <code class="docutils literal notranslate"><span class="pre">Agent</span></code> is <code class="docutils literal notranslate"><span class="pre">VirtualTimeSyncScheduler</span></code>, the <code class="docutils literal notranslate"><span class="pre">input()</span></code> method for all <code class="docutils literal notranslate"><span class="pre">Components</span></code> are called first, then <code class="docutils literal notranslate"><span class="pre">fire()</span></code>, and finally the <code class="docutils literal notranslate"><span class="pre">output()</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
 <span class="go">1.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([1, 2, 3], dtype=int16)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([0, 0, 0], dtype=int16)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([0, 0, 0], dtype=int16)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompC</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompC</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([0, 0, 0], dtype=int16)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">agent</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
 <span class="go">2.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([1, 2, 3], dtype=int16)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([1, 2, 3], dtype=int16)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([1, 2, 3], dtype=int16)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompC</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompC</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([0, 0, 0], dtype=int16)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">agent</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
 <span class="go">3.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([1, 2, 3], dtype=int16)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([1, 2, 3], dtype=int16)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([1, 2, 3], dtype=int16)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CompC</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CompC</span><span class="o">.</span><span class="n">get_in_port</span><span class="p">(</span><span class="s2">&quot;in&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([1, 2, 3], dtype=int16)</span>
 </pre></div>
 </div>
-<p>The very basics of BriCA V1 have been covered here, proceed to the &#8216;<code class="docutils literal"><span class="pre">Component</span></code> Definition&#8217; tutorial to learn how to create your own <code class="docutils literal"><span class="pre">Components</span></code>. This specific tutorial will implement a support vector machine (SVM) and random forest (RF) classifiers and compare its output.</p>
 </div>
 </div>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">目次</a></h3>
+  <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Introduction</a><ul>
 <li><a class="reference internal" href="#what-is-brica">What is BriCA?</a></li>
@@ -301,51 +293,49 @@
 </li>
 </ul>
 
-  <h4>前のトピックへ</h4>
+  <h4>Previous topic</h4>
   <p class="topless"><a href="../brica1/brica1.html"
-                        title="前の章へ">brica1 package</a></p>
+                        title="previous chapter">brica1 package</a></p>
   <div role="note" aria-label="source link">
-    <h3>このページ</h3>
+    <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/tutorial/introduction.txt"
-            rel="nofollow">ソースコードを表示</a></li>
+      <li><a href="../_sources/tutorial/introduction.rst.txt"
+            rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>クイック検索</h3>
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="検索" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    モジュール、クラス、または関数名を入力してください
-    </p>
+    </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
     <div class="related" role="navigation" aria-label="related navigation">
-      <h3>ナビゲーション</h3>
+      <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="総合索引"
-             >索引</a></li>
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Pythonモジュール索引"
-             >モジュール</a> |</li>
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="../brica1/brica1.html" title="brica1 package"
-             >前へ</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">BriCA1 1.0.0 ドキュメント</a> &raquo;</li> 
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">BriCA1 1.0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Introduction</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2015, ktnyt.
-      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1 で生成しました。
+        &#169; Copyright 2015, ktnyt.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.1.
     </div>
   </body>
 </html>

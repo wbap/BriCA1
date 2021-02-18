@@ -1,44 +1,34 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>brica1.component &mdash; BriCA1 1.0.0 ドキュメント</title>
-    
-    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>brica1.component &#8212; BriCA1 1.0.1 documentation</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../',
-        VERSION:     '1.0.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/translations.js"></script>
-    <link rel="top" title="BriCA1 1.0.0 ドキュメント" href="../../index.html" />
-    <link rel="up" title="モジュールコード" href="../index.html" /> 
-  </head>
-  <body role="document">
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
-      <h3>ナビゲーション</h3>
+      <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="総合索引"
-             accesskey="I">索引</a></li>
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../../py-modindex.html" title="Pythonモジュール索引"
-             >モジュール</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">BriCA1 1.0.0 ドキュメント</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">モジュールコード</a> &raquo;</li> 
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">BriCA1 1.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">brica1.component</a></li> 
       </ul>
     </div>  
 
@@ -47,9 +37,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <h1>brica1.component のソースコード</h1><div class="highlight"><pre>
-<span class="c"># -*- coding: utf-8 -*-</span>
-
+  <h1>Source code for brica1.component</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">component.py</span>
 <span class="sd">=====</span>
@@ -61,16 +50,19 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Component&quot;</span><span class="p">,</span> <span class="s">&quot;ComponentSet&quot;</span><span class="p">,</span> <span class="s">&quot;ConstantComponent&quot;</span><span class="p">,</span> <span class="s">&quot;PipeComponent&quot;</span><span class="p">,</span> <span class="s">&quot;NullComponent&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Component&quot;</span><span class="p">,</span> <span class="s2">&quot;ComponentSet&quot;</span><span class="p">,</span> <span class="s2">&quot;ConstantComponent&quot;</span><span class="p">,</span> <span class="s2">&quot;PipeComponent&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NullComponent&quot;</span>
+<span class="p">]</span>
 
 <span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABCMeta</span><span class="p">,</span> <span class="n">abstractmethod</span>
-<span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
 
-<span class="c"># BriCA imports</span>
-<span class="kn">from</span> <span class="nn">unit</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="c1"># BriCA imports</span>
+<span class="kn">from</span> <span class="nn">.unit</span> <span class="kn">import</span> <span class="n">Unit</span>
 
-<div class="viewcode-block" id="Component"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.component.Component">[ドキュメント]</a><span class="k">class</span> <span class="nc">Component</span><span class="p">(</span><span class="n">Unit</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Component"><a class="viewcode-back" href="../../tutorial/brica1/brica1.html#brica1.component.Component">[docs]</a><span class="k">class</span> <span class="nc">Component</span><span class="p">(</span><span class="n">Unit</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    `Component` is an abstract class for implementation units. Subclasses must</span>
 <span class="sd">    override the `fire()` method to specify its implementation. See the sample</span>
@@ -80,7 +72,7 @@
 
     <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">ABCMeta</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Create a new `Component` instance.</span>
 
 <span class="sd">        Args:</span>
@@ -91,21 +83,22 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="nb">super</span><span class="p">(</span><span class="n">Component</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">last_input_time</span> <span class="o">=</span> <span class="mf">0.0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">last_output_time</span> <span class="o">=</span> <span class="mf">0.0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="o">=</span> <span class="mf">0.0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Component</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_input_time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_output_time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="mi">1000</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sleep</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">states</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
 
-    <span class="nd">@abstractmethod</span>
-<div class="viewcode-block" id="Component.fire"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.component.Component.fire">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">fire</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Component.fire"><a class="viewcode-back" href="../../tutorial/brica1/brica1.html#brica1.component.Component.fire">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">fire</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Perform a calculation.</span>
 
 <span class="sd">        Users must override `fire(self)` method to define a new sub-class of</span>
-<span class="sd">        Module. `fire(self)` method implements a function of the form</span>
+<span class="sd">        `Component`. `fire(self)` method implements a function of the form</span>
 
 <span class="sd">          results, states &lt;- fire(in_ports, states)</span>
 
@@ -127,133 +120,145 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">pass</span>
-</div>
-<div class="viewcode-block" id="Component.set_state"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.component.Component.set_state">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">set_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Set a state value for the given ID.</span>
+        <span class="k">pass</span></div>
 
-<span class="sd">        Args:</span>
-<span class="sd">          id (str): a string ID.</span>
-<span class="sd">          v (any): a state value to set.</span>
+<div class="viewcode-block" id="Component.train"><a class="viewcode-back" href="../../tutorial/brica1/brica1.html#brica1.component.Component.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Perform a training iteration</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">          None.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-</div>
-<div class="viewcode-block" id="Component.get_state"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.component.Component.get_state">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="Component.set_state"><a class="viewcode-back" href="../../tutorial/brica1/brica1.html#brica1.component.Component.set_state">[docs]</a>    <span class="k">def</span> <span class="nf">set_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identifier</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Set a state value for the given ID.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          identifier (str): a string ID.</span>
+<span class="sd">          vvalue (any): a state value to set.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">          None.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="n">identifier</span><span class="p">]</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Component.get_state"><a class="viewcode-back" href="../../tutorial/brica1/brica1.html#brica1.component.Component.get_state">[docs]</a>    <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identifier</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Get a state value for the given ID.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">          id (str): a string ID.</span>
+<span class="sd">          identifier (str): a string ID.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">          any: a state value for the given ID.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span>
-</div>
-<div class="viewcode-block" id="Component.clear_state"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.component.Component.clear_state">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">clear_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="n">identifier</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Component.clear_state"><a class="viewcode-back" href="../../tutorial/brica1/brica1.html#brica1.component.Component.clear_state">[docs]</a>    <span class="k">def</span> <span class="nf">clear_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identifier</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Clear a state value for the given ID.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">          id (str): a string ID.</span>
+<span class="sd">          identifier (str): a string ID.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">          None.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span>
-</div>
-<div class="viewcode-block" id="Component.set_result"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.component.Component.set_result">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">set_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="n">identifier</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Component.set_result"><a class="viewcode-back" href="../../tutorial/brica1/brica1.html#brica1.component.Component.set_result">[docs]</a>    <span class="k">def</span> <span class="nf">set_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identifier</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Set a result value for the given ID.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">          id (str): a string ID.</span>
-<span class="sd">          v (any): a result value to set.</span>
+<span class="sd">          identifier (str): a string ID.</span>
+<span class="sd">          value (any): a result value to set.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">          None.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-</div>
-<div class="viewcode-block" id="Component.get_result"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.component.Component.get_result">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">identifier</span><span class="p">]</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Component.get_result"><a class="viewcode-back" href="../../tutorial/brica1/brica1.html#brica1.component.Component.get_result">[docs]</a>    <span class="k">def</span> <span class="nf">get_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identifier</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Get a result value for the given ID.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">          id (str): a string ID.</span>
+<span class="sd">          identifier (str): a string ID.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">          any: a result value for the given ID.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span>
-</div>
-<div class="viewcode-block" id="Component.clear_result"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.component.Component.clear_result">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">clear_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">identifier</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Component.clear_result"><a class="viewcode-back" href="../../tutorial/brica1/brica1.html#brica1.component.Component.clear_result">[docs]</a>    <span class="k">def</span> <span class="nf">clear_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identifier</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Clear a state value for the given ID.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">          id (str): a string ID.</span>
+<span class="sd">          identifier (str): a string ID.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">          None.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span>
-</div>
-<div class="viewcode-block" id="Component.input"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.component.Component.input">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">identifier</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Component.input"><a class="viewcode-back" href="../../tutorial/brica1/brica1.html#brica1.component.Component.input">[docs]</a>    <span class="k">def</span> <span class="nf">input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Obtain inputs from outputs of other Modules.</span>
 
 <span class="sd">        This method collects the outputs of connected modules and sets the</span>
 <span class="sd">        values to the in-ports. It is usually called by the scheduler.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">          time (float): the scheduler&#39;s current time.</span>
+<span class="sd">          time (int): the scheduler&#39;s current time.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">          None.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">for</span> <span class="nb">id</span><span class="p">,</span> <span class="n">in_port</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_ports</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">identifier</span><span class="p">,</span> <span class="n">in_port</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_ports</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">in_port</span><span class="o">.</span><span class="n">sync</span><span class="p">()</span>
             <span class="n">in_port</span><span class="o">.</span><span class="n">invoke_callbacks</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">in_port</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="n">identifier</span><span class="p">]</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">in_port</span><span class="o">.</span><span class="n">buffer</span><span class="p">)</span>
 
-        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_input_time</span> <span class="o">&lt;=</span> <span class="n">time</span><span class="p">,</span> <span class="s">&quot;collect_input() captured a time travel&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">last_input_time</span> <span class="o">=</span> <span class="n">time</span>
-</div>
-<div class="viewcode-block" id="Component.output"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.component.Component.output">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_input_time</span> <span class="o">&lt;=</span> <span class="n">time</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;collect_input() captured a time&quot;</span>
+                                              <span class="s2">&quot; travel&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_input_time</span> <span class="o">=</span> <span class="n">time</span></div>
+
+<div class="viewcode-block" id="Component.output"><a class="viewcode-back" href="../../tutorial/brica1/brica1.html#brica1.component.Component.output">[docs]</a>    <span class="k">def</span> <span class="nf">output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Expose results to `out_ports`</span>
 
 <span class="sd">        This method exposes the computation results from `results` to</span>
 <span class="sd">        `out_ports`. It is usually called by the scheduler.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">          time (float): the scheduler&#39;s current time.</span>
+<span class="sd">          time (int): the scheduler&#39;s current time.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">          None.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">for</span> <span class="nb">id</span><span class="p">,</span> <span class="n">out_port</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_ports</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="nb">id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">:</span>
-                <span class="n">out_port</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">identifier</span><span class="p">,</span> <span class="n">out_port</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_ports</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">identifier</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">:</span>
+                <span class="n">out_port</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">identifier</span><span class="p">]</span>
                 <span class="n">out_port</span><span class="o">.</span><span class="n">invoke_callbacks</span><span class="p">()</span>
 
-        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_output_time</span> <span class="o">&lt;=</span> <span class="n">time</span><span class="p">,</span> <span class="s">&quot;update_output() captured a time travel&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">last_output_time</span> <span class="o">=</span> <span class="n">time</span>
-</div>
-<div class="viewcode-block" id="Component.reset"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.component.Component.reset">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_output_time</span> <span class="o">&lt;=</span> <span class="n">time</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;update_output() captured a&quot;</span>
+                                               <span class="s2">&quot; time travel&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_output_time</span> <span class="o">=</span> <span class="n">time</span></div>
+
+<div class="viewcode-block" id="Component.reset"><a class="viewcode-back" href="../../tutorial/brica1/brica1.html#brica1.component.Component.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Reset the component state</span>
 
 <span class="sd">        This method resets the internal time of the component for reuse.</span>
@@ -266,16 +271,46 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">last_input_time</span> <span class="o">=</span> <span class="mf">0.0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">last_output_time</span> <span class="o">=</span> <span class="mf">0.0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="o">=</span> <span class="mf">0.0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="mf">1.0</span>
-</div></div>
-<div class="viewcode-block" id="ComponentSet"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.component.ComponentSet">[ドキュメント]</a><span class="k">class</span> <span class="nc">ComponentSet</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_input_time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_output_time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="mi">1000</span></div></div>
+
+
+<span class="k">class</span> <span class="nc">FunctorComponent</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    `FunctorComponent` is a wrapper for simple component definition by allowing</span>
+<span class="sd">    users to define the behavior without overriding the fire method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">use_state</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Create a new `FunctorComponent` instance.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          function (callable): a function to implement to this component.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">          FunctorComponent: a new `FunctorComponent` instance.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">FunctorComponent</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">function</span> <span class="o">=</span> <span class="n">function</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_state</span> <span class="o">=</span> <span class="n">use_state</span>
+
+    <span class="k">def</span> <span class="nf">fire</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_state</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ComponentSet"><a class="viewcode-back" href="../../tutorial/brica1/brica1.html#brica1.component.ComponentSet">[docs]</a><span class="k">class</span> <span class="nc">ComponentSet</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    `ComponentSet` groups components to fire sequentially</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Create a new `ComponentSet` instance.</span>
 
 <span class="sd">        Args:</span>
@@ -286,16 +321,16 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="nb">super</span><span class="p">(</span><span class="n">ComponentSet</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ComponentSet</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">components</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">priorities</span> <span class="o">=</span> <span class="p">{}</span>
 
-<div class="viewcode-block" id="ComponentSet.add_component"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.component.ComponentSet.add_component">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">add_component</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">component</span><span class="p">,</span> <span class="n">priority</span><span class="p">):</span>
+<div class="viewcode-block" id="ComponentSet.add_component"><a class="viewcode-back" href="../../tutorial/brica1/brica1.html#brica1.component.ComponentSet.add_component">[docs]</a>    <span class="k">def</span> <span class="nf">add_component</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identifier</span><span class="p">,</span> <span class="n">component</span><span class="p">,</span> <span class="n">priority</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Add a `Component` for given ID and priority</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">          id (str): a string ID.</span>
-<span class="sd">          component (Component): a component to add for `id`.</span>
+<span class="sd">          identifier (str): a string ID.</span>
+<span class="sd">          component (Component): a component to add for `identifier`.</span>
 <span class="sd">          priority (int): a priority value for scheduling.</span>
 
 <span class="sd">        Returns:</span>
@@ -303,10 +338,23 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">component</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">priorities</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">priority</span>
-</div>
-<div class="viewcode-block" id="ComponentSet.fire"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.component.ComponentSet.fire">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">fire</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">identifier</span><span class="p">]</span> <span class="o">=</span> <span class="n">component</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">priorities</span><span class="p">[</span><span class="n">identifier</span><span class="p">]</span> <span class="o">=</span> <span class="n">priority</span></div>
+
+<div class="viewcode-block" id="ComponentSet.get_component"><a class="viewcode-back" href="../../tutorial/brica1/brica1.html#brica1.component.ComponentSet.get_component">[docs]</a>    <span class="k">def</span> <span class="nf">get_component</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identifier</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Get a `Component` for given ID.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          identifier (str): a string ID.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">          Component: a `Component` corresponding to the ID.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">identifier</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="ComponentSet.fire"><a class="viewcode-back" href="../../tutorial/brica1/brica1.html#brica1.component.ComponentSet.fire">[docs]</a>    <span class="k">def</span> <span class="nf">fire</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Fire sub-components based on priority</span>
 
 <span class="sd">        Args:</span>
@@ -317,20 +365,24 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">order</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">priorities</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="nb">id</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">priorities</span><span class="p">[</span><span class="nb">id</span><span class="p">])</span>
-        <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">order</span><span class="p">:</span>
-            <span class="n">component</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">priorities</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span>
+            <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">identifier</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">priorities</span><span class="p">[</span><span class="n">identifier</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">identifier</span> <span class="ow">in</span> <span class="n">order</span><span class="p">:</span>
+            <span class="n">component</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">identifier</span><span class="p">]</span>
             <span class="n">component</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">last_input_time</span><span class="p">)</span>
             <span class="n">component</span><span class="o">.</span><span class="n">fire</span><span class="p">()</span>
-            <span class="n">component</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">last_output_time</span><span class="p">)</span>
-</div></div>
-<div class="viewcode-block" id="ConstantComponent"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.component.ConstantComponent">[ドキュメント]</a><span class="k">class</span> <span class="nc">ConstantComponent</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+            <span class="n">component</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">last_output_time</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="ConstantComponent"><a class="viewcode-back" href="../../tutorial/brica1/brica1.html#brica1.component.ConstantComponent">[docs]</a><span class="k">class</span> <span class="nc">ConstantComponent</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    `ConstantComponent` copies states to out ports.</span>
 
 <span class="sd">    Use `set_state` to define the output of this Module.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Create a new `ConstantComponent` instance.</span>
 
 <span class="sd">        Args:</span>
@@ -341,9 +393,9 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="nb">super</span><span class="p">(</span><span class="n">ConstantComponent</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ConstantComponent</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
-<div class="viewcode-block" id="ConstantComponent.fire"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.component.ConstantComponent.fire">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">fire</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ConstantComponent.fire"><a class="viewcode-back" href="../../tutorial/brica1/brica1.html#brica1.component.ConstantComponent.fire">[docs]</a>    <span class="k">def</span> <span class="nf">fire</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Copy state contents to results.</span>
 
 <span class="sd">        Args:</span>
@@ -354,15 +406,16 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span>
-</div></div>
-<div class="viewcode-block" id="PipeComponent"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.component.PipeComponent">[ドキュメント]</a><span class="k">class</span> <span class="nc">PipeComponent</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">identifier</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">identifier</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="n">identifier</span><span class="p">]</span></div></div>
+
+
+<div class="viewcode-block" id="PipeComponent"><a class="viewcode-back" href="../../tutorial/brica1/brica1.html#brica1.component.PipeComponent">[docs]</a><span class="k">class</span> <span class="nc">PipeComponent</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    `PipeComponent` copies contents of in ports to out ports.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Create a new `PipeComponent` instance.</span>
 
 <span class="sd">        Args:</span>
@@ -373,33 +426,34 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="nb">super</span><span class="p">(</span><span class="n">PipeComponent</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PipeComponent</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">map</span> <span class="o">=</span> <span class="p">[]</span>
 
-<div class="viewcode-block" id="PipeComponent.set_map"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.component.PipeComponent.set_map">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">set_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_id</span><span class="p">,</span> <span class="n">out_id</span><span class="p">):</span>
+<div class="viewcode-block" id="PipeComponent.set_map"><a class="viewcode-back" href="../../tutorial/brica1/brica1.html#brica1.component.PipeComponent.set_map">[docs]</a>    <span class="k">def</span> <span class="nf">set_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_identifier</span><span class="p">,</span> <span class="n">out_identifier</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Map from in-port to out port.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">          in_id (str): port id to map from.</span>
-<span class="sd">          out_id (str): port id to map to.</span>
+<span class="sd">          in_identifier (str): port identifier to map from.</span>
+<span class="sd">          out_identifier (str): port identifier to map to.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">          None.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">in_id</span><span class="p">,</span> <span class="n">out_id</span><span class="p">))</span>
-</div>
-<div class="viewcode-block" id="PipeComponent.fire"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.component.PipeComponent.fire">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">fire</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">in_id</span><span class="p">,</span> <span class="n">out_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">out_id</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="n">in_id</span><span class="p">]</span>
-</div></div>
-<div class="viewcode-block" id="NullComponent"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.component.NullComponent">[ドキュメント]</a><span class="k">class</span> <span class="nc">NullComponent</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">in_identifier</span><span class="p">,</span> <span class="n">out_identifier</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="PipeComponent.fire"><a class="viewcode-back" href="../../tutorial/brica1/brica1.html#brica1.component.PipeComponent.fire">[docs]</a>    <span class="k">def</span> <span class="nf">fire</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">in_identifier</span><span class="p">,</span> <span class="n">out_identifier</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">out_identifier</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="n">in_identifier</span><span class="p">]</span></div></div>
+
+
+<div class="viewcode-block" id="NullComponent"><a class="viewcode-back" href="../../tutorial/brica1/brica1.html#brica1.component.NullComponent">[docs]</a><span class="k">class</span> <span class="nc">NullComponent</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    `NullComponent` does nothing.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Create a new `NullComponent` instance.</span>
 
 <span class="sd">        Args:</span>
@@ -410,9 +464,9 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="nb">super</span><span class="p">(</span><span class="n">NullComponent</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">NullComponent</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
-<div class="viewcode-block" id="NullComponent.fire"><a class="viewcode-back" href="../../brica1/brica1.html#brica1.component.NullComponent.fire">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">fire</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="NullComponent.fire"><a class="viewcode-back" href="../../tutorial/brica1/brica1.html#brica1.component.NullComponent.fire">[docs]</a>    <span class="k">def</span> <span class="nf">fire</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Do nothing. Just return.</span>
 
 <span class="sd">        Args:</span>
@@ -425,44 +479,43 @@
         <span class="k">pass</span></div></div>
 </pre></div>
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <div id="searchbox" style="display: none" role="search">
-  <h3>クイック検索</h3>
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="検索" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    モジュール、クラス、または関数名を入力してください
-    </p>
+    </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
     <div class="related" role="navigation" aria-label="related navigation">
-      <h3>ナビゲーション</h3>
+      <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="総合索引"
-             >索引</a></li>
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
         <li class="right" >
-          <a href="../../py-modindex.html" title="Pythonモジュール索引"
-             >モジュール</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">BriCA1 1.0.0 ドキュメント</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >モジュールコード</a> &raquo;</li> 
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">BriCA1 1.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">brica1.component</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2015, ktnyt.
-      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1 で生成しました。
+        &#169; Copyright 2015, ktnyt.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.1.
     </div>
   </body>
 </html>
