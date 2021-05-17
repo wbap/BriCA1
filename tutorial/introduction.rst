@@ -168,7 +168,7 @@ There are four types of ``Schedulers`` planned and two of them currently impleme
 Agents
 ~~~~~~
 
-Beacause the implementation is simpler, we will show some examples for using the ``VirtualTimeSyncScheduler`` in this tutorial. Instantiate the ``Scheduler`` and pass it to the ``Agent`` constructor.
+Because the implementation is simpler, we will show some examples for using the ``VirtualTimeSyncScheduler`` in this tutorial. Instantiate the ``Scheduler`` and pass it to the ``Agent`` constructor.
 
   >>> s = brica1.VirtualTimeSyncScheduler(agent)
 
