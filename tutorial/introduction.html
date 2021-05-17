@@ -6,38 +6,28 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Introduction &#8212; BriCA1 1.0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
-    
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="brica1 package" href="../brica1/brica1.html" /> 
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="../brica1/brica1.html" title="brica1 package"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">BriCA1 1.0.1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Introduction</a></li> 
-      </ul>
-    </div>  
+  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
   <div class="section" id="introduction">
@@ -192,7 +182,11 @@
 </div>
 <div class="section" id="agents">
 <h3>Agents<a class="headerlink" href="#agents" title="Permalink to this headline">¶</a></h3>
-<p>First re-setup the <code class="docutils literal notranslate"><span class="pre">Components</span></code> and a <code class="docutils literal notranslate"><span class="pre">Module</span></code> to pass an <code class="docutils literal notranslate"><span class="pre">Agent</span></code>.</p>
+<p>Beacause the implementation is simpler, we will show some examples for using the <code class="docutils literal notranslate"><span class="pre">VirtualTimeSyncScheduler</span></code> in this tutorial. Instantiate the <code class="docutils literal notranslate"><span class="pre">Scheduler</span></code> and pass it to the <code class="docutils literal notranslate"><span class="pre">Agent</span></code> constructor.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">VirtualTimeSyncScheduler</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Adding a <code class="docutils literal notranslate"><span class="pre">Module</span></code> to the <code class="docutils literal notranslate"><span class="pre">Agent</span></code> will automatically make the <code class="docutils literal notranslate"><span class="pre">Scheduler</span></code> aware of all <code class="docutils literal notranslate"><span class="pre">Components</span></code> contained in the <code class="docutils literal notranslate"><span class="pre">Module</span></code>. First re-setup the <code class="docutils literal notranslate"><span class="pre">Components</span></code> and <code class="docutils literal notranslate"><span class="pre">Modules</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">ConstantComponent</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CompB</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">PipeComponent</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CompC</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">NullComponent</span><span class="p">()</span>
@@ -209,13 +203,7 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ModA</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="s2">&quot;CompA&quot;</span><span class="p">,</span> <span class="n">CompA</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ModA</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="s2">&quot;CompB&quot;</span><span class="p">,</span> <span class="n">CompB</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ModA</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="s2">&quot;CompC&quot;</span><span class="p">,</span> <span class="n">CompC</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">agent</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">Agent</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>Beacause the implementation is simpler, we will show some examples for using the <code class="docutils literal notranslate"><span class="pre">VirtualTimeSyncScheduler</span></code> in this tutorial.  Pass the <code class="docutils literal notranslate"><span class="pre">Agent</span></code> to the <code class="docutils literal notranslate"><span class="pre">Scheduler</span></code> constructor.  Adding the <code class="docutils literal notranslate"><span class="pre">Module</span></code> to the <code class="docutils literal notranslate"><span class="pre">Agent</span></code> beforehand will automatically make the <code class="docutils literal notranslate"><span class="pre">Scheduler</span></code> aware of all <code class="docutils literal notranslate"><span class="pre">Components</span></code> contained in the <code class="docutils literal notranslate"><span class="pre">Module</span></code>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">agent</span><span class="o">.</span><span class="n">add_submodule</span><span class="p">(</span><span class="s2">&quot;ModA&quot;</span><span class="p">,</span> <span class="n">ModA</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">VirtualTimeSyncScheduler</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">agent</span> <span class="o">=</span> <span class="n">brica1</span><span class="o">.</span><span class="n">Agent</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">agent</span><span class="o">.</span><span class="n">add_submodule</span><span class="p">(</span><span class="s2">&quot;ModA&quot;</span><span class="p">,</span> <span class="n">ModA</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>First check that all ports for every <code class="docutils literal notranslate"><span class="pre">Component</span></code> is initialized with a zero vector.</p>
@@ -229,8 +217,8 @@
 <span class="go">array([0, 0, 0], dtype=int16)</span>
 </pre></div>
 </div>
-<p>Call the <code class="docutils literal notranslate"><span class="pre">step()</span></code> method of <code class="docutils literal notranslate"><span class="pre">Scheduler`</span></code> to update the <code class="docutils literal notranslate"><span class="pre">Components</span></code>.  Because the <code class="docutils literal notranslate"><span class="pre">Scheduler</span></code> given to the <code class="docutils literal notranslate"><span class="pre">Agent</span></code> is <code class="docutils literal notranslate"><span class="pre">VirtualTimeSyncScheduler</span></code>, the <code class="docutils literal notranslate"><span class="pre">input()</span></code> method for all <code class="docutils literal notranslate"><span class="pre">Components</span></code> are called first, then <code class="docutils literal notranslate"><span class="pre">fire()</span></code>, and finally the <code class="docutils literal notranslate"><span class="pre">output()</span></code>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<p>Call the <code class="docutils literal notranslate"><span class="pre">step()</span></code> method of <code class="docutils literal notranslate"><span class="pre">Agent</span></code> to update the <code class="docutils literal notranslate"><span class="pre">Components</span></code>. Because the <code class="docutils literal notranslate"><span class="pre">Scheduler</span></code> given to the <code class="docutils literal notranslate"><span class="pre">Agent</span></code> is <code class="docutils literal notranslate"><span class="pre">VirtualTimeSyncScheduler</span></code>, the <code class="docutils literal notranslate"><span class="pre">input()</span></code> method for all <code class="docutils literal notranslate"><span class="pre">Components</span></code> are called first, then <code class="docutils literal notranslate"><span class="pre">fire()</span></code>, and finally the <code class="docutils literal notranslate"><span class="pre">output()</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">agent</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
 <span class="go">1.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([1, 2, 3], dtype=int16)</span>
@@ -242,7 +230,7 @@
 <span class="go">array([0, 0, 0], dtype=int16)</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">agent</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
 <span class="go">2.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([1, 2, 3], dtype=int16)</span>
@@ -254,7 +242,7 @@
 <span class="go">array([0, 0, 0], dtype=int16)</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">agent</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
 <span class="go">3.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CompA</span><span class="o">.</span><span class="n">get_out_port</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">buffer</span>
 <span class="go">array([1, 2, 3], dtype=int16)</span>
@@ -266,76 +254,75 @@
 <span class="go">array([1, 2, 3], dtype=int16)</span>
 </pre></div>
 </div>
+<p>The very basics of BriCA V1 have been covered here, proceed to the ‘<code class="docutils literal notranslate"><span class="pre">Component</span></code> Definition’ tutorial to learn how to create your own <code class="docutils literal notranslate"><span class="pre">Components</span></code>. This specific tutorial will implement a support vector machine (SVM) and random forest (RF) classifiers and compare its output.</p>
 </div>
 </div>
 </div>
 
 
-            <div class="clearer"></div>
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Introduction</a><ul>
-<li><a class="reference internal" href="#what-is-brica">What is BriCA?</a></li>
-<li><a class="reference internal" href="#installing">Installing</a></li>
-<li><a class="reference internal" href="#getting-started">Getting Started</a><ul>
-<li><a class="reference internal" href="#components">Components</a></li>
-<li><a class="reference internal" href="#modules">Modules</a></li>
-<li><a class="reference internal" href="#schedulers">Schedulers</a></li>
-<li><a class="reference internal" href="#agents">Agents</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<h1 class="logo"><a href="index.html">BriCA1</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="brica1/brica1.html">brica1 package</a></li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="../brica1/brica1.html"
-                        title="previous chapter">brica1 package</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/tutorial/introduction.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
+    <form class="search" action="search.html" method="get">
       <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
 <script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="../brica1/brica1.html" title="brica1 package"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">BriCA1 1.0.1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Introduction</a></li> 
-      </ul>
+    <div class="footer">
+      &copy;2021, ktnyt.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/introduction.rst.txt"
+          rel="nofollow">Page source</a>
     </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2015, ktnyt.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.1.
-    </div>
+
+    
+
+    
   </body>
 </html>
