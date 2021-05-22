@@ -168,11 +168,9 @@ There are four types of ``Schedulers`` planned and two of them currently impleme
 Agents
 ~~~~~~
 
-Because the implementation is simpler, we will show some examples for using the ``VirtualTimeSyncScheduler`` in this tutorial. Instantiate the ``Scheduler`` and pass it to the ``Agent`` constructor.
+Because the implementation is simpler, we will show some examples for using the ``VirtualTimeSyncScheduler`` in this tutorial.
 
-  >>> s = brica1.VirtualTimeSyncScheduler(agent)
-
-Adding a ``Module`` to the ``Agent`` will automatically make the ``Scheduler`` aware of all ``Components`` contained in the ``Module``. First re-setup the ``Components`` and ``Modules``.
+First, let us reset all the ``Components`` and ``Modules`` as we did above.
 
   >>> CompA = brica1.ConstantComponent()
   >>> CompB = brica1.PipeComponent()
@@ -190,9 +188,14 @@ Adding a ``Module`` to the ``Agent`` will automatically make the ``Scheduler`` a
   >>> ModA.add_component("CompA", CompA)
   >>> ModA.add_component("CompB", CompB)
   >>> ModA.add_component("CompC", CompC)
-  >>> agent.add_submodule("ModA", ModA)
 
-First check that all ports for every ``Component`` is initialized with a zero vector.
+Then, let us define an ``Agent`` and add the defined ``Module`` to it, and pass it to the ``Scheduler`` constructor.
+
+  >>> agent = brica1.Agent()
+  >>> agent.add_submodule("ModA", ModA)
+  >>> s = brica1.VirtualTimeSyncScheduler(agent)
+
+Before running the ``Agent``, let us check that all ports for every ``Component`` is initialized with a zero vector.
 
   >>> CompA.get_out_port("out").buffer
   array([0, 0, 0], dtype=int16)
@@ -203,9 +206,9 @@ First check that all ports for every ``Component`` is initialized with a zero ve
   >>> CompC.get_in_port("in").buffer
   array([0, 0, 0], dtype=int16)
 
-Call the ``step()`` method of ``Agent`` to update the ``Components``. Because the ``Scheduler`` given to the ``Agent`` is ``VirtualTimeSyncScheduler``, the ``input()`` method for all ``Components`` are called first, then ``fire()``, and finally the ``output()``.
+Now let us call the ``step()`` method of ``Scheduler`` to update the ``Components``.  Because the ``Scheduler`` is ``VirtualTimeSyncScheduler``, the ``input()`` method for all ``Components`` are called first, then ``fire()``, and finally the ``output()``.
 
-  >>> agent.step()
+  >>> s.step()
   1.0
   >>> CompA.get_out_port("out").buffer
   array([1, 2, 3], dtype=int16)
@@ -216,7 +219,7 @@ Call the ``step()`` method of ``Agent`` to update the ``Components``. Because th
   >>> CompC.get_in_port("in").buffer
   array([0, 0, 0], dtype=int16)
 
-  >>> agent.step()
+  >>> s.step()
   2.0
   >>> CompA.get_out_port("out").buffer
   array([1, 2, 3], dtype=int16)
@@ -227,7 +230,7 @@ Call the ``step()`` method of ``Agent`` to update the ``Components``. Because th
   >>> CompC.get_in_port("in").buffer
   array([0, 0, 0], dtype=int16)
 
-  >>> agent.step()
+  >>> s.step()
   3.0
   >>> CompA.get_out_port("out").buffer
   array([1, 2, 3], dtype=int16)
@@ -238,4 +241,4 @@ Call the ``step()`` method of ``Agent`` to update the ``Components``. Because th
   >>> CompC.get_in_port("in").buffer
   array([1, 2, 3], dtype=int16)
 
-The very basics of BriCA V1 have been covered here, proceed to the '``Component`` Definition' tutorial to learn how to create your own ``Components``. This specific tutorial will implement a support vector machine (SVM) and random forest (RF) classifiers and compare its output.
+The very basics of BriCA1 have been covered here.
