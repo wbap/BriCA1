@@ -59,7 +59,7 @@ class Unit(object):
           id (str): a string ID.
 
         Returns:
-          numpy.ndarray: a value vector for the in-port ID.
+          port (Port): the Port for the in-port ID.
 
         """
 
@@ -113,7 +113,7 @@ class Unit(object):
           id (str): a string ID.
 
         Returns:
-          numpy.ndarray: a value vector for the in-port ID.
+          port (Port): the Port for the out-port ID.
 
         """
 
