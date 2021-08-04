@@ -12,9 +12,9 @@ to the respective `Port`s inside the `GymAgent`.
 
 import numpy as np
 
-from .component import Component
-from .module import Module, Agent
-from .utils import alias_in_port, alias_out_port, connect
+from brica1 import Component
+from brica1 import Module, Agent
+from brica1 import alias_in_port, alias_out_port, connect
 
 __all__ = ['EnvComponent', 'GymAgent']
 
