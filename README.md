@@ -1,6 +1,6 @@
-# BriCA V1
+# BriCA1
 
-wbap/V1 repository contains a python implementation for BriCA V1
+wbap/BriCA1 repository contains a python implementation for BriCA1
 
 ## Reference:
 * [Tutorial](http://wbap.github.io/BriCA1/)
