@@ -39,11 +39,16 @@ class EnvComponent(Component):
         observation = env.reset()
         self.results['observation'] = observation
         self.results['token_out'] = np.array([self.cnt])
+        self.results['done'] = np.array([0])
+        self.results['reward'] = np.array([0.0])
 
     def fire(self):
         if self.flush:
             return
-        if self.inputs['token_in'][0]==self.cnt:
+        if self.cnt == 0:   # after reset
+            self.cnt = 1
+            self.results['token_out'] = np.array([self.cnt])
+        elif self.inputs['token_in'][0] == self.cnt:
             action = self.inputs['action'][0]
             observation, reward, done, info = self.env.step(action)
             self.info = info
@@ -65,8 +70,10 @@ class EnvComponent(Component):
         self.cnt = 0
         self.flush = False
         self.results['observation'] = self.env.reset()
-        self.results['token_out'] = np.array([self.cnt])
-        self.inputs['token_in'] = np.array([self.cnt])
+        self.results['done'] = np.array([0])
+        self.results['reward'] = np.array([0.0])
+        self.results['token_out'] = np.array([0])
+        self.inputs['token_in'] = np.array([0])
 
 class GymAgent(Agent):
     def __init__(self, model, env):
