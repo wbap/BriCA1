@@ -49,7 +49,13 @@ class EnvComponent(Component):
             self.cnt = 1
             self.results['token_out'] = np.array([self.cnt])
         elif self.inputs['token_in'][0] == self.cnt:
-            action = self.inputs['action'][0]
+            if self.inputs['action'].size == 1:
+                action = self.inputs['action'][0]
+            else:   # one-hot vector to int
+                if self.inputs['action'].max() == 0.0:
+                    action = 0
+                else:
+                    action = np.argmax(self.inputs['action']) + 1
             observation, reward, done, info = self.env.step(action)
             self.info = info
             self.cnt += 1
