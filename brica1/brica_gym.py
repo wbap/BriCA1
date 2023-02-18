@@ -18,7 +18,7 @@ __all__ = ['EnvComponent', 'GymAgent']
 
 
 class EnvComponent(brica1.Component):
-    def __init__(self, env, obs_dim, action_dim):
+    def __init__(self, env, obs_dim=1, action_dim=1):
         super(EnvComponent, self).__init__()
 
         self.env = env
@@ -79,7 +79,7 @@ class EnvComponent(brica1.Component):
         self.inputs['token_in'] = np.array([0])
 
 class GymAgent(brica1.Agent):
-    def __init__(self, model, env, obs_dim, action_dim):
+    def __init__(self, model, env, obs_dim=1, action_dim=1):
         super(GymAgent, self).__init__()
 
         self.env = EnvComponent(env, obs_dim, action_dim)
