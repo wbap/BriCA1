@@ -18,14 +18,14 @@ __all__ = ['EnvComponent', 'GymAgent']
 
 
 class EnvComponent(brica1.Component):
-    def __init__(self, env):
+    def __init__(self, env, obs_dim=1, action_dim=1):
         super(EnvComponent, self).__init__()
 
         self.env = env
 
-        self.make_in_port('action', 1)
+        self.make_in_port('action', action_dim)
         self.make_in_port('token_in', 1)
-        self.make_out_port('observation', 1)
+        self.make_out_port('observation', obs_dim)
         self.make_out_port('reward', 1)
         self.make_out_port('done', 1)
         self.make_out_port('token_out', 1)
@@ -33,6 +33,7 @@ class EnvComponent(brica1.Component):
         self.info = None
         self.cnt = 0
         self.flush = False
+        self.action_dim = action_dim
 
         observation = env.reset()
         self.results['observation'] = observation
@@ -45,13 +46,16 @@ class EnvComponent(brica1.Component):
             return
         if self.inputs['token_in'][0] == self.cnt:
             if self.cnt != 0:
-                if self.inputs['action'].size == 1:
-                    action = self.inputs['action'][0]
-                else:   # one-hot vector to int
-                    if self.inputs['action'].max() == 0.0:
-                        action = 0
-                    else:
-                        action = np.argmax(self.inputs['action']) + 1
+                if self.action_dim == 1:
+                    if self.inputs['action'].size == 1:
+                        action = self.inputs['action'][0]
+                    else:   # one-hot vector to int
+                        if self.inputs['action'].max() == 0.0:
+                            action = 0
+                        else:
+                            action = np.argmax(self.inputs['action']) + 1
+                else:
+                    action = self.inputs['action']
                 observation, reward, done, info = self.env.step(action)
                 self.info = info
                 self.results['observation'] = observation
@@ -75,10 +79,10 @@ class EnvComponent(brica1.Component):
         self.inputs['token_in'] = np.array([0])
 
 class GymAgent(brica1.Agent):
-    def __init__(self, model, env):
+    def __init__(self, model, env, obs_dim=1, action_dim=1):
         super(GymAgent, self).__init__()
 
-        self.env = EnvComponent(env)
+        self.env = EnvComponent(env, obs_dim, action_dim)
         self.add_component('env', self.env)
 
         if isinstance(model, brica1.Component):
@@ -86,11 +90,11 @@ class GymAgent(brica1.Agent):
         if isinstance(model, brica1.Module):
             self.add_submodule('model', model)
 
-        self.make_in_port('observation', 1)
+        self.make_in_port('observation', obs_dim)
         self.make_in_port('reward', 1)
         self.make_in_port('done', 1)
         self.make_in_port('token_in', 1)
-        self.make_out_port('action', 1)
+        self.make_out_port('action', action_dim)
         self.make_out_port('token_out', 1)
 
         brica1.utils.alias_in_port((model, 'observation'), (self, 'observation'))
