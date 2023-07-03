@@ -11,7 +11,10 @@ to the respective `Port`s inside the `GymAgent`.
 """
 
 import numpy as np
-
+try:
+    import gym
+except ModuleNotFoundError:
+    import gymnasium as gym
 import brica1
 
 __all__ = ['EnvComponent', 'GymAgent']
@@ -35,8 +38,11 @@ class EnvComponent(brica1.Component):
         self.flush = False
         self.action_dim = action_dim
 
-        observation = env.reset()
-        self.results['observation'] = observation
+        result = env.reset()
+        if  len(result) ==2 and type(result[1]) is dict:
+            self.results['observation'] = result[0]
+        else:
+            self.results['observation'] = result
         self.results['token_out'] = np.array([self.cnt])
         self.results['done'] = np.array([0])
         self.results['reward'] = np.array([0.0])
@@ -46,7 +52,9 @@ class EnvComponent(brica1.Component):
             return
         if self.inputs['token_in'][0] == self.cnt:
             if self.cnt != 0:
-                if self.action_dim == 1:
+                if isinstance(self.env.action_space, gym.spaces.Box) or self.action_dim > 1:
+                    action = self.inputs['action']
+                else:
                     if self.inputs['action'].size == 1:
                         action = self.inputs['action'][0]
                     else:   # one-hot vector to int
@@ -54,9 +62,11 @@ class EnvComponent(brica1.Component):
                             action = 0
                         else:
                             action = np.argmax(self.inputs['action']) + 1
+                result = self.env.step(action)
+                if len(result) > 4:
+                    observation, reward, done, truncated, info = self.env.step(action)
                 else:
-                    action = self.inputs['action']
-                observation, reward, done, info = self.env.step(action)
+                    observation, reward, done, info = self.env.step(action)
                 self.info = info
                 self.results['observation'] = observation
                 self.results['reward'] = np.array([reward])
@@ -72,7 +82,11 @@ class EnvComponent(brica1.Component):
         self.cnt = 0
         self.flush = False
         self.done = False
-        self.results['observation'] = self.env.reset()
+        result = self.env.reset()
+        if  len(result) ==2 and type(result[1]) is dict:
+            self.results['observation'] = result[0]
+        else:
+            self.results['observation'] = result
         self.results['done'] = np.array([0])
         self.results['reward'] = np.array([0.0])
         self.results['token_out'] = np.array([0])
