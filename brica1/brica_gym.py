@@ -64,9 +64,9 @@ class EnvComponent(brica1.Component):
                             action = np.argmax(self.inputs['action']) + 1
                 result = self.env.step(action)
                 if len(result) > 4:
-                    observation, reward, done, truncated, info = self.env.step(action)
+                    observation, reward, done, truncated, info = result
                 else:
-                    observation, reward, done, info = self.env.step(action)
+                    observation, reward, done, info = result
                 self.info = info
                 self.results['observation'] = observation
                 self.results['reward'] = np.array([reward])
